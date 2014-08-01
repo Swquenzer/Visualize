@@ -1,0 +1,85 @@
+/* reporting.css */
+body, html {
+	height: 100%;
+	margin: 0;
+	padding: 0;
+	font-family: 'Ubuntu', sans-serif;
+	background: #EEEEEE;
+	overflow: hidden;
+}
+h2 {
+	font-size: 18px;
+	font-weight: 400;
+	font-family: 'Ubuntu', sans-serif;
+	color: #EEEEEE;
+}
+#wrapper {
+	height: 100%;
+}
+
+/* MAIN CONTENT */
+#main {
+	display: fixed;
+	width: 95%;
+	transition: width .2s, ease;
+}
+#main.shrink {
+	width: 75%;
+	transition: width 1s, ease;
+}
+#edit_bar {
+	display: block;
+	margin: 0;
+	padding: 20px 0;
+	background: #DBE2EA;
+}
+#edit_bar h1 {
+	position: relative;
+	left: 10%;
+	text-align: left;
+}
+#content {
+	height: 100%;
+	padding: 20px;
+	overflow: scroll;
+}
+
+/* LEFT SIDEBAR */
+.left_sidebar {
+	height: 100%;
+	width: 4%;
+	padding-right: 1%;
+	float: left;
+	background: #2E323A;
+	transition: width .2s, ease;
+}
+.left_sidebar.hover {
+	width: 24%;
+	transition: width 1s, ease;
+}
+.left_sidebar h2 {
+	position: relative;
+	left: 5%;
+}
+.left_sidebar section {
+	width: 100%;
+	padding: 10px 0;
+	color: #6b8baf;
+	font-weight: 300;
+	background: #262A33;
+	border-top: 10px solid #2E323A;
+	border-bottom: 1px solid #6b8baf;
+}
+.left_sidebar .bottom {
+	height: 100%;
+}
+#main {
+	height: 100%;
+	float: left;
+}
+.invisible {
+	display: none;
+}
+.clear {
+	clear: both;
+}
