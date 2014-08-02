@@ -1,8 +1,17 @@
 //main.js
 $(document).ready(function() {
-	var hover = false;
+	/*
+	** Initialize
+	*/
+	$('.stats-mod:nth-child(1)').toggleClass('stats-mod-open').children(2).toggleClass('light-green');
+
+
+	/*
+	** Sidebar Module 
+	*/
+	var hovering = false;
 	var isIn = true;
-	var isOut = false;
+	var isOut = false; 
 
 	var slideOut = function() {
 		isIn = false;
@@ -15,7 +24,7 @@ $(document).ready(function() {
 				if(i === len-1) {
 					isOut = true;
 					//Is now fully out
-					if(!hover) {
+					if(!hovering) {
 						slideIn();
 					}
 				}
@@ -38,16 +47,35 @@ $(document).ready(function() {
 
 	$('.left_sidebar').hover(function() {
 		if(isIn) {
-			hover = true;
+			hovering = true;
 			slideOut();
 		}
 	}, function() {
-		hover = false;
+		hovering = false;
 		if(isOut) {
 			slideIn();
 			isOut = false;
 		}
 	});
+
+	/*
+	** Statistics Drawer
+	*/
+	$('.stats-mod').on("click", function() {
+		//If drawer is not open, move to top
+		if(!$(this).hasClass('stats-mod-open')) {
+			var elements = $(this).siblings();
+			elements.detach().appendTo($(this).parent());
+		}
+		//Close other open drawer if possible
+		$('.stats-mod-open').children(2).toggleClass('light-green');
+		$('.stats-mod-open').toggleClass('stats-mod-open');
+		//Open or close drawer
+		$(this).toggleClass('stats-mod-open');
+		$(this).children(2).toggleClass('light-green');
+	});
+
+
 	window.thing = function() {
 		$('#content').append(document.properties);
 	}

@@ -3,16 +3,21 @@
 <head>
     <meta charset="utf-8" />
     <title>Reporting</title>
+    <!--jQuery-->
     <script src="dist/jquery-2.1.1.min.js"></script>
+    <!--Load the AJAX API-->
+    <!-- // <script type="text/javascript" src="https://www.google.com/jsapi"></script> -->
+    <!-- // <script type="te  	xt/javascript" src="js/charts.js"></script> -->
+    <!-- Auto reload on css and js update -->
     <script src="js/live.js"></script>
-    <script src="js/main.js"></script>
+    <!-- Main Code -->
     <link rel="stylesheet" type="text/css" href="css/reporting.css">
-    <link href='http://fonts.googleapis.com/css?family=Ubuntu:400,300' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Ubuntu:700,400,300' rel='stylesheet' type='text/css'>
 </head>
 <body>
 	<div id="wrapper">
 		<div class="left_sidebar">
-			<h2 class="invisible">Reporting</h2>
+			<h2 class="invisible">Options ></h2>
 			<section class="invisible">
 				<ul>
 					<li>An option</li>
@@ -42,13 +47,44 @@
 		</div>
 		<div id="main">
 			<section id="edit_bar">
-				<h1>EDIT BAR ETC</h1>
+				<h1><span class="green">Life Cents</span> Reporting</h1>
 			</section>
 			<section id="content">
-				<button value="THING" onclick="thing()">THING</button>
+				<span id="stats">
+					<h2>Statistics <span class="order">By Week</span></h2>
+					<span>
+						<div class="stats-mod">
+							<span class="value">2,180</span>
+							<span class="description">New Users Added</span>		
+						</div>
+						<div class="stats-mod">
+							<span class="value">3,236</span>
+							<span class="description">Modules completed</span>		
+						</div>
+						<div class="stats-mod">
+							<span class="value">$132,100</span>
+							<span class="description">Money Gained</span>		
+						</div>
+						<div class="stats-mod">
+							<span class="value">290</span>
+							<span class="description">Beers Chugged</span>
+						</div>
+					</span>
+				</span><!-- End Stats -->
+				<!-- <div class="chart-outer">
+					<div class="chart-inner">
+						<h3></h3>
+						<div class="chart-row"></div>
+						<div class="chart-row"></div>
+						<div class="chart-row"></div>
+						<div class="chart-row"></div>
+					</div> <!-- End chart-inner -->
+				</div> <!--End chart-outer--> -->
+				<button value="THING" onclick="thing()">Click Here</button>
 			</section>
 		</div>
 		<span class="clear"></span>
 	</div>
+	<script src="js/main.js"></script>
 </body>
 </html>
