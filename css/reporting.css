@@ -50,6 +50,7 @@ h2 {
 	width: 4%;
 	padding-right: 1%;
 	float: left;
+	overflow: hidden;
 	background: #2E323A;
 	transition: width .2s, ease;
 }
@@ -62,6 +63,7 @@ h2 {
 	left: 5%;
 }
 .left_sidebar section {
+	display: none;
 	width: 100%;
 	padding: 10px 0;
 	color: #6b8baf;
