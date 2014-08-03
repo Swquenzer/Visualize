@@ -3,8 +3,12 @@ $(document).ready(function() {
 	/*
 	** Initialize
 	*/
+	//Make first stat animate out
 	$('.stats-mod:nth-child(1)').toggleClass('stats-mod-open').children(2).toggleClass('light-green');
-
+	//Slide the remaining stats down one at a time
+	$('.stats-mod').not(':nth-child(1)').toggleClass('invisible').each(function(i) {
+		$(this).delay(200*i).slideDown(200);
+	});
 
 	/*
 	** Sidebar Module 

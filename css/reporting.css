@@ -51,6 +51,10 @@ h2 {
 	background: #262A33;
 	border-top: 10px solid #2E323A;
 	border-bottom: 1px solid #6b8baf;
+	transition: background .2s, ease;
+}
+.left_sidebar section:hover {
+	background: #2c313d;
 }
 .left_sidebar .bottom {
 	height: 100%;
@@ -67,6 +71,10 @@ h2 {
 .light-green {
 	color: #b4eab4 !important;
 }
+.red {
+	color: #E55D3F !important;
+}
+
 /* Main Content Area*/
 #main {
 	height: 100%;
@@ -104,7 +112,8 @@ h2 {
 #content {
 	height: 100%;
 	padding: 20px;
-	overflow: scroll;
+	overflow-y: scroll;
+	overflow-x: hidden;
 	background: #acc1ca;
 }
 #stats h2 {
@@ -134,7 +143,7 @@ h2 {
 	max-width: 790px;
 }
 #stats .stats-mod {
-	height: 100px;
+	height: 75px;
 	width: 250px;
 	margin-right: 10px; margin-top: 5px; margin-bottom: 5px;
 	float: left;
@@ -148,11 +157,12 @@ h2 {
 #stats .stats-mod-open {
 	display: block;
 	width: 770px;
+	margin-right: 350px;
 	transition: width .9s, ease;
 }
 #stats .value {
 	display: block;
-	padding: 20px 20px 10px 20px;
+	padding: 10px 20px 5px 20px;
 	text-align: center;
 	color: white;
 	font-size: 28px;
