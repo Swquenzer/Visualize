@@ -26,17 +26,33 @@ h2 {
 
 /* LEFT SIDEBAR */
 .left_sidebar {
+	position: relative;
 	height: 100%;
 	width: 4%;
-	padding-right: 1%;
+	padding: 0 10px;
 	float: left;
 	overflow: hidden;
 	background: #2E323A;
 	transition: width .2s, ease;
 }
-.left_sidebar.hover {
+.left_sidebar.open {
 	width: 24%;
 	transition: width 1s, ease;
+}
+.left_sidebar .icon-menu {
+	display: block;
+	position: relative;
+	margin-top: 10px;
+	text-align: right;
+	float: right;
+	z-index: 100000;
+}
+.left_sidebar .icon-menu img {
+	opacity: .6;
+	padding: 5px;
+}
+.left_sidebar .icon-menu img:hover {
+	opacity: .9;
 }
 .left_sidebar h2 {
 	position: relative;
@@ -49,11 +65,19 @@ h2 {
 	color: #6b8baf;
 	font-weight: 300;
 	background: #262A33;
-	border-top: 10px solid #2E323A;
-	border-bottom: 1px solid #6b8baf;
 	transition: background .2s, ease;
 }
-.left_sidebar section:hover {
+.left_sidebar .header {
+	text-align: center;
+	cursor: default;
+	font-weight: 700;
+	border-top: 10px solid #2E323A;
+	border-bottom: 1px solid #6b8baf;
+}
+.left_sidebar section.option {
+	border-bottom: 1px solid #192129;
+}
+.left_sidebar section.option:hover {
 	background: #2c313d;
 }
 .left_sidebar .bottom {
@@ -66,7 +90,7 @@ h2 {
 	clear: both;
 }
 .green {
-	color: #438a46;
+	color: #438a46 !important;
 }
 .light-green {
 	color: #b4eab4 !important;
@@ -96,7 +120,7 @@ h2 {
 	display: block;
 	margin: 0;
 	padding: 20px;
-	background: #DBE2EA;
+	background: #e7eff7;
 }
 #edit_bar h1 {
 	position: relative;
@@ -132,11 +156,10 @@ h2 {
 }
 
 #stats {
-	display: block;
+	display: inline-block;
 	margin: 0;
 	padding: 0;
 	position: relative;
-	left: 5%;
 }
 #stats>span {
 	display: block;
@@ -184,14 +207,19 @@ h2 {
 /* Charts */
 .chart-outer {
 	display: block;
-	height: 400px;
-	width: 600px;
+	width: 770px;
+	margin-top: 15px;
+	margin-bottom: 15px;
 	background: #617887;
 	border: 1px solid #617887;
 	border-radius: 4px 4px 4px 4px;
-	/box-shadow: 0px 0px 8px 3px rgba(0,0,0,0.5);
 }
 .chart-inner {
-
+	display: block;
+	padding: 10px;
+	margin: 10px;
+	height: 400px;
+	background: #2E323A;
+	border-radius: 4px 4px 4px 4px;
 }
 

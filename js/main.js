@@ -13,13 +13,12 @@ $(document).ready(function() {
 	/*
 	** Sidebar Module 
 	*/
-	var hovering = false;
 	var isIn = true;
 	var isOut = false; 
 
 	var slideOut = function() {
 		isIn = false;
-		$('.left_sidebar').toggleClass('hover', true);
+		$('.left_sidebar').toggleClass('open', true);
 		$('#main').toggleClass('shrink', true);
 		$('.left_sidebar h2').fadeIn("200");
 		var len = $('.left_sidebar section').length;
@@ -27,10 +26,6 @@ $(document).ready(function() {
 			$(this).delay(200*i+300).slideDown(200, function() {
 				if(i === len-1) {
 					isOut = true;
-					//Is now fully out
-					if(!hovering) {
-						slideIn();
-					}
 				}
 			});
 		});
@@ -39,7 +34,7 @@ $(document).ready(function() {
 		isOut = false;
 		$('.left_sidebar h2').fadeOut(200, function() {
 			$('#main').toggleClass('shrink', false);
-			$('.left_sidebar').toggleClass('hover', false);
+			$('.left_sidebar').toggleClass('open', false);
 			var count = 0;
 			$('.left_sidebar section').slideUp(300, function() {
 				//is now fully in
@@ -49,16 +44,14 @@ $(document).ready(function() {
 		});
 	}
 
-	$('.left_sidebar').hover(function() {
+	$('.icon-menu img').on("click", function() {
 		if(isIn) {
-			hovering = true;
 			slideOut();
+			$('.icon-menu img').toggleClass('invisible');
 		}
-	}, function() {
-		hovering = false;
 		if(isOut) {
 			slideIn();
-			isOut = false;
+			$('.icon-menu img').toggleClass('invisible');
 		}
 	});
 
