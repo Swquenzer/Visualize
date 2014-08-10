@@ -26,37 +26,36 @@
 				Administration
 			</section>
 			<section class="option invisible">
-				<ul>
-					<li>An option</li>
-					<li>An option</li>
-				</ul>
+				<h4>Dashboard <img src="images/dashboard-icon.png"></h4>
 			</section>
 			<section class="option invisible">
-				<ul>
-					<li>An option</li>
-					<li>An option</li>
-				</ul>
+				<h4>Settings <img src="images/settings-icon.png"></h4>
 			</section>
 			<section class="header light-green invisible">
-				Filters
+				Statistics
 			</section>
-			<section class="option invisible">
-				<ul>
-					<li>An option</li>
-					<li>An option</li>
-				</ul>
+			<section class="option invisible" onclick="addStat(142, 'Users Added');">
+				<span>*Users Added</span>
 			</section>
-			<section class="bottom invisible">
+			<section class="option invisible" onclick="addStat(1893, 'Badges Completed');">
+				<span>*Badges Completed</span>
+			</section>
+			<section class="option invisible" onclick="addStat(210, 'Rewards Earned');">
+				<span>*Rewards Earned</span>
+			</section>
+			<section class="option invisible" onclick="addStat('$52,100', 'Money Made');">
+				<span>*Money Made</span>
+			</section>
+			<section class="header bottom invisible">
 			</section>
 		</div>
 		<div id="main">
 			<section id="edit_bar">
 				<h1><span class="green">Life Cents</span> Reporting</h1>
-				<button value="THING" onclick="thing()">Click Here</button>
 			</section>
 			<section id="content">
 				<div class="message green">
-					<h4>Welcome to the LifeCents Reporting tool! Use the menu on the left to view different statistics</h3>
+					<h4>Welcome to the LifeCents Reporting tool! Use the menu on the left to view different statistics <button value="THING" onclick="thing()">Click Here</button></h3>
 				</div>
 				<span id="stats">
 					<h2>Statistics <span class="order">By Week</span></h2>
@@ -67,23 +66,7 @@
 						</div>
 						<div class="stats-mod">
 							<span class="value">3,236</span>
-							<span class="description">Modules completed</span>		
-						</div>
-						<div class="stats-mod">
-							<span class="value">$132,100</span>
-							<span class="description">Money Gained</span>		
-						</div>
-						<div class="stats-mod">
-							<span class="value">290</span>
-							<span class="description">Beers Chugged</span>
-						</div>
-						<div class="stats-mod">
-							<span class="value">2,180</span>
-							<span class="description">New Users Added</span>
-						</div>
-						<div class="stats-mod">
-							<span class="value">3,236</span>
-							<span class="description">Modules completed</span>		
+							<span class="description">Modules completed</span>
 						</div>
 						<div class="stats-mod">
 							<span class="value">$132,100</span>
@@ -96,15 +79,14 @@
 					</span>
 				</span><!-- End Stats -->
 				<span class="clear"></span>
-				<div class="chart-outer">
-					<div class="chart-inner">
-						<h3></h3>
-						<div class="chart-row"></div>
-						<div class="chart-row"></div>
-						<div class="chart-row"></div>
-						<div class="chart-row"></div>
-					</div> <!-- End chart-inner-->
-				</div> <!--End chart-outer-->
+				<div class="chart">
+					<div class="chart-header">
+						<h3>User Engagement</h3>
+					</div><!-- End chart-header-->
+					<div class="chart-body">
+
+					</div><!-- End chart-body-->
+				</div> <!--End chart-->
 				<span class="clear"></span>
 			</section><!--content-->
 		</div>
