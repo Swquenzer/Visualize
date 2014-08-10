@@ -4,7 +4,7 @@ $(document).ready(function() {
 	** Initialize
 	*/
 	//Make first stat animate out
-	$('.stats-mod:nth-child(1)').toggleClass('stats-mod-open').children(2).toggleClass('light-green');
+	//$('.stats-mod:nth-child(1)').toggleClass('stats-mod-open').children(2).toggleClass('light-green');
 	//Slide the remaining stats down one at a time
 	$('.stats-mod').not(':nth-child(1)').toggleClass('invisible').each(function(i) {
 		$(this).delay(200*i).slideDown(200);
@@ -20,7 +20,7 @@ $(document).ready(function() {
 		isIn = false;
 		$('.left_sidebar').toggleClass('open', true);
 		$('#main').toggleClass('shrink', true);
-		$('.left_sidebar h2').fadeIn("200");
+		$('.left_sidebar h2').delay(100).fadeIn("200");
 		var len = $('.left_sidebar section').length;
 		$('.left_sidebar section').each(function(i) {
 			$(this).delay(200*i+300).slideDown(200, function() {
@@ -57,7 +57,7 @@ $(document).ready(function() {
 
 	/*
 	** Statistics Drawer
-	*/
+	
 	$('.stats-mod').on("click", function() {
 		//If drawer is not open, move to top
 		if(!$(this).hasClass('stats-mod-open')) {
@@ -71,9 +71,9 @@ $(document).ready(function() {
 		$(this).toggleClass('stats-mod-open');
 		$(this).children(2).toggleClass('light-green');
 	});
-
+	*/
 
 	window.thing = function() {
-		$('#content').append(document.properties);
+		$('.stats-mod:last').clone(true, true).appendTo('#stats');
 	}
 });
