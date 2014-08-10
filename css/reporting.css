@@ -133,8 +133,9 @@ h2 {
 /* Edit Bar */
 #main {
 	display: fixed;
-	margin-right: -10px;
-	width: 95%;
+	height: 90%;
+	margin-right: -20px;
+	width: 96%;
 	transition: width .2s, ease;
 }
 #main.shrink {
@@ -163,7 +164,7 @@ h2 {
 #content {
 	display:block;
 	height: 100%;
-	padding: 20px;
+	padding: 0 20px;
 	overflow-y: scroll;
 	overflow-x: hidden;
 	background: #c6dee8;
@@ -191,7 +192,8 @@ h2 {
 }
 #stats>span {
 	display: block;
-	max-width: 790px;
+	width: 100%;
+	/max-width: 790px;
 }
 #stats .stats-mod {
 	height: 75px;
