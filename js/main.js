@@ -9,6 +9,14 @@ $(document).ready(function() {
 	$('.stats-mod').not(':nth-child(1)').toggleClass('invisible').each(function(i) {
 		$(this).delay(200*i).slideDown(200);
 	});
+	$('#content.current').show();
+
+	//Initialize Tablesorter
+	$(".qt table").tablesorter();
+	////////////////////////////
+	//Initialize Query Engine 1
+	var qe = [];
+	qe[0] = new QueryEngine("rewards");
 
 	/*
 	** Sidebar Module 
@@ -56,9 +64,9 @@ $(document).ready(function() {
 		}
 	});
 	$('.left_sidebar').hover(function() {
-		$('.icon-menu img').css("opacity", 1);
+		if(isIn) $('.icon-menu img').css("opacity", 1);
 	}, function() {
-		$('.icon-menu img').css("opacity", .8);
+		if(isIn) $('.icon-menu img').css("opacity", .8);
 	});
 	/*
 	** Statistics Drawer
@@ -77,6 +85,40 @@ $(document).ready(function() {
 		$(this).children(2).toggleClass('light-green');
 	});
 	*/
+	$('.option.dashboard').on("click", function() {
+		var that = $('.content.dashboard');
+		if(!that.hasClass("current")) {
+			$('.content.current').toggleClass('current').slideUp('slow');
+			that.toggleClass('current');
+			that.delay('slow').slideDown('slow');
+		}
+	});
+	$('.option.settings').on("click", function() {
+		var that = $('.content.settings');
+		if(!that.hasClass("current")) {
+			$('.content.current').toggleClass('current').slideUp('slow');
+			that.toggleClass('current');
+			that.delay('slow').slideDown('slow');
+		}
+	})
+
+	/* TWAG Slider */
+	$('.twag-footer').on("click", function() {
+		var twag = $('.twag-body');
+		if(twag.hasClass('down')) {
+			$('.twag-header h2').css("font-size", "24px")
+			twag.slideUp("slow", function() {
+				$('.twag-footer img').attr("src", "images/down.png");
+			});
+		} else {
+			$('.twag-header h2').css("font-size", "36px")
+			twag.slideDown("slow", function() {
+				$('.twag-footer img').attr("src", "images/up.png");
+			});
+		}
+		twag.toggleClass("down","up");
+	});
+
 	window.addStat = function(stat, description) {
 		console.log("IN");
 		var html = '<div class="stats-mod"><span class="value">' + stat + '</span><span class="description">' + description + '</span></div>';

@@ -3,13 +3,10 @@
 <head>
     <meta charset="utf-8" />
     <title>Reporting</title>
-    <!--jQuery-->
-    <script src="dist/jquery-2.1.1.min.js"></script>
-    <!--Load the AJAX API-->
-    <!-- // <script type="text/javascript" src="https://www.google.com/jsapi"></script> -->
-    <!-- // <script type="te  	xt/javascript" src="js/charts.js"></script> -->
+    <script type="text/javascript" src="dist/jquery-2.1.1.min.js"></script>
+	<script type="text/javascript" src="dist/jquery.tablesorter.min.js"></script>
     <!-- Auto reload on css and js update -->
-    <script src="js/live.js"></script>
+    <!-- // <script src="js/live.js"></script> -->
     <!-- Main Code -->
     <link rel="stylesheet" type="text/css" href="css/reporting.css">
     <link href='http://fonts.googleapis.com/css?family=Ubuntu:700,400,300' rel='stylesheet' type='text/css'>
@@ -25,10 +22,16 @@
 			<section class="header red invisible">
 				Administration
 			</section>
-			<section class="option invisible">
+			<section class="option dashboard invisible">
 				<h4>Dashboard <img src="images/dashboard-icon.png"></h4>
 			</section>
-			<section class="option invisible">
+			<section class="option settings invisible">
+				<h4>Timeline <img src="images/settings-icon.png"></h4>
+			</section>
+			<section class="option settings invisible">
+				<h4>Google Analytics <img src="images/settings-icon.png"></h4>
+			</section>
+			<section class="option settings invisible">
 				<h4>Settings <img src="images/settings-icon.png"></h4>
 			</section>
 			<section class="header light-green invisible">
@@ -46,16 +49,169 @@
 			<section class="option invisible" onclick="addStat('$52,100', 'Money Made');">
 				<span>*Money Made</span>
 			</section>
+
 			<section class="header bottom invisible">
 			</section>
-		</div>
+		</div><!--Left Sidebar-->
 		<div id="main">
 			<section id="edit_bar">
-				<h1><span class="green">Life Cents</span> Reporting</h1>
+				<h1><span class="green">LifeCents</span> Reporting</h1>
 			</section>
-			<section id="content">
+			<section class="content dashboard current">
 				<div class="message green">
-					<h4>Welcome to the LifeCents Reporting tool! Use the menu on the left to view different statistics <button value="THING" onclick="thing()">Click Here</button></h3>
+					<h1>Dashboard</h1>
+					<h4>Welcome to the LifeCents Reporting tool! Use the menu on the left to view different statistics</h3>
+				</div><!--End Message-->
+				<!--This week at a glance (TWAG)-->
+				<section class="twag">
+					<div class="twag-header">
+						<h2>This Week at a Glance</h2>
+					</div>
+					<div class="twag-body down">
+						<table>
+							<tr>
+								<th>Engagement</th>
+								<th>Last Week</th>
+								<th>This Week</th>
+								<th>Delta</th>
+							</tr>
+							<tr onclick="twagUpdate('users')">
+								<td>New Users</td>
+								<td>1,409</td>
+								<td>1,493</td>
+								<td class="light-green">+18%</td>
+							</tr>
+							<tr onclick="twagUpdate('tasks')">
+								<td>Tasks Completed</td>
+								<td>1,409</td>
+								<td>1,493</td>
+								<td class="red">-3%</td>
+							</tr>
+							<tr onclick="twagUpdate('goals')">
+								<td>Goals Completed</td>
+								<td>3,409</td>
+								<td>4,493</td>
+								<td class="red">-3%</td>
+							</tr>
+							<tr onclick="twagUpdate('badges')">
+								<td>Badges Earned</td>
+								<td>1,409</td>
+								<td>1,493</td>
+								<td class="light-green">+32%</td>
+							</tr>
+							<tr onclick="twagUpdate('rewards')">
+								<td>Rewards Earned</td>
+								<td>1,409</td>
+								<td>1,493</td>
+								<td class="light-green">+4%</td>
+							</tr>
+						</table>
+						<div id="twag-chart" style="width: 48%; float: left"></div>
+					</div><!--End twag-body-->
+				</section><!--End twag-->
+				<footer class="twag-footer">
+					<img src="images/up.png">
+				</footer>
+				<!--</span> End Stats -->
+				<span class="clear"></span>
+				<div class="module qt">
+					<div class="module-header">
+						<h3>User Engagement: Rewards</h3>
+					</div><!-- End module-header-->
+					<div class="module-body">
+						<table class="tablesorter">
+							<thead>
+								<tr>
+									<th> Name</th>
+									<th> Completion Rate</th>
+									<th> Subject</th>
+									<th> Date Assigned</th>
+									<th> Date Awarded</th>
+									<th> Related Badges</th>
+									<th> Related Goals</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>A PRA Debt Reduction</td>
+									<td>168 Users (68%)</td>
+									<td>FHA</td>
+									<td>Jan 6, 2014</td>
+									<td>Mar 12, 2014</td>
+									<td>Clickable Icon</td>
+									<td>Clickable dIcon</td>
+								</tr>
+								<tr>
+									<td>B Some Content</td>
+									<td>H Some Content</td>
+									<td>J Some Content</td>
+									<td>Some Content</td>
+									<td>Some Content</td>
+									<td>Some Content</td>
+									<td>Some Content</td>
+								</tr>
+								<tr>
+									<td>C Some Content</td>
+									<td>Some Content</td>
+									<td>Some Content</td>
+									<td>H Some Content</td>
+									<td>Some Content</td>
+									<td>Some Content</td>
+									<td>Some Content</td>
+								</tr>
+								<tr>
+									<td>D Some Content</td>
+									<td>H Some Content</td>
+									<td>Some Content</td>
+									<td>Some Content</td>
+									<td>J Some Content</td>
+									<td>Some Content</td>
+									<td>Some Content</td>
+								</tr>
+								<tr>
+									<td>E Some Content</td>
+									<td>Some Content</td>
+									<td>Some Content</td>
+									<td>Some Content</td>
+									<td>Some Content</td>
+									<td>Some Content</td>
+									<td>J Some Content</td>
+								</tr>
+								<tr>
+									<td>F Some Content</td>
+									<td>J Some Content</td>
+									<td>H Some Content</td>
+									<td>Some Content</td>
+									<td>Some Content</td>
+									<td>Some Content</td>
+									<td>Some Content</td>
+								</tr>
+								<tr>
+									<td>G Some Content</td>
+									<td>H Some Content</td>
+									<td>Some Content</td>
+									<td>Some Content</td>
+									<td>J Some Content</td>
+									<td>Some Content</td>
+									<td>Some Content</td>
+								</tr>
+							</tbody>
+						</table>
+					</div><!-- End module-body-->
+				</div> <!--End module-->
+				<div class="module">
+					<div class="module-header">
+						<h3>User Engagement</h3>
+					</div><!-- End module-header-->
+					<div class="module-body">
+					</div><!-- End module-body-->
+				</div> <!--End module-->
+				
+			</section><!--content-->
+			<section class="content settings">
+				<div class="message red">
+					<h1>Settings</h1>
+					<h4>Welcome to the LifeCents Reporting tool! Use the menu on the left to view different statistics</h3>
 				</div>
 				<span id="stats">
 					<h2>Statistics <span class="order">By Week</span></h2>
@@ -79,19 +235,22 @@
 					</span>
 				</span><!-- End Stats -->
 				<span class="clear"></span>
-				<div class="chart">
-					<div class="chart-header">
+				<div class="module">
+					<div class="module-header">
 						<h3>User Engagement</h3>
-					</div><!-- End chart-header-->
-					<div class="chart-body">
-
-					</div><!-- End chart-body-->
-				</div> <!--End chart-->
+					</div><!-- End module-header-->
+					<div class="module-body">
+					</div><!-- End module-body-->
+				</div> <!--End module-->
 				<span class="clear"></span>
 			</section><!--content-->
 		</div>
 		<span class="clear"></span>
 	</div>
+	<script type="text/javascript" src="dist/highcharts.js"></script>
+	<script type="text/javascript" src="js/themes/dark-unica.js"></script>
+	<!--<script type="text/javascript" src="js/charts.js"></script>-->
 	<script src="js/main.js"></script>
+	<script type="text/javascript" src="js/charts1.js"></script>
 </body>
 </html>
