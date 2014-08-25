@@ -98,18 +98,79 @@ function twagUpdate(type) {
 /* Render Engine */
 //Table
 //Temp Data
-function QueryEngine(view) {
-    this.view = view;
+var rewards = {
+    name: 'PRA Debt Reduction',
+    completion: '192 Users (82%)', //Placeholder until dynamic data
+    subject: 'FHA',
+    dateAssigned: '',
+    dateAwarded: 'Feb 19, 2014'
+};
+var numRecords = 1;
+//Query Engine Class
+function QueryEngine(options) {
+    this.options = options;
+    //add to options?
+    this.target = $("#" + options.target);
+    this.affiliation = [];
+    this.subject = "";
     this.initialize = function() {
-        //GET data for initial view (tasks completed)
+        var that = this;
+        //Get affiliation from sidebar form
+        this.affiliation = [];
+        var aff = $('.qe input[name="affiliation"]');
+        $.each(aff, function(index, value) {
+            if(value.checked) {
+                that.affiliation.push(value.value);
+            }
+        });
+        //Get subject from sidebar form
+        this.subject = $('.qe input[name="subject"]:checked');
+
+        //Create Query Table Structure
+        var queryTable = "<div class='module qt'><div class='module-header'><h3>User Engagement: " + this.options.view.capitalize() + "<span class='affiliate-listing'> > " + this.affiliation.join(" + ") + "</span></h3></div><div class='module-body'><table class='tablesorter'><thead><tr></tr></thead><tbody></tbody></table></div></div>";
+        //Add to top of QE module stack
+        this.target.prepend(queryTable);
+        /////Add loading icon
+        this.renderView();
+        /////Remove loading icon
+        //After view has finished rendering, display
+        this.target.slideDown('slow');
     };
     this.changeView = function(newView) {
-        this.view = newView;
-        this.renderView();
+        //Change to new view type (reward, badge, metric, etc)
+        this.options.view = newView;
+        var that = this;
+        this.target.slideUp('fast', function() {
+            //Remove current module for replacement
+            that.target.children().first().empty();
+            //Initialize new module with updated view
+            that.initialize();
+        });
     };
     this.renderView = function() {
-
+        console.log(this.subject);
+        var that = this;
+        var table = this.target.children().first().find('table');
+        //Create thead Row
+        $.getJSON('rewards.json', function(data) {
+            //console.log(data);
+            for(var i=0; i<data.columns.length; i++) {
+                table.find('thead tr').append("<th>" + data.columns[i].separate().capitalize() + "</th>");
+            }
+            table.find('thead tr').append("<th>Subject</th><th>Related Badges</th><th>Related Goals</th>");
+            //Create tbody Rows
+            for(var i=0; i<data.results.length; i++) {
+                table.find('tbody').append('<tr></tr>');
+                for(var j=0; j<data.results[i].length; j++) {
+                    table.find('tbody tr:last').append("<td>" + data.results[i][j] + "</td>");
+                }
+                //Subject name extracted from previous sibling label
+                var subject = that.subject.prev().html();
+                table.find('tbody tr:last').append("<td>" + subject + "</td><td>Clickable Icon</td><td>Clickable Icon</td>");
+            }     
+            $(".qt table").tablesorter();
+        });
     };
-};
+}
 
 

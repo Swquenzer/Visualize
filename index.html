@@ -35,19 +35,39 @@
 				<h4>Settings <img src="images/settings-icon.png"></h4>
 			</section>
 			<section class="header light-green invisible">
-				Statistics
+				Custom Query
 			</section>
-			<section class="option invisible" onclick="addStat(142, 'Users Added');">
-				<span>*Users Added</span>
+			<section class="qe" >
+				<h3>Affiliation:</h3>
+				<label>PRA</label>
+				<input type="checkbox" name="affiliation" value="pra" checked>
+				<label>Mercy</label>
+				<input type="checkbox" name="affiliation" value="mercy">
+				<label>Cash America</label>
+				<input type="checkbox" name="affiliation" value="cashamerica">
+				<h3>Subjects:</h3>
+				<label>FHA Master</label>
+				<input type="radio" name="subject" value="fhamaster" checked>
+				<label>Other</label>
+				<input type="radio" name="subject" value="other">
 			</section>
-			<section class="option invisible" onclick="addStat(1893, 'Badges Completed');">
-				<span>*Badges Completed</span>
+			<section class="option invisible" onclick="qe[0].changeView('reward');">
+				<span>Reward</span>
 			</section>
-			<section class="option invisible" onclick="addStat(210, 'Rewards Earned');">
-				<span>*Rewards Earned</span>
+			<section class="option invisible" onclick="qe[0].changeView('badge');">
+				<span>Badge</span>
 			</section>
-			<section class="option invisible" onclick="addStat('$52,100', 'Money Made');">
-				<span>*Money Made</span>
+			<section class="option invisible" onclick="qe[0].changeView('goal');">
+				<span>Goal</span>
+			</section>
+			<section class="option invisible" onclick="qe[0].changeView('task');">
+				<span>Task</span>
+			</section>
+			<section class="option invisible" onclick="qe[0].changeView('questionaire');">
+				<span>Questionaire</span>
+			</section>
+			<section class="option invisible" onclick="qe[0].changeView('metric');">
+				<span>Metric</span>
 			</section>
 
 			<section class="header bottom invisible">
@@ -114,104 +134,98 @@
 				</footer>
 				<!--</span> End Stats -->
 				<span class="clear"></span>
-				<div class="module qt">
-					<div class="module-header">
-						<h3>User Engagement: Rewards</h3>
-					</div><!-- End module-header-->
-					<div class="module-body">
-						<table class="tablesorter">
-							<thead>
-								<tr>
-									<th> Name</th>
-									<th> Completion Rate</th>
-									<th> Subject</th>
-									<th> Date Assigned</th>
-									<th> Date Awarded</th>
-									<th> Related Badges</th>
-									<th> Related Goals</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td>A PRA Debt Reduction</td>
-									<td>168 Users (68%)</td>
-									<td>FHA</td>
-									<td>Jan 6, 2014</td>
-									<td>Mar 12, 2014</td>
-									<td>Clickable Icon</td>
-									<td>Clickable dIcon</td>
-								</tr>
-								<tr>
-									<td>B Some Content</td>
-									<td>H Some Content</td>
-									<td>J Some Content</td>
-									<td>Some Content</td>
-									<td>Some Content</td>
-									<td>Some Content</td>
-									<td>Some Content</td>
-								</tr>
-								<tr>
-									<td>C Some Content</td>
-									<td>Some Content</td>
-									<td>Some Content</td>
-									<td>H Some Content</td>
-									<td>Some Content</td>
-									<td>Some Content</td>
-									<td>Some Content</td>
-								</tr>
-								<tr>
-									<td>D Some Content</td>
-									<td>H Some Content</td>
-									<td>Some Content</td>
-									<td>Some Content</td>
-									<td>J Some Content</td>
-									<td>Some Content</td>
-									<td>Some Content</td>
-								</tr>
-								<tr>
-									<td>E Some Content</td>
-									<td>Some Content</td>
-									<td>Some Content</td>
-									<td>Some Content</td>
-									<td>Some Content</td>
-									<td>Some Content</td>
-									<td>J Some Content</td>
-								</tr>
-								<tr>
-									<td>F Some Content</td>
-									<td>J Some Content</td>
-									<td>H Some Content</td>
-									<td>Some Content</td>
-									<td>Some Content</td>
-									<td>Some Content</td>
-									<td>Some Content</td>
-								</tr>
-								<tr>
-									<td>G Some Content</td>
-									<td>H Some Content</td>
-									<td>Some Content</td>
-									<td>Some Content</td>
-									<td>J Some Content</td>
-									<td>Some Content</td>
-									<td>Some Content</td>
-								</tr>
-							</tbody>
-						</table>
-					</div><!-- End module-body-->
-				</div> <!--End module-->
-				<div class="module">
-					<div class="module-header">
-						<h3>User Engagement</h3>
-					</div><!-- End module-header-->
-					<div class="module-body">
-					</div><!-- End module-body-->
-				</div> <!--End module-->
-				
+				<div id="queryEngine">
+					 <div class="module qt">
+						<div class="module-header">
+							<h3>User Engagement: Rewards</h3>
+						</div><!-- End module-header-->
+						<div class="module-body">
+							<table class="tablesorter">
+								<thead>
+									<tr>
+										<th> Name</th>
+										<th> Completion Rate</th>
+										<th> Subject</th>
+										<th> Date Assigned</th>
+										<th> Date Awarded</th>
+										<th> Related Badges</th>
+										<th> Related Goals</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>A PRA Debt Reduction</td>
+										<td>168 Users (68%)</td>
+										<td>FHA</td>
+										<td>Jan 6, 2014</td>
+										<td>Mar 12, 2014</td>
+										<td>Clickable Icon</td>
+										<td>Clickable dIcon</td>
+									</tr>
+									<tr>
+										<td>B Some Content</td>
+										<td>H Some Content</td>
+										<td>J Some Content</td>
+										<td>Some Content</td>
+										<td>Some Content</td>
+										<td>Some Content</td>
+										<td>Some Content</td>
+									</tr>
+									<tr>
+										<td>C Some Content</td>
+										<td>Some Content</td>
+										<td>Some Content</td>
+										<td>H Some Content</td>
+										<td>Some Content</td>
+										<td>Some Content</td>
+										<td>Some Content</td>
+									</tr>
+									<tr>
+										<td>D Some Content</td>
+										<td>H Some Content</td>
+										<td>Some Content</td>
+										<td>Some Content</td>
+										<td>J Some Content</td>
+										<td>Some Content</td>
+										<td>Some Content</td>
+									</tr>
+									<tr>
+										<td>E Some Content</td>
+										<td>Some Content</td>
+										<td>Some Content</td>
+										<td>Some Content</td>
+										<td>Some Content</td>
+										<td>Some Content</td>
+										<td>J Some Content</td>
+									</tr>
+									<tr>
+										<td>F Some Content</td>
+										<td>J Some Content</td>
+										<td>H Some Content</td>
+										<td>Some Content</td>
+										<td>Some Content</td>
+										<td>Some Content</td>
+										<td>Some Content</td>
+									</tr>
+									<tr>
+										<td>G Some Content</td>
+										<td>H Some Content</td>
+										<td>Some Content</td>
+										<td>Some Content</td>
+										<td>J Some Content</td>
+										<td>Some Content</td>
+										<td>Some Content</td>
+									</tr>
+								</tbody>
+							</table>
+						</div><!-- End module-body-->
+					</div> <!--End module--> -->
+				</div><!--End queryEngine-->
 			</section><!--content-->
 			<section class="content settings">
 				<div class="message red">
 					<h1>Settings</h1>
-					<h4>Welcome to the LifeCents Reporting tool! Use the menu on the left to view different statistics</h3>
+					<h3>Welcome to the LifeCents Reporting tool! Use the menu on the left to view different statistics</h3>
 				</div>
 				<span id="stats">
 					<h2>Statistics <span class="order">By Week</span></h2>
@@ -249,8 +263,8 @@
 	</div>
 	<script type="text/javascript" src="dist/highcharts.js"></script>
 	<script type="text/javascript" src="js/themes/dark-unica.js"></script>
+	<script type="text/javascript" src="js/charts1.js"></script>
 	<!--<script type="text/javascript" src="js/charts.js"></script>-->
 	<script src="js/main.js"></script>
-	<script type="text/javascript" src="js/charts1.js"></script>
 </body>
 </html>

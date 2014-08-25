@@ -1,4 +1,15 @@
 //main.js
+//Prototypes
+
+//Captializes first letter of string
+String.prototype.capitalize = function() {
+    return this.charAt(0).toUpperCase() + this.slice(1);
+};
+//Adds a space in between camel-case words
+String.prototype.separate = function() {
+	return this.replace(/([A-Z]+)/g, " $1");
+};
+
 $(document).ready(function() {
 	/*
 	** Initialize
@@ -11,13 +22,19 @@ $(document).ready(function() {
 	});
 	$('#content.current').show();
 
-	//Initialize Tablesorter
-	$(".qt table").tablesorter();
 	////////////////////////////
 	//Initialize Query Engine 1
-	var qe = [];
-	qe[0] = new QueryEngine("rewards");
+	qe = [];
+	var options = {
+		view: "rewards",
+		target: "queryEngine",
+		type: "table"
+	}
+	qe[0] = new QueryEngine(options);
+	qe[0].initialize();
 
+	//Initialize Tablesorter
+	$(".qt table").tablesorter();
 	/*
 	** Sidebar Module 
 	*/

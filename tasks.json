@@ -1,0 +1,39 @@
+{
+  "columns": [
+    "name",
+    "completion",
+    "subject",
+    "dateAssigned",
+    "dateDue"
+  ],
+  "results": [
+    [
+      "PRA Debt Reduction",
+      "168 Users (68%)",
+      "FHA",
+      "",
+      ""
+    ],
+    [
+      "Mercy",
+      "12 Users (18%)",
+      "FHA Master",
+      "Apr 30, 2014",
+      "June 5, 2014"
+    ],
+    [
+      "Test Aff",
+      "124 Users (22%)",
+      "FHA",
+      "Jul 20, 2014",
+      "Jul 22, 2014"
+    ],
+    [
+      "Random Aff",
+      "1,201 Users (89%)",
+      "FHA Master",
+      "Apr 30, 2014",
+      "June 5, 2014"
+    ]
+  ]
+}

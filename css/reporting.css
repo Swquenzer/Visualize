@@ -20,6 +20,11 @@ h2 {
 	font-family: 'Ubuntu', sans-serif;
 	color: #EEEEEE;
 }
+input[type="radio"], input[type="checkbox"] {
+	display: inline-block;
+	padding: 25px;
+}
+
 #wrapper {
 	height: 100%;
 }
@@ -433,4 +438,11 @@ h2 {
 }
 .qt td {
 	padding: 10px 5px;
+}
+.qt .affiliate-listing {
+	display: inline-block;
+	margin-left: 10px;
+	font-size: 14px;
+	font-weight: 300;
+	color: #28345e;
 }

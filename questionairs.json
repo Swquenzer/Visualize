@@ -1,0 +1,42 @@
+{
+  "columns": [
+    "name",
+    "completion",
+    "affiliation",
+    "subject",
+    "dateAssigned",
+    "dateDue"
+  ],
+  "results": [
+    [
+      "About Me - Credit Report",
+      "128 Users (78%)",
+      "PRA",
+      "FHA",
+      "",
+      ""
+    ],
+    [
+      "Mercy",
+      "12 Users (18%)",
+      "FHA Master",
+      "",
+      ""
+    ],
+    [
+      "About Me - Credit Score",
+      "124 Users (22%)",
+      "Test Affiliation",
+      "FHA",
+      "",
+      ""
+    ],
+    [
+      "Random Aff",
+      "1,201 Users (89%)",
+      "FHA Master",
+      "Apr 30, 2014",
+      "June 5, 2014"
+    ]
+  ]
+}
