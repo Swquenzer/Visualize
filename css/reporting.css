@@ -20,10 +20,6 @@ h2 {
 	font-family: 'Ubuntu', sans-serif;
 	color: #EEEEEE;
 }
-input[type="radio"], input[type="checkbox"] {
-	display: inline-block;
-	padding: 25px;
-}
 
 #wrapper {
 	height: 100%;
@@ -124,6 +120,9 @@ input[type="radio"], input[type="checkbox"] {
 }
 .red {
 	color: #dd6956 !important;
+}
+.center {
+	text-align: center;
 }
 
 /* Main Content Area*/
@@ -441,7 +440,7 @@ input[type="radio"], input[type="checkbox"] {
 }
 .qt .affiliate-listing {
 	display: inline-block;
-	margin-left: 10px;
+	margin-left: 5px;
 	font-size: 14px;
 	font-weight: 300;
 	color: #28345e;

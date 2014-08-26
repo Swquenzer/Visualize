@@ -148,15 +148,15 @@ function QueryEngine(options) {
         });
     };
     this.renderView = function() {
-        console.log(this.subject);
         var that = this;
         var table = this.target.children().first().find('table');
         //Create thead Row
         $.getJSON('rewards.json', function(data) {
-            //console.log(data);
             for(var i=0; i<data.columns.length; i++) {
+                //Column Names (table headers) should originally be in lower *camelCase*
                 table.find('thead tr').append("<th>" + data.columns[i].separate().capitalize() + "</th>");
             }
+            //*Need switch statment for related badges and goals
             table.find('thead tr').append("<th>Subject</th><th>Related Badges</th><th>Related Goals</th>");
             //Create tbody Rows
             for(var i=0; i<data.results.length; i++) {
@@ -166,6 +166,7 @@ function QueryEngine(options) {
                 }
                 //Subject name extracted from previous sibling label
                 var subject = that.subject.prev().html();
+                //*Need another switch statment here
                 table.find('tbody tr:last').append("<td>" + subject + "</td><td>Clickable Icon</td><td>Clickable Icon</td>");
             }     
             $(".qt table").tablesorter();
