@@ -43,13 +43,13 @@ $(document).ready(function() {
 	** Main Page
 	*/
 	//Main page transition
-	function changePage(section) {
+	changePage = function(section) {
 		if(!section.hasClass("current")) {
 			$('.content.current').toggleClass('current').slideUp('slow');
 			section.toggleClass('current');
 			section.delay('slow').slideDown('slow');
 		}
-	};
+	}
 
 	/*
 	** Sidebar Module 
