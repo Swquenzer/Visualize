@@ -97,7 +97,7 @@ function twagUpdate(type) {
 
 /* Render Engine */
 //Table
-//Temp Data
+/*
 var rewards = {
     name: 'PRA Debt Reduction',
     completion: '192 Users (82%)', //Placeholder until dynamic data
@@ -105,30 +105,39 @@ var rewards = {
     dateAssigned: '',
     dateAwarded: 'Feb 19, 2014'
 };
+*/
 var numRecords = 1;
 //Query Engine Class
 function QueryEngine(options) {
     this.options = options;
     //add to options?
     this.target = $("#" + options.target);
-    this.affiliation = [];
-    this.subject = "";
+    this.affiliation = "";
+    this.subject = [];
     this.initialize = function() {
         var that = this;
-        //Get affiliation from sidebar form
-        this.affiliation = [];
-        var aff = $('.qe input[name="affiliation"]');
-        $.each(aff, function(index, value) {
+        //Get subject from sidebar form
+        this.subject = [];
+        var sub = $('.qe input[name="subject"]');
+
+        $.each(sub, function(index, value) {
             if(value.checked) {
-                that.affiliation.push(value.value);
+                that.subject.push(value.value);
             }
         });
-        //Get subject from sidebar form
-        this.subject = $('.qe input[name="subject"]:checked');
+        //If no checkboxes are selected
+        if(this.subject.length === 0) {
+            //*Give user message to select a checkbox. For now auto-select first option
+            sub.first().prop('checked', true);
+            this.subject.push(sub.first()[0].value);
+        }
+        //Get affiliation from sidebar form
+        this.affiliation = $('.qe input[name="affiliation"]:checked');
 
         //Create Query Table Structure
-        var queryTable = "<div class='module qt'><div class='module-header'><h3>User Engagement: " + this.options.view.capitalize() + "<span class='affiliate-listing'> > " + this.affiliation.join(" + ") + "</span></h3></div><div class='module-body'><table class='tablesorter'><thead><tr></tr></thead><tbody></tbody></table></div></div>";
-        //Add to top of QE module stack
+        //*Show something different depending on options.view
+        var queryTable = "<div class='module qt'><div class='module-header'><h3>User Engagement: " + this.options.view.capitalize() + "<span class='subject-listing'> > " + this.affiliation[0].value.toUpperCase() + " > " + this.subject.join(" + ").toUpperCase() + "</span></h3></div><div class='module-body'><table class='tablesorter'><thead><tr></tr></thead><tbody></tbody></table></div></div>";
+        //Push to top of QE module stack
         this.target.prepend(queryTable);
         /////Add loading icon
         this.renderView();
@@ -138,39 +147,115 @@ function QueryEngine(options) {
     };
     this.changeView = function(newView) {
         //Change to new view type (reward, badge, metric, etc)
-        this.options.view = newView;
+        if(newView === 'userList') {
+            this.options.viewMode = 'userList';
+        } else {
+            this.options.viewMode = 'type';
+            this.options.view = newView;
+        }
         var that = this;
         this.target.slideUp('fast', function() {
             //Remove current module for replacement
+            //*CURRENTLY replaces FIRST module, need to modify to any user-chosen module
             that.target.children().first().empty();
             //Initialize new module with updated view
             that.initialize();
         });
     };
+    this.createUserView = function() {
+        console.log(this.options.view);
+        console.log(this.options.viewMode);
+        console.log(this.options.viewName);
+        var section = $('.content.userView');
+        changePage(section);
+    }; 
     this.renderView = function() {
         var that = this;
         var table = this.target.children().first().find('table');
-        //Create thead Row
-        $.getJSON('rewards.json', function(data) {
-            for(var i=0; i<data.columns.length; i++) {
-                //Column Names (table headers) should originally be in lower *camelCase*
-                table.find('thead tr').append("<th>" + data.columns[i].separate().capitalize() + "</th>");
+        //*Needs to be in form rewards.aspx?option1=option1&option2=option2
+        //OR use getJSON parameters
+        var getURL = this.options.view + '.json';
+        if(this.options.viewMode === 'userList') {
+            var paramList = {};
+            paramList.view = this.options.view;
+            paramList.affiliation = this.affiliation[0].value;
+            paramList.subject = this.subject;
+            //Gather data for query
+            switch(this.options.view) {
+                case 'rewards':
+                    paramList.viewName = this.options.viewName;
+                    break;
+                case 'badges':
+
+                    break;
+                case 'goals':
+
+                    break;
+                case 'tasks':
+
+                    break;
+                case 'questionaires':
+
+                    break;
+                case 'metrics':
+
+                    break;
             }
-            //*Need switch statment for related badges and goals
-            table.find('thead tr').append("<th>Subject</th><th>Related Badges</th><th>Related Goals</th>");
-            //Create tbody Rows
-            for(var i=0; i<data.results.length; i++) {
-                table.find('tbody').append('<tr></tr>');
-                for(var j=0; j<data.results[i].length; j++) {
-                    table.find('tbody tr:last').append("<td>" + data.results[i][j] + "</td>");
+
+            //If array doesn't get through in paramList, look up "traditional flag" with Google
+            $.getJSON('getUsers.json', paramList, function(data) {
+                //On Success
+                for(var i=0; i<data.columns.length; i++) {
+                    //Column Names (table headers) should originally be in lower *camelCase*
+                    table.find('thead tr').append("<th>" + data.columns[i].separate().capitalize() + "</th>");
                 }
-                //Subject name extracted from previous sibling label
-                var subject = that.subject.prev().html();
-                //*Need another switch statment here
-                table.find('tbody tr:last').append("<td>" + subject + "</td><td>Clickable Icon</td><td>Clickable Icon</td>");
-            }     
-            $(".qt table").tablesorter();
-        });
+                for(var i=0; i<data.results.length; i++) {
+                    table.find('tbody').append('<tr></tr>');
+                    for(var j=0; j<data.results[i].length; j++) {
+                        table.find('tbody tr:last').append("<td>" + data.results[i][j]  + "</td>");
+                    }
+                }
+                //*Add another click handler (as below) that creates a BACK button to show prev view
+                //onclick handler to go into USER mode
+                table.find('tr').slice(1).on("click", function() {
+                    //This is what decides the paramter for getting a user view
+                    that.options.viewName = $(this).find('td')[0].innerHTML;
+                    that.options.viewMode = 'user';
+                    that.createUserView();
+                });
+            });
+        } else {
+            //Create thead Row
+            $.getJSON(getURL, {},function(data) {
+                for(var i=0; i<data.columns.length; i++) {
+                    //Column Names (table headers) should originally be in lower *camelCase*
+                    table.find('thead tr').append("<th>" + data.columns[i].separate().capitalize() + "</th>");
+                }
+                //*Need switch statment for related badges and goals
+                table.find('thead tr').append("<th>Subject</th><th>Related Badges</th><th>Related Goals</th>");
+                //Create tbody Rows
+                for(var i=0; i<data.results.length; i++) {
+                    table.find('tbody').append('<tr></tr>');
+                    for(var j=0; j<data.results[i].length; j++) {
+                        table.find('tbody tr:last').append("<td>" + data.results[i][j]  + "</td>");
+                    }
+                    //Subject name extracted from previous sibling label
+                    //var subject = that.subject.prev().html();
+                    //*Need another switch statment here
+                    table.find('tbody tr:last').append("<td>" + "subject" + "</td><td>Clickable Icon</td><td>Clickable Icon</td>");
+                }
+                //Select all tr's except for first (header)
+                table.find('tr').slice(1).on("click", function() {
+                    //This is what decides the paramter for getting a userList view
+                    that.options.viewName = $(this).find('td')[0].innerHTML;
+                    that.changeView('userList');
+                });
+            }).error(function() {
+                console.log("Error retrieving data");
+            });
+        }
+        //Apply to all tables
+        $(".qt table").tablesorter();
     };
 }
 

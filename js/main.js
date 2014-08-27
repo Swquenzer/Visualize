@@ -25,16 +25,32 @@ $(document).ready(function() {
 	////////////////////////////
 	//Initialize Query Engine 1
 	qe = [];
+	//view: rewards, badges, metrics, etc
+	//viewMode: type, userList, user
+	//viewName: string value of first td in selected row ('swquenzer' or 'saving habits')
 	var options = {
 		view: "rewards",
 		target: "queryEngine",
-		type: "table"
+		type: "table",
+		viewMode: "type"
 	}
 	qe[0] = new QueryEngine(options);
 	qe[0].initialize();
 
 	//Initialize Tablesorter
 	$(".qt table").tablesorter();
+	/*
+	** Main Page
+	*/
+	//Main page transition
+	function changePage(section) {
+		if(!section.hasClass("current")) {
+			$('.content.current').toggleClass('current').slideUp('slow');
+			section.toggleClass('current');
+			section.delay('slow').slideDown('slow');
+		}
+	};
+
 	/*
 	** Sidebar Module 
 	*/
@@ -85,39 +101,16 @@ $(document).ready(function() {
 	}, function() {
 		if(isIn) $('.icon-menu img').css("opacity", .8);
 	});
-	/*
-	** Statistics Drawer
-	
-	$('.stats-mod').on("click", function() {
-		//If drawer is not open, move to top
-		if(!$(this).hasClass('stats-mod-open')) {
-			var elements = $(this).siblings();
-			elements.detach().appendTo($(this).parent());
-		}
-		//Close other open drawer if possible
-		$('.stats-mod-open').children(2).toggleClass('light-green');
-		$('.stats-mod-open').toggleClass('stats-mod-open');
-		//Open or close drawer
-		$(this).toggleClass('stats-mod-open');
-		$(this).children(2).toggleClass('light-green');
-	});
-	*/
+
+	/*** --- Left Sidebar Controls --- ***/
 	$('.option.dashboard').on("click", function() {
-		var that = $('.content.dashboard');
-		if(!that.hasClass("current")) {
-			$('.content.current').toggleClass('current').slideUp('slow');
-			that.toggleClass('current');
-			that.delay('slow').slideDown('slow');
-		}
+		var section = $('.content.dashboard');
+		changePage(section);
 	});
 	$('.option.settings').on("click", function() {
-		var that = $('.content.settings');
-		if(!that.hasClass("current")) {
-			$('.content.current').toggleClass('current').slideUp('slow');
-			that.toggleClass('current');
-			that.delay('slow').slideDown('slow');
-		}
-	})
+		var section = $('.content.settings');
+		changePage(section);
+	});
 
 	/* TWAG Slider */
 	$('.twag-footer').on("click", function() {
@@ -136,6 +129,7 @@ $(document).ready(function() {
 		twag.toggleClass("down","up");
 	});
 
+	/* Extra Functions */
 	window.addStat = function(stat, description) {
 		console.log("IN");
 		var html = '<div class="stats-mod"><span class="value">' + stat + '</span><span class="description">' + description + '</span></div>';

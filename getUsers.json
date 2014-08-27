@@ -1,0 +1,44 @@
+{
+  "columns": [
+    "userName",
+    "firstName",
+    "lastName",
+    "email",
+    "affiliation",
+    "joinDate"
+  ],
+  "results": [
+    [
+      "Hershdog",
+      "Matt",
+      "Hershey",
+      "hershmilly@hotmail.com",
+      "PRA",
+      "8.15.13"
+    ],
+    [
+      "Capn",
+      "Joel",
+      "Murray",
+      "joel.murray@myfela.com",
+      "Mercy",
+      "12.10.13"
+    ],
+    [
+      "Swquenzer",
+      "Stephen",
+      "Quenzer",
+      "swquenzer@gmail.com",
+      "PRA",
+      "6.10.14"
+    ],
+    [
+      "KingMe",
+      "Jordan",
+      "King",
+      "jking@gmail.com",
+      "Mercy",
+      "2.04.14"
+    ]
+  ]
+}
