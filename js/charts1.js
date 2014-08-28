@@ -136,7 +136,10 @@ function QueryEngine(options) {
 
         //Create Query Table Structure
         //*Show something different depending on options.view
-        var queryTable = "<div class='module qt'><div class='module-header'><h3>User Engagement: " + this.options.view.capitalize() + "<span class='subject-listing'> > " + this.affiliation[0].value.toUpperCase() + " > " + this.subject.join(" + ").toUpperCase() + "</span></h3></div><div class='module-body'><table class='tablesorter'><thead><tr></tr></thead><tbody></tbody></table></div></div>";
+        var footer = "";
+        //If it's a userlist, allow group emailing
+        if(this.options.viewMode === 'userList') footer = "<h4><img src='images/envelope-black.png'>Send these users an email</h4><span class='clear'></span>";
+        var queryTable = "<div class='module qt'><div class='module-header'><h3>User Engagement: " + this.options.view.capitalize() + "<span class='subject-listing'> > " + this.affiliation[0].value.toUpperCase() + " > " + this.subject.join(" + ").toUpperCase() + "</span></h3></div><div class='module-body'><table class='tablesorter'><thead><tr></tr></thead><tbody></tbody></table>"+footer+"</div></div>";
         //Push to top of QE module stack
         this.target.prepend(queryTable);
         /////Add loading icon
@@ -150,6 +153,8 @@ function QueryEngine(options) {
         if(newView === 'userList') {
             this.options.viewMode = 'userList';
         } else {
+            var section = $('.content.dashboard');
+            changePage(section);
             this.options.viewMode = 'type';
             this.options.view = newView;
         }
@@ -163,9 +168,9 @@ function QueryEngine(options) {
         });
     };
     this.createUserView = function() {
-        console.log(this.options.view);
-        console.log(this.options.viewMode);
-        console.log(this.options.viewName);
+        console.log("view: " + this.options.view);
+        console.log("viewMode: " + this.options.viewMode);
+        console.log("viewName: " + this.options.viewName);
         var section = $('.content.userView');
         changePage(section);
     }; 

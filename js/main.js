@@ -1,6 +1,6 @@
 //main.js
 //Prototypes
-
+var dev = true;
 //Captializes first letter of string
 String.prototype.capitalize = function() {
     return this.charAt(0).toUpperCase() + this.slice(1);
@@ -24,7 +24,6 @@ $(document).ready(function() {
 
 	////////////////////////////
 	//Initialize Query Engine 1
-	qe = [];
 	//view: rewards, badges, metrics, etc
 	//viewMode: type, userList, user
 	//viewName: string value of first td in selected row ('swquenzer' or 'saving habits')
@@ -34,11 +33,15 @@ $(document).ready(function() {
 		type: "table",
 		viewMode: "type"
 	}
+	qe = [];
 	qe[0] = new QueryEngine(options);
 	qe[0].initialize();
 
 	//Initialize Tablesorter
 	$(".qt table").tablesorter();
+
+	//Make all non-current sections (non dashboard) display:none
+	$('.content').not('.current').hide();
 	/*
 	** Main Page
 	*/
@@ -111,7 +114,21 @@ $(document).ready(function() {
 		var section = $('.content.settings');
 		changePage(section);
 	});
+	$('.option.userView').on("click", function() {
+		var section = $('.content.userView');
+		changePage(section);
+	});
 
+	if(dev) {
+		var twag = $('.twag-body');
+		$('.twag-header h2').css("font-size", "24px")
+		twag.slideUp("slow", function() {
+			$('.twag-footer img').attr("src", "images/down.png");
+		});
+	}
+	
+
+	twag.toggleClass("down","up");
 	/* TWAG Slider */
 	$('.twag-footer').on("click", function() {
 		var twag = $('.twag-body');

@@ -244,36 +244,6 @@ h2 {
 	text-align: left;
 }
 
-/* Charts */
-.module {
-	display: block;
-	/max-width: 660px;
-	margin: 15px 0;
-	background: #C6DEE8;
-	border-right: 30px solid #697490;
-	border-radius: 2px 2px 2px 2px;
-	box-shadow: 0px 0px 1px 0px rgba(1, 1, 1, .6);
-}
-.module-header {
-	display:block;
-	background: #F6F6F6;
-}
-.module-header h3 {
-	display: inline-block;dd
-	margin: 0;
-	padding: 5px 20px;
-	color: #767676;
-	font-weight: 300;
-}
-.module-body {
-	display: block;
-	position: relative;
-	/height: 400px;
-	margin: 0;
-	padding: 0;
-	background: #ffffff;
-}
-
 /* Message */
 .message {
 	display: block;
@@ -452,4 +422,121 @@ h2 {
 	font-weight: 300;
 	color: #28345e;
 }
+
+/* Modules */
+.module {
+	display: block;
+	/max-width: 660px;
+	margin: 15px 0px;
+	background: #C6DEE8;
+	border-right: 30px solid #697490;
+	border-radius: 2px 2px 2px 2px;
+	box-shadow: 0px 0px 1px 0px rgba(1, 1, 1, .6);
+}
+.module-header {
+	display:block;
+	background: #F6F6F6;
+}
+.module-header h3 {
+	display: inline-block;dd
+	margin: 0;
+	padding: 5px 20px;
+	color: #767676;
+	font-weight: 300;
+}
+.module-body h4 {
+	display: block;
+	margin: 15px 0 0 0;
+	padding: 10px;
+	text-align: center;
+	color: black;
+	cursor: pointer;
+	opacity: .6;
+}
+.module-body h4:hover {
+	opacity: 1;
+	background: #dee0ee;
+}
+.module-body h4 img {
+	position: relative;
+	bottom: 2px;
+	margin-right: 5px;
+	vertical-align: middle;
+}
+.module-body {
+	display: block;
+	position: relative;
+	/height: 400px;
+	margin: 0;
+	padding: 0;
+	background: #ffffff;
+}
+
 /* User View */
+.userView {
+	text-align: center;
+}
+.userView .module {
+	display: inline-block;
+	margin-right: 1%;
+	margin-left: 1%;
+	width: 47%;
+	vertical-align: top;
+	border-right: none;
+}
+.userView .profile {
+	width: 96%;
+	text-align: left;
+	background: #434E66;
+}
+.userView .profile .module-header {
+	background: #434E66;
+	border-bottom: 1px solid #333B51;
+}
+.userView .profile .module-header h3 {
+	padding: 15px 15px 6px;
+	color: #EEEEEE;
+	vertical-align: middle;
+}
+.userView .profile h3 img {
+	width: 50px;
+	position: relative;
+	margin-top: -17px;
+	vertical-align: middle
+}
+.userView .profile .module-header h4 {
+	display: inline-block;
+	padding: 15px 20px;
+	margin-right: 20px;
+	text-align: right;
+	color: white;
+	float: right;
+	cursor: pointer;
+	opacity: .6;
+	transition: opacity .1s;
+}
+.userView .profile .module-header h4 img {
+	position: relative;
+	bottom: 3px;
+	margin-right: 5px;
+	vertical-align: middle;
+}
+.userView .profile .module-header h4:hover {
+	color: white;
+	opacity: 1 !important;
+}
+.userView .profile .module-body {
+	height: 150px;
+	padding: 30px;
+	text-align: center;
+	color: #8DABE2;
+	background: #454C5A;
+}
+.userView .module-header {
+	
+}
+.userView .module-body {
+	padding: 10px 15px;
+	text-align: left;
+	color: #414141;
+}
