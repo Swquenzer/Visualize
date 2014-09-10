@@ -190,7 +190,7 @@ var twagOptions = {
     }]
 }
 //Create new bar chart
-var twagChart = new Highcharts.Chart(twagOptions);
+twagChart = new Highcharts.Chart(twagOptions);
 
 //On click event for controlling different engagement views
 //New Users, Tasks Completed, Goals Completed, Badges Earned, Rewards Earned
@@ -237,7 +237,10 @@ function QueryEngine(options) {
         this.renderView();
         /////Remove loading icon
         //After view has finished rendering, display
-        this.target.slideDown('slow');
+        this.target.slideDown('slow', function() {
+            //Forces resize of charts to match container width
+            $(window).resize();
+        });
     };
     this.changeView = function(newView) {
         //Change to new view type (reward, badge, metric, etc)

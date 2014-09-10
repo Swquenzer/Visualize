@@ -71,6 +71,8 @@ $(document).ready(function() {
 		$('.left_sidebar section').each(function(i) {
 			$(this).delay(100*i+300).slideDown(100, function() {
 				if(i === len-1) {
+					//Forces resize of charts to match container width
+					$(window).resize();
 					isOut = true;
 				}
 			});
@@ -108,8 +110,8 @@ $(document).ready(function() {
 	});
 
 	//On page load
-	//slideOut();
-	//$('.icon-menu img').toggleClass('invisible');
+	slideOut();
+	$('.icon-menu img').toggleClass('invisible');
 
 	/*** --- Left Sidebar Controls --- ***/
 	$('.option.dashboard').on("click", function() {
