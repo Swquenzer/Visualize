@@ -29,16 +29,13 @@ $(document).ready(function() {
 	//viewName: string value of first td in selected row ('swquenzer' or 'saving habits')
 	var options = {
 		view: "rewards",
-		target: "queryEngine",
+		target: "qe-dashboard",
 		type: "table",
 		viewMode: "type"
 	}
 	qe = [];
 	qe[0] = new QueryEngine(options);
 	qe[0].initialize();
-
-	//Initialize Tablesorter
-	$(".qt table").tablesorter();
 
 	//Make all non-current sections (non dashboard) display:none
 	$('.content').not('.current').hide();

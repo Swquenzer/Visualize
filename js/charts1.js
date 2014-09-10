@@ -322,6 +322,9 @@ function QueryEngine(options) {
                     that.options.viewMode = 'user';
                     that.createUserView();
                 });
+
+                //Apply to all tables
+                $(".qt table").tablesorter();
             });
         } else {
             //Create thead Row
@@ -349,12 +352,12 @@ function QueryEngine(options) {
                     that.options.viewName = $(this).find('td')[0].innerHTML;
                     that.changeView('userList');
                 });
+                //Apply to all tables
+                $(".qt table").tablesorter();
             }).error(function() {
                 console.log("Error retrieving data");
             });
         }
-        //Apply to all tables
-        $(".qt table").tablesorter();
     };
     this.createTable = function() {
         var footer = "";
@@ -365,7 +368,7 @@ function QueryEngine(options) {
         this.target.prepend(queryTable);
     };
     this.createGraph = function() {
-        var queryGraph = "<div class='module qg'><div class='module-header'><h3>Graph</h3></div><div class='module-body'><div id='qe-graph' style='height: 400px'></div></div></div><!--end module qg-->";
+        var queryGraph = "<div class='module qg'><div class='module-header'><h3>Graph</h3></div><div class='module-body'><div id='qe-graph' style='height: 600px'></div></div></div><!--end module qg-->";
         this.target.prepend(queryGraph);
         var qeGraph = new Highcharts.Chart(Highcharts.merge(qeOptions, defaultTheme));
     };
