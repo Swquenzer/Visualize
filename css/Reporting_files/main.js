@@ -1,6 +1,6 @@
 //main.js
 //Prototypes
-var dev = false;
+var dev = true;
 //Captializes first letter of string
 String.prototype.capitalize = function() {
     return this.charAt(0).toUpperCase() + this.slice(1);
@@ -46,9 +46,7 @@ $(document).ready(function() {
 	** Main Page
 	*/
 	//Main page transition
-	changePage = function(section, that) {
-		$('.option').toggleClass('current', false);
-		$(that).toggleClass('current', true);
+	changePage = function(section) {
 		if(!section.hasClass("current")) {
 			$('.content.current').toggleClass('current').slideUp('slow');
 			section.toggleClass('current');
@@ -107,26 +105,22 @@ $(document).ready(function() {
 		if(isIn) $('.icon-menu img').css("opacity", .8);
 	});
 
-	//On page load
-	//slideOut();
-	//$('.icon-menu img').toggleClass('invisible');
-
 	/*** --- Left Sidebar Controls --- ***/
 	$('.option.dashboard').on("click", function() {
 		var section = $('.content.dashboard');
-		changePage(section, this);
+		changePage(section);
 	});
 	$('.option.messaging').on("click", function() {
 		var section = $('.content.messaging');
-		changePage(section, this);
+		changePage(section);
 	});
 	$('.option.userView').on("click", function() {
 		var section = $('.content.userView');
-		changePage(section, this);
+		changePage(section);
 	});
 	$('.option.registration').on("click", function() {
 		var section = $('.content.registration');
-		changePage(section, this);
+		changePage(section);
 	});
 
 	if(dev) {
@@ -138,7 +132,7 @@ $(document).ready(function() {
 	}
 	
 
-	//twag.toggleClass("down","up");
+	twag.toggleClass("down","up");
 	/* TWAG Slider */
 	$('.twag-footer').on("click", function() {
 		var twag = $('.twag-body');

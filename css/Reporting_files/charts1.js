@@ -3,111 +3,6 @@
 ** Creation Date: 
 */
 /* This Week At a Glance (TWAG) Module */
-var defaultTheme = {
-  colors: ['#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', '#492970',
-        '#f28f43', '#77a1e5', '#c42525', '#a6c96a'],
-   chart: {
-      backgroundColor: '#fff',
-      borderWidth: 0,
-      plotBackgroundColor: '#fff',
-      plotShadow: false,
-      plotBorderWidth: 0
-   },
-   title: {
-      style: {
-            color: '#274b6d',//#3E576F',
-            fontSize: '16px'
-      }
-   },
-   subtitle: {
-      style: {
-            color: '#4d759e'
-       }
-   },
-   xAxis: {
-      gridLineWidth: 0,
-      lineColor: '#C0D0E0',
-      tickColor: '#C0D0E0',
-      labels: {
-         style: {
-            color: '#666',
-            cursor: 'default',
-            fontSize: '11px',
-            lineHeight: '14px'
-         }
-      },
-      title: {
-         style: {
-                color: '#4d759e',
-                fontWeight: 'bold'
-        }
-      }
-   },
-   yAxis: {
-      minorTickInterval: null,
-      lineColor: '#C0D0E0',
-      lineWidth: 1,
-      tickWidth: 1,
-      tickColor: '#C0D0E0',
-      labels: {
-         style: {
-            color: '#666',
-            cursor: 'default',
-            fontSize: '11px',
-            lineHeight: '14px'
-         }
-      },
-      title: {
-         style: {
-                color: '#4d759e',
-                fontWeight: 'bold'
-        }
-      }
-   },
-   legend: {
-      itemStyle: {
-            color: '#274b6d',
-            fontSize: '12px'
-      },
-      itemHoverStyle: {
-         color: '#000'
-      },
-      itemHiddenStyle: {
-         color: '#CCC'
-      }
-   },
-   labels: {
-      style: {
-            color: '#3E576F'
-        }
-   },
-
-   navigation: {
-      buttonOptions: {
-         theme: {
-            stroke: '#CCCCCC'
-         }
-      }
-   }
-};
-var qeOptions = {
-    chart: {
-        renderTo: 'qe-graph'
-    },
-    title : {
-        text: 'Query Engine Results',
-        x: -20
-    },
-    subtitle: {
-        text: 'rewards',
-        x: -20
-    },
-    series: [{
-        name: 'Rewards Earned',
-        data: [10,12,9,18,16,28,28,32,29,43]
-    }]
-};
-
 function getTwagData(type) {
     //Model
     var users = {
@@ -156,7 +51,8 @@ function getTwagData(type) {
 }
 //Default type for initial view
 var type = getTwagData('users');
-var twagOptions = {
+//Create new bar chart
+twagChart = new Highcharts.Chart({
     chart: {
         renderTo: 'twag-chart',
         type: 'bar',
@@ -188,9 +84,7 @@ var twagOptions = {
         name: 'Total ' + type.name,
         data: type.dataTotal
     }]
-}
-//Create new bar chart
-var twagChart = new Highcharts.Chart(twagOptions);
+});
 
 //On click event for controlling different engagement views
 //New Users, Tasks Completed, Goals Completed, Badges Earned, Rewards Earned
@@ -202,6 +96,16 @@ function twagUpdate(type) {
 }
 
 /* Render Engine */
+//Table
+/*
+var rewards = {
+    name: 'PRA Debt Reduction',
+    completion: '192 Users (82%)', //Placeholder until dynamic data
+    subject: 'FHA',
+    dateAssigned: '',
+    dateAwarded: 'Feb 19, 2014'
+};
+*/
 var numRecords = 1;
 //Query Engine Class
 function QueryEngine(options) {
@@ -231,8 +135,14 @@ function QueryEngine(options) {
         this.affiliation = $('.qe input[name="affiliation"]:checked');
 
         //Create Query Table Structure
-        this.createTable();
-        this.createGraph();
+        //*Show something different depending on options.view
+        var footer = "";
+        //If it's a userlist, allow group emailing
+        if(this.options.viewMode === 'userList') footer = "<h4><img src='images/envelope-black.png'>Send these users an email</h4><span class='clear'></span>";
+        console.log(2);  
+        var queryTable = "<div class='module qt'><div class='module-header'><h3>User Engagement: " + this.options.view.capitalize() + "<span class='subject-listing'> > " + this.affiliation[0].value.toUpperCase() + " > " + this.subject.join(" + ").toUpperCase() + "</span></h3></div><div class='module-body'><table class='tablesorter'><thead><tr></tr></thead><tbody></tbody></table>"+footer+"</div></div>";
+        //Push to top of QE module stack
+        this.target.prepend(queryTable);
         /////Add loading icon
         this.renderView();
         /////Remove loading icon
@@ -245,7 +155,7 @@ function QueryEngine(options) {
             this.options.viewMode = 'userList';
         } else {
             var section = $('.content.dashboard');
-            changePage(section, $('.option.dashboard'));
+            changePage(section);
             this.options.viewMode = 'type';
             this.options.view = newView;
         }
@@ -253,7 +163,7 @@ function QueryEngine(options) {
         this.target.slideUp('fast', function() {
             //Remove current module for replacement
             //*CURRENTLY replaces FIRST module, need to modify to any user-chosen module
-            that.target.children().first().empty().next().empty();
+            that.target.children().first().empty();
             //Initialize new module with updated view
             that.initialize();
         });
@@ -263,11 +173,11 @@ function QueryEngine(options) {
         console.log("viewMode: " + this.options.viewMode);
         console.log("viewName: " + this.options.viewName);
         var section = $('.content.userView');
-        changePage(section, $('.options.userView'));
+        changePage(section);
     }; 
     this.renderView = function() {
         var that = this;
-        var table = this.target.children().first().next().find('table');
+        var table = this.target.children().first().find('table');
         //*Needs to be in form rewards.aspx?option1=option1&option2=option2
         //OR use getJSON parameters
         var getURL = this.options.view + '.json';
@@ -351,20 +261,8 @@ function QueryEngine(options) {
             });
         }
         //Apply to all tables
+        console.log(1);
         $(".qt table").tablesorter();
-    };
-    this.createTable = function() {
-        var footer = "";
-        //If it's a userlist, allow group emailing from footer
-        if(this.options.viewMode === 'userList') footer = "<h4><img src='images/envelope-black.png'>Send these users an email</h4><span class='clear'></span>";
-        var queryTable = "<div class='module qt'><div class='module-header'><h3>User Engagement: " + this.options.view.capitalize() + "<span class='subject-listing'> > " + this.affiliation[0].value.toUpperCase() + " > " + this.subject.join(" + ").toUpperCase() + "</span></h3></div><div class='module-body'><table class='tablesorter'><thead><tr></tr></thead><tbody></tbody></table>"+footer+"</div></div>";
-        //Push to top of QE module stack
-        this.target.prepend(queryTable);
-    };
-    this.createGraph = function() {
-        var queryGraph = "<div class='module qg'><div class='module-header'><h3>Graph</h3></div><div class='module-body'><div id='qe-graph' style='height: 400px'></div></div></div><!--end module qg-->";
-        this.target.prepend(queryGraph);
-        var qeGraph = new Highcharts.Chart(Highcharts.merge(qeOptions, defaultTheme));
     };
 }
 

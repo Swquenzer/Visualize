@@ -9,6 +9,7 @@
     <!-- // <script src="js/live.js"></script> -->
     <!-- Main Code -->
     <link rel="stylesheet" type="text/css" href="css/reporting.css">
+    <link rel="stylesheet" type="text/css" href="css/custom.css">
     <link href='http://fonts.googleapis.com/css?family=Ubuntu:700,400,300' rel='stylesheet' type='text/css'>
 </head>
 <body>
@@ -22,14 +23,17 @@
 			<section class="header red invisible">
 				Administration
 			</section>
-			<section class="option dashboard invisible">
-				<h4>Dashboard <img src="images/dashboard-icon.png"></h4>
+			<section class="option dashboard current invisible">
+				<h4>Dashboard <img src="images/settings-icon.png"></h4>
 			</section>
 			<section class="option userView invisible">
 				<h4>User Profile <img src="images/user.png"></h4>
 			</section>
-			<section class="option settings invisible">
-				<h4>Settings <img src="images/settings-icon.png"></h4>
+			<section class="option registration invisible">
+				<h4>User Registration <img src="images/users.png"></h4>
+			</section>
+			<section class="option messaging invisible">
+				<h4>Messaging <img src="images/dashboard-icon.png"></h4>
 			</section>
 			<section class="header light-green invisible">
 				Custom Query
@@ -125,7 +129,7 @@
 								<td class="light-green">+4%</td>
 							</tr>
 						</table>
-						<div id="twag-chart" style="width: 48%; float: left"></div>
+						<div id="twag-chart" style="width: 48%; float: left;"></div>
 					</div><!--End twag-body-->
 				</section><!--End twag-->
 				<footer class="twag-footer">
@@ -134,95 +138,10 @@
 				<!--</span> End Stats -->
 				<span class="clear"></span>
 				<div id="queryEngine">
-					 <div class="module qt">
-						<div class="module-header">
-							<h3>User Engagement: Rewards</h3>
-						</div><!-- End module-header-->
-						<div class="module-body">
-							<table class="tablesorter">
-								<thead>
-									<tr>
-										<th> Name</th>
-										<th> Completion Rate</th>
-										<th> Subject</th>
-										<th> Date Assigned</th>
-										<th> Date Awarded</th>
-										<th> Related Badges</th>
-										<th> Related Goals</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td>A PRA Debt Reduction</td>
-										<td>168 Users (68%)</td>
-										<td>FHA</td>
-										<td>Jan 6, 2014</td>
-										<td>Mar 12, 2014</td>
-										<td>Clickable Icon</td>
-										<td>Clickable dIcon</td>
-									</tr>
-									<tr>
-										<td>B Some Content</td>
-										<td>H Some Content</td>
-										<td>J Some Content</td>
-										<td>Some Content</td>
-										<td>Some Content</td>
-										<td>Some Content</td>
-										<td>Some Content</td>
-									</tr>
-									<tr>
-										<td>C Some Content</td>
-										<td>Some Content</td>
-										<td>Some Content</td>
-										<td>H Some Content</td>
-										<td>Some Content</td>
-										<td>Some Content</td>
-										<td>Some Content</td>
-									</tr>
-									<tr>
-										<td>D Some Content</td>
-										<td>H Some Content</td>
-										<td>Some Content</td>
-										<td>Some Content</td>
-										<td>J Some Content</td>
-										<td>Some Content</td>
-										<td>Some Content</td>
-									</tr>
-									<tr>
-										<td>E Some Content</td>
-										<td>Some Content</td>
-										<td>Some Content</td>
-										<td>Some Content</td>
-										<td>Some Content</td>
-										<td>Some Content</td>
-										<td>J Some Content</td>
-									</tr>
-									<tr>
-										<td>F Some Content</td>
-										<td>J Some Content</td>
-										<td>H Some Content</td>
-										<td>Some Content</td>
-										<td>Some Content</td>
-										<td>Some Content</td>
-										<td>Some Content</td>
-									</tr>
-									<tr>
-										<td>G Some Content</td>
-										<td>H Some Content</td>
-										<td>Some Content</td>
-										<td>Some Content</td>
-										<td>J Some Content</td>
-										<td>Some Content</td>
-										<td>Some Content</td>
-									</tr>
-								</tbody>
-							</table>
-						</div><!-- End module-body-->
-					</div> <!--End module-->
 				</div><!--End queryEngine-->
 			</section><!--content-->
 			<section class="content userView">
-				<div class="module profile">
+				<div class="module dark profile">
 					<div class="module-header">
 						<h3><img src="images/user1.png">User Profile: Stephen Quenzer</h3>
 						<h4><img src="images/envelope-white.png">Send Stephen an email</h4>
@@ -413,42 +332,124 @@
 					</div> <!--End module-->
 				</span>
 			</section><!--End userList-->
-			<section class="content settings">
-				<div class="message red">
-					<h1>Settings</h1>
-					<h3>Welcome to the LifeCents Reporting tool! Use the menu on the left to view different statistics</h3>
-				</div>
-				<span id="stats">
-					<h2>Statistics <span class="order">By Week</span></h2>
-					<span>
-						<div class="stats-mod">
-							<span class="value">2,180</span>
-							<span class="description">New Users Added</span>
-						</div>
-						<div class="stats-mod">
-							<span class="value">3,236</span>
-							<span class="description">Modules completed</span>
-						</div>
-						<div class="stats-mod">
-							<span class="value">$132,100</span>
-							<span class="description">Money Gained</span>		
-						</div>
-						<div class="stats-mod">
-							<span class="value">290</span>
-							<span class="description">Beers Chugged</span>
-						</div>
-					</span>
-				</span><!-- End Stats -->
-				<span class="clear"></span>
+			<section class="content registration">
+				<div class="module dark">
+					<div class="module-header">
+						<h1>Registration</h1>
+					</div><!--end module-header-->
+					<div class="module-body">
+						<form class="reg-form">
+							<div class="inner-wrapper">
+							<p>
+							<label>First Name</label>
+							<input name="username" placeholder="Stephen">
+							</p>
+							<p>
+							<label>Last Name</label>
+							<input name="username" placeholder="Quenzer">
+							</p>
+							<p>
+							<label>Username</label>
+							<input name="username" placeholder="Username">
+							</p>
+							<p>
+							<label>Password</label>
+							<input name="password" placeholder="********">
+							</p>
+							<p>
+							<label>Re-enter Password</label>
+							<input name="password" placeholder="********">
+							</p>
+								<span class="clear"></span>
+								<h2>Affiliations</h2>
+								<span>
+									<input type="checkbox" name="pra" id="pra" class="css-checkbox" checked/>
+	                    			<label for="pra" class="css-label">PRA</label>
+	                    		</span>
+	                    		<span>
+									<input type="checkbox" name="cashamerica" id="cashamerica" class="css-checkbox" checked/>
+	                    			<label for="cashamerica" class="css-label">Cash America</label>
+	                    		</span>
+	                    		<span>
+									<input type="checkbox" name="mercy" id="mercy" class="css-checkbox" checked/>
+	                				<label for="mercy" class="css-label">Mercy</label>
+	                			</span>
+	                    		<span></span>
+	                    		<span></span>
+	                    		<span></span>
+	                			<h2>Special Permissions</h2>
+		                    	<span>
+		                    		<input type="checkbox" name="individual" id="individual" class="css-checkbox" checked/>
+		                    		<label for="individual" class="css-label">Individual Data</label>
+	                    		</span>
+	                    		<span>
+		                    		<input type="checkbox" name="google" id="google" class="css-checkbox" checked/>
+	                    			<label for="google" class="css-label">Google Analytics</label>
+	                    		</span>
+	                    		<span>
+		                    		<input type="checkbox" name="messaging" id="messaging" class="css-checkbox" checked/>
+	                    			<label for="messaging" class="css-label">Messaging</label>
+	                    		</span>
+	                    		<span>
+		                    		<input type="checkbox" name="download" id="download" class="css-checkbox" checked/>
+	                    			<label for="download" class="css-label">Download Data</label>
+	                    		</span>
+	                    		<span>
+		                    		<input type="checkbox" name="timeline" id="timeline" class="css-checkbox" checked/>
+	                    			<label for="timeline" class="css-label">Timeline</label>
+	                    		</span>
+	                    		<span>
+		                    		<input type="checkbox" name="assigment" id="assigment" class="css-checkbox" checked/>
+	                    			<label for="assigment" class="css-label">User Assignments</label>
+	                    		</span>
+	                    		<span>
+		                    		<input type="checkbox" name="comparative" id="comparative" class="css-checkbox" checked/>
+	                    			<label for="comparative" class="css-label">Comparative Data</label>
+	                    		</span>
+	                    		<span></span>
+	                    		<span></span>
+	                    		<span></span>
+	                    	</div>
+                    		<input type="submit" name="submit" value="Create User">
+						</form>
+					</div><!--end module-body-->
+				</div><!--end module-->
+			</section><!--End content registration-->
+			<section class="content messaging">
 				<div class="module">
 					<div class="module-header">
-						<h3>User Engagement</h3>
-					</div><!-- End module-header-->
+						<h1>
+							Send a Message
+						</h1>
+					</div><!--end module-header-->
 					<div class="module-body">
-					</div><!-- End module-body-->
-				</div> <!--End module-->
-				<span class="clear"></span>
-			</section><!--content-->
+						<div class="wrapper">
+							<form id="messaging">
+								<p>
+								<label>Your Name</label>
+								<input type="text" placeholder="Blake Allison">
+								</p>
+								<p>
+								<label>Subject</label>
+								<input type="text" placeholder="Finish up your get rich now reward!">
+								</p>
+								<p>
+								<label>Message Body</label>
+								<textarea cols="40" rows="10">Your credit health is currently at high risk. Complete the credit health task on Lifecents to improve!</textarea>
+								</p>
+								<input type="submit" value="Send Message">
+							</form>
+						</div>
+					</div><!--end module-body-->
+				</div><!--end module-->
+				<div class="module">
+					<div class="module-header">
+						<h1>Message History</h1>
+					</div>
+					<div class="module-body">
+					</div>
+				</div>
+			</section><!--end content messaging-->
 		</div>
 		<span class="clear"></span>
 	</div>

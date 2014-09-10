@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html class=""><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <title>Reporting</title>
+    <script type="text/javascript" src="Reporting_files/jquery-2.js"></script>
+	<script type="text/javascript" src="Reporting_files/jquery.js"></script>
+    <!-- Auto reload on css and js update -->
+    <!-- // <script src="js/live.js"></script> -->
+    <!-- Main Code -->
+    <link rel="stylesheet" type="text/css" href="Reporting_files/reporting.css">
+    <link rel="stylesheet" type="text/css" href="Reporting_files/custom.css">
+    <link href="Reporting_files/css_002.css" rel="stylesheet" type="text/css">
+<link type="text/css" rel="stylesheet" href="Reporting_files/css.css"></head>
+<body>
+	<div id="wrapper">
+		<div class="left_sidebar open">
+			<span class="icon-menu">
+				<img style="opacity: 1;" class="invisible" src="Reporting_files/list.png" height="32" width="37">
+				<img style="opacity: 1;" class="" src="Reporting_files/cross.png" height="32" width="32">
+			</span>
+			<h2 style="display: block;" class="invisible">Options &gt;</h2>
+			<section style="display: block;" class="header red invisible">
+				Administration
+			</section>
+			<section style="display: block;" class="option dashboard invisible">
+				<h4>Dashboard <img src="Reporting_files/settings-icon.png"></h4>
+			</section>
+			<section style="display: block;" class="option userView invisible">
+				<h4>User Profile <img src="Reporting_files/user.png"></h4>
+			</section>
+			<section style="display: block;" class="option registration invisible">
+				<h4>User Registration <img src="Reporting_files/users.png"></h4>
+			</section>
+			<section style="display: block;" class="option messaging invisible">
+				<h4>Messaging <img src="Reporting_files/dashboard-icon.png"></h4>
+			</section>
+			<section style="display: block;" class="header light-green invisible">
+				Custom Query
+			</section>
+			<section style="display: block;" class="qe">
+				<h3>Affiliation:</h3>
+				<label>PRA</label>
+				<input name="affiliation" value="pra" checked="checked" type="radio">
+				<label>Mercy</label>
+				<input name="affiliation" value="mercy" type="radio">
+				<label>FTC</label>
+				<input name="affiliation" value="cashamerica" type="radio">
+				<h3>Subjects:</h3>
+				<label>FHA Master</label>
+				<input name="subject" value="fhamaster" checked="checked" type="checkbox">
+				<label>Other</label>
+				<input name="subject" value="other" type="checkbox">
+			</section>
+			<section style="display: block;" class="option invisible" onclick="qe[0].changeView('rewards');">
+				<span>Reward</span>
+			</section>
+			<section style="display: block;" class="option invisible" onclick="qe[0].changeView('badges');">
+				<span>Badge</span>
+			</section>
+			<section style="display: block;" class="option invisible" onclick="qe[0].changeView('goals');">
+				<span>Goal</span>
+			</section>
+			<section style="display: block;" class="option invisible" onclick="qe[0].changeView('tasks');">
+				<span>Task</span>
+			</section>
+			<section style="display: block;" class="option invisible" onclick="qe[0].changeView('questionaires');">
+				<span>Questionaire</span>
+			</section>
+			<section style="display: block;" class="option invisible" onclick="qe[0].changeView('metrics');">
+				<span>Metric</span>
+			</section>
+			<section style="display: block;" class="option invisible">
+				<h4>Questions and Responses <img src="Reporting_files/settings-icon.png"></h4>
+			</section>
+			<section style="display: block;" class="header bottom invisible">
+			</section>
+		</div><!--Left Sidebar-->
+		<div class="shrink" id="main">
+			<section id="edit_bar">
+				<h1><span class="green">LifeCents</span> Reporting</h1>
+			</section>
+			<section style="display: none;" class="content dashboard">
+				<div class="message green">
+					<h1>Dashboard</h1>
+					<h4>Welcome to the LifeCents Reporting tool! Use the menu on the left to view different statistics</h4>
+				</div><!--End Message-->
+				<!--This week at a glance (TWAG)-->
+				<section class="twag">
+					<div class="twag-header">
+						<h2 style="font-size: 24px;">This Week at a Glance</h2>
+					</div>
+					<div style="display: none;" class="twag-body">
+						<table>
+							<tbody><tr>
+								<th>Engagement</th>
+								<th>Last Week</th>
+								<th>This Week</th>
+								<th>Delta</th>
+							</tr>
+							<tr onclick="twagUpdate('users')">
+								<td>New Users</td>
+								<td>1,409</td>
+								<td>1,493</td>
+								<td class="light-green">+18%</td>
+							</tr>
+							<tr onclick="twagUpdate('tasks')">
+								<td>Tasks Completed</td>
+								<td>1,409</td>
+								<td>1,493</td>
+								<td class="red">-3%</td>
+							</tr>
+							<tr onclick="twagUpdate('goals')">
+								<td>Goals Completed</td>
+								<td>3,409</td>
+								<td>4,493</td>
+								<td class="red">-3%</td>
+							</tr>
+							<tr onclick="twagUpdate('badges')">
+								<td>Badges Earned</td>
+								<td>1,409</td>
+								<td>1,493</td>
+								<td class="light-green">+32%</td>
+							</tr>
+							<tr onclick="twagUpdate('rewards')">
+								<td>Rewards Earned</td>
+								<td>1,409</td>
+								<td>1,493</td>
+								<td class="light-green">+4%</td>
+							</tr>
+						</tbody></table>
+						<div data-highcharts-chart="0" id="twag-chart" style="width: 48%; float: left"><div style="position: relative; overflow: hidden; width: 527px; height: 400px; text-align: left; line-height: normal; z-index: 0; font-family: 'Unica One',sans-serif; left: 0px; top: 0px;" id="highcharts-0" class="highcharts-container"><svg height="400" width="527" xmlns="http://www.w3.org/2000/svg" style="font-family:'Unica One', sans-serif;font-size:12px;" version="1.1"><desc>Created with Highcharts 4.0.3</desc><defs><linearGradient id="highcharts-1" y2="1" x2="1" y1="0" x1="0"><stop stop-opacity="1" stop-color="#454C5A" offset="0"></stop><stop stop-opacity="1" stop-color="#454C5A" offset="1"></stop></linearGradient><clipPath id="highcharts-2"><rect height="439" width="266" y="0" x="0"></rect></clipPath></defs><rect class=" highcharts-background" fill="url(#highcharts-1)" strokeWidth="0" height="400" width="527" y="0" x="0"></rect><g zIndex="1" class="highcharts-grid"></g><g zIndex="1" class="highcharts-grid"><path opacity="1" zIndex="1" stroke-width="1" stroke="#707073" d="M 132.5 46 L 132.5 312" fill="none"></path><path opacity="1" zIndex="1" stroke-width="1" stroke="#707073" d="M 187.5 46 L 187.5 312" fill="none"></path><path opacity="1" zIndex="1" stroke-width="1" stroke="#707073" d="M 242.5 46 L 242.5 312" fill="none"></path><path opacity="1" zIndex="1" stroke-width="1" stroke="#707073" d="M 297.5 46 L 297.5 312" fill="none"></path><path opacity="1" zIndex="1" stroke-width="1" stroke="#707073" d="M 351.5 46 L 351.5 312" fill="none"></path><path opacity="1" zIndex="1" stroke-width="1" stroke="#707073" d="M 406.5 46 L 406.5 312" fill="none"></path><path opacity="1" zIndex="1" stroke-width="1" stroke="#707073" d="M 461.5 46 L 461.5 312" fill="none"></path><path opacity="1" zIndex="1" stroke-width="1" stroke="#707073" d="M 517.5 46 L 517.5 312" fill="none"></path><path opacity="1" zIndex="1" stroke-width="1" stroke="#707073" d="M 77.5 46 L 77.5 312" fill="none"></path></g><g zIndex="2" class="highcharts-axis"><path opacity="1" stroke-width="1" stroke="#707073" d="M 78 179.5 L 68 179.5" fill="none"></path><path opacity="1" stroke-width="1" stroke="#707073" d="M 78 312.5 L 68 312.5" fill="none"></path><path opacity="1" stroke-width="1" stroke="#707073" d="M 78 45.5 L 68 45.5" fill="none"></path><path visibility="visible" zIndex="7" stroke-width="1" stroke="#707073" d="M 77.5 46 L 77.5 312" fill="none"></path></g><g zIndex="2" class="highcharts-axis"><path opacity="1" stroke-width="1" stroke="#707073" d="M 132.5 312 L 132.5 322" fill="none"></path><path opacity="1" stroke-width="1" stroke="#707073" d="M 187.5 312 L 187.5 322" fill="none"></path><path opacity="1" stroke-width="1" stroke="#707073" d="M 242.5 312 L 242.5 322" fill="none"></path><path opacity="1" stroke-width="1" stroke="#707073" d="M 297.5 312 L 297.5 322" fill="none"></path><path opacity="1" stroke-width="1" stroke="#707073" d="M 351.5 312 L 351.5 322" fill="none"></path><path opacity="1" stroke-width="1" stroke="#707073" d="M 406.5 312 L 406.5 322" fill="none"></path><path opacity="1" stroke-width="1" stroke="#707073" d="M 461.5 312 L 461.5 322" fill="none"></path><path opacity="1" stroke-width="1" stroke="#707073" d="M 517.5 312 L 517.5 322" fill="none"></path><path opacity="1" stroke-width="1" stroke="#707073" d="M 77.5 312 L 77.5 322" fill="none"></path><text y="348.5" visibility="visible" style="color:#A0A0A3;fill:#A0A0A3;" class=" highcharts-yaxis-title" transform="translate(0,0)" text-anchor="middle" zIndex="7" x="297.5"><tspan>Total Users</tspan></text></g><g zIndex="3" class="highcharts-series-group"><g clip-path="url(#highcharts-2)" height="266" width="439" style="" transform="translate(517,312) rotate(90) scale(-1,1) scale(1 1)" zIndex="0.1" visibility="visible" class="highcharts-series highcharts-tracker"><rect stroke-width="1" stroke="#FFFFFF" ry="0" rx="0" fill="#2b908f" height="28" width="64" y="102.5" x="167.5"></rect><rect stroke-width="1" stroke="#FFFFFF" ry="0" rx="0" fill="#2b908f" height="30" width="64" y="58.5" x="34.5"></rect></g><g clip-path="none" height="266" width="439" transform="translate(517,312) rotate(90) scale(-1,1) scale(1 1)" zIndex="0.1" visibility="visible" class="highcharts-markers"></g><g clip-path="url(#highcharts-2)" height="266" width="439" style="" transform="translate(517,312) rotate(90) scale(-1,1) scale(1 1)" zIndex="0.1" visibility="visible" class="highcharts-series highcharts-tracker"><rect stroke-width="1" stroke="#FFFFFF" ry="0" rx="0" fill="#90ee7e" height="309" width="64" y="130.5" x="167.5"></rect><rect stroke-width="1" stroke="#FFFFFF" ry="0" rx="0" fill="#90ee7e" height="351" width="64" y="88.5" x="34.5"></rect></g><g clip-path="none" height="266" width="439" transform="translate(517,312) rotate(90) scale(-1,1) scale(1 1)" zIndex="0.1" visibility="visible" class="highcharts-markers"></g></g><text y="26" style="color:#E0E0E3;font-size:20px;text-transform:uppercase;fill:#E0E0E3;width:463px;" zIndex="4" class="highcharts-title" text-anchor="middle" x="264"><tspan>User Engagement</tspan></text><g transform="translate(165,369)" zIndex="7" class="highcharts-legend"><g zIndex="1"><g><g transform="translate(8,3)" zIndex="1" class="highcharts-legend-item"><text y="15" zIndex="2" text-anchor="start" style="color:#E0E0E3;font-size:12px;font-weight:bold;cursor:pointer;fill:#E0E0E3;" x="21"><tspan>Total Users</tspan></text><rect fill="#90ee7e" zIndex="3" height="12" width="16" y="4" x="0"></rect></g><g transform="translate(114.38333129882812,3)" zIndex="1" class="highcharts-legend-item"><text zIndex="2" text-anchor="start" style="color:#E0E0E3;font-size:12px;font-weight:bold;cursor:pointer;fill:#E0E0E3;" y="15" x="21"><tspan>New Users</tspan></text><rect fill="#2b908f" zIndex="3" height="12" width="16" y="4" x="0"></rect></g></g></g></g><g zIndex="7" class="highcharts-axis-labels highcharts-xaxis-labels"><text opacity="1" y="118.75" style="width:154px;color:#E0E0E3;cursor:default;font-size:11px;fill:#E0E0E3;" text-anchor="end" x="63"><tspan>Last Week</tspan></text><text opacity="1" y="251.75" style="width:154px;color:#E0E0E3;cursor:default;font-size:11px;fill:#E0E0E3;" text-anchor="end" x="63"><tspan>This Week</tspan></text></g><g zIndex="7" class="highcharts-axis-labels highcharts-yaxis-labels"><text opacity="1" y="332" style="color:#E0E0E3;cursor:default;font-size:11px;fill:#E0E0E3;" text-anchor="middle" x="78">0</text><text opacity="1" y="332" style="color:#E0E0E3;cursor:default;font-size:11px;fill:#E0E0E3;" text-anchor="middle" x="132.875">250</text><text opacity="1" y="332" style="color:#E0E0E3;cursor:default;font-size:11px;fill:#E0E0E3;" text-anchor="middle" x="187.75">500</text><text opacity="1" y="332" style="color:#E0E0E3;cursor:default;font-size:11px;fill:#E0E0E3;" text-anchor="middle" x="242.625">750</text><text opacity="1" y="332" style="color:#E0E0E3;cursor:default;font-size:11px;fill:#E0E0E3;" text-anchor="middle" x="297.5">1000</text><text opacity="1" y="332" style="color:#E0E0E3;cursor:default;font-size:11px;fill:#E0E0E3;" text-anchor="middle" x="352.375">1250</text><text opacity="1" y="332" style="color:#E0E0E3;cursor:default;font-size:11px;fill:#E0E0E3;" text-anchor="middle" x="407.25">1500</text><text opacity="1" y="332" style="color:#E0E0E3;cursor:default;font-size:11px;fill:#E0E0E3;" text-anchor="middle" x="462.125">1750</text><text opacity="1" y="332" style="color:#E0E0E3;cursor:default;font-size:11px;fill:#E0E0E3;" text-anchor="middle" x="514.2666664123535">2000</text></g><g transform="translate(0,-9999)" style="cursor:default;padding:0;white-space:nowrap;" zIndex="8" class="highcharts-tooltip"><path transform="translate(1, 1)" stroke-width="5" stroke-opacity="0.049999999999999996" stroke="black" isShadow="true" d="M 3 0 L 13 0 C 16 0 16 0 16 3 L 16 13 C 16 16 16 16 13 16 L 3 16 C 0 16 0 16 0 13 L 0 3 C 0 0 0 0 3 0" fill="none"></path><path transform="translate(1, 1)" stroke-width="3" stroke-opacity="0.09999999999999999" stroke="black" isShadow="true" d="M 3 0 L 13 0 C 16 0 16 0 16 3 L 16 13 C 16 16 16 16 13 16 L 3 16 C 0 16 0 16 0 13 L 0 3 C 0 0 0 0 3 0" fill="none"></path><path transform="translate(1, 1)" stroke-width="1" stroke-opacity="0.15" stroke="black" isShadow="true" d="M 3 0 L 13 0 C 16 0 16 0 16 3 L 16 13 C 16 16 16 16 13 16 L 3 16 C 0 16 0 16 0 13 L 0 3 C 0 0 0 0 3 0" fill="none"></path><path d="M 3 0 L 13 0 C 16 0 16 0 16 3 L 16 13 C 16 16 16 16 13 16 L 3 16 C 0 16 0 16 0 13 L 0 3 C 0 0 0 0 3 0" fill="rgba(0, 0, 0, 0.85)"></path><text y="21" style="font-size:12px;color:#F0F0F0;fill:#F0F0F0;" zIndex="1" x="8"></text></g><text y="395" style="cursor:pointer;color:#666;font-size:9px;fill:#666;" zIndex="8" text-anchor="end" x="517">Highcharts.com</text></svg></div></div>
+					</div><!--End twag-body-->
+				</section><!--End twag-->
+				<footer class="twag-footer">
+					<img src="Reporting_files/down.png">
+				</footer>
+				<!--</span> End Stats -->
+				<span class="clear"></span>
+				<div style="" id="queryEngine"><div class="module qt"><div class="module-header"><h3>User Engagement: Rewards<span class="subject-listing"> &gt; PRA &gt; FHAMASTER</span></h3></div><div class="module-body"><table class="tablesorter"><thead><tr><th>Name</th><th>Completion</th><th>Subject</th><th>Date Assigned</th><th>Date Due</th><th>Subject</th><th>Related Badges</th><th>Related Goals</th></tr></thead><tbody><tr><td>PRA Debt Reduction</td><td>168 Users (68%)</td><td>FHA</td><td></td><td></td><td>subject</td><td>Clickable Icon</td><td>Clickable Icon</td></tr><tr><td>Mercy</td><td>12 Users (18%)</td><td>FHA Master</td><td>Apr 30, 2014</td><td>June 5, 2014</td><td>subject</td><td>Clickable Icon</td><td>Clickable Icon</td></tr><tr><td>Test Aff</td><td>124 Users (22%)</td><td>FHA</td><td>Jul 20, 2014</td><td>Jul 22, 2014</td><td>subject</td><td>Clickable Icon</td><td>Clickable Icon</td></tr><tr><td>Random Aff</td><td>1,201 Users (89%)</td><td>FHA Master</td><td>Apr 30, 2014</td><td>June 5, 2014</td><td>subject</td><td>Clickable Icon</td><td>Clickable Icon</td></tr></tbody></table></div></div>
+				</div><!--End queryEngine-->
+			</section><!--content-->
+			<section style="display: none;" class="content userView">
+				<div class="module dark profile">
+					<div class="module-header">
+						<h3><img src="Reporting_files/user1.png">User Profile: Stephen Quenzer</h3>
+						<h4><img src="Reporting_files/envelope-white.png">Send Stephen an email</h4>
+					</div><!-- End module-header-->
+					<div class="module-body">
+						<div>A bunch of content goes here</div>
+					</div><!-- End module-body-->
+				</div> <!--End module Profile-->
+				<span class="qt">
+					<div class="module">
+						<div class="module-header">
+							<h3>Rewards</h3>
+						</div><!-- End module-header-->
+						<div class="module-body">
+							A bunch of statistics go here
+							<table class="tablesorter">
+								<thead>
+									<tr>
+										<th class="header">Name</th>
+										<th class="header">Col 2</th>
+										<th class="header">Col 3</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>The Name</td>
+										<td>Stat 2</td>
+										<td>Stat 3</td>
+									</tr>
+								</tbody>
+							</table>
+						</div><!-- End module-body-->
+					</div> <!--End module-->
+					<div class="module">
+						<div class="module-header">
+							<h3>Goals</h3>
+						</div><!-- End module-header-->
+						<div class="module-body">
+							A bunch of statistics go here
+							<table class="tablesorter">
+								<thead>
+									<tr>
+										<th class="header">Name</th>
+										<th class="header">Col 2</th>
+										<th class="header">Col 3</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>The Name</td>
+										<td>Stat 2</td>
+										<td>Stat 3</td>
+									</tr>
+									<tr>
+										<td>The Name</td>
+										<td>Stat 2</td>
+										<td>Stat 3</td>
+									</tr>
+									<tr>
+										<td>The Name</td>
+										<td>Stat 2</td>
+										<td>Stat 3</td>
+									</tr>
+								</tbody>
+							</table>
+						</div><!-- End module-body-->
+					</div> <!--End module-->
+					<div class="module">
+						<div class="module-header">
+							<h3>Badges</h3>
+						</div><!-- End module-header-->
+						<div class="module-body">
+							A bunch of statistics go here
+							<table class="tablesorter">
+								<thead>
+									<tr>
+										<th class="header">Name</th>
+										<th class="header">Col 2</th>
+										<th class="header">Col 3</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>The Name</td>
+										<td>Stat 2</td>
+										<td>Stat 3</td>
+									</tr>
+									<tr>
+										<td>The Name</td>
+										<td>Stat 2</td>
+										<td>Stat 3</td>
+									</tr>
+									<tr>
+										<td>The Name</td>
+										<td>Stat 2</td>
+										<td>Stat 3</td>
+									</tr>
+								</tbody>
+							</table>
+						</div><!-- End module-body-->
+					</div> <!--End module-->
+					<div class="module">
+						<div class="module-header">
+							<h3>Tasks</h3>
+						</div><!-- End module-header-->
+						<div class="module-body">
+							A bunch of statistics go here
+							<table class="tablesorter">
+								<thead>
+									<tr>
+										<th class="header">Name</th>
+										<th class="header">Col 2</th>
+										<th class="header">Col 3</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>The Name</td>
+										<td>Stat 2</td>
+										<td>Stat 3</td>
+									</tr>
+								</tbody>
+							</table>
+						</div><!-- End module-body-->
+					</div> <!--End module-->
+					<div class="module">
+						<div class="module-header">
+							<h3>Questionaires</h3>
+						</div><!-- End module-header-->
+						<div class="module-body">
+							A bunch of statistics go here
+							<table class="tablesorter">
+								<thead>
+									<tr>
+										<th class="header">Name</th>
+										<th class="header">Col 2</th>
+										<th class="header">Col 3</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>The Name</td>
+										<td>Stat 2</td>
+										<td>Stat 3</td>
+									</tr>
+									<tr>
+										<td>The Name</td>
+										<td>Stat 2</td>
+										<td>Stat 3</td>
+									</tr>
+									<tr>
+										<td>The Name</td>
+										<td>Stat 2</td>
+										<td>Stat 3</td>
+									</tr>
+								</tbody>
+							</table>
+						</div><!-- End module-body-->
+					</div> <!--End module-->
+					<div class="module">
+						<div class="module-header">
+							<h3>Metrics</h3>
+						</div><!-- End module-header-->
+						<div class="module-body">
+							A bunch of statistics go here
+							<table class="tablesorter">
+								<thead>
+									<tr>
+										<th class="header">Name</th>
+										<th class="header">Col 2</th>
+										<th class="header">Col 3</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>The Name</td>
+										<td>Stat 2</td>
+										<td>Stat 3</td>
+									</tr>
+									<tr>
+										<td>The Name</td>
+										<td>Stat 2</td>
+										<td>Stat 3</td>
+									</tr>
+								</tbody>
+							</table>
+						</div><!-- End module-body-->
+					</div> <!--End module-->
+				</span>
+			</section><!--End userList-->
+			<section style="display: none;" class="content registration">
+				<div class="module dark">
+					<div class="module-header">
+						<h1>Registration</h1>
+					</div><!--end module-header-->
+					<div class="module-body">
+						<form class="reg-form">
+							<p class="half">
+							<label>First Name</label>
+							<input name="username" placeholder="Stephen">
+							</p>
+							<p class="half">
+							<label>Last Name</label>
+							<input name="username" placeholder="Quenzer">
+							</p>
+							<p>
+							<label>Username</label>
+							<input name="username" placeholder="Username">
+							</p>
+							<p>
+							<label>Password</label>
+							<input name="password" placeholder="********">
+							</p>
+							<p>
+							<label>Re-enter Password</label>
+							<input name="password" placeholder="********">
+							</p>
+							<div id="special-permissions">
+								<h2>Affiliations</h2>
+								<span>
+									<input name="pra" id="pra" class="css-checkbox" checked="checked" type="checkbox">
+	                    			<label for="pra" class="css-label">PRA</label>
+	                    		</span>
+	                    		<span>
+									<input name="cashamerica" id="cashamerica" class="css-checkbox" checked="checked" type="checkbox">
+	                    			<label for="cashamerica" class="css-label">Cash America</label>
+	                    		</span>
+	                    		<span>
+									<input name="mercy" id="mercy" class="css-checkbox" checked="checked" type="checkbox">
+	                				<label for="mercy" class="css-label">Mercy</label>
+	                			</span>
+	                			<h2>Special Permissions</h2>
+		                    	<span>
+		                    		<input name="individual" id="individual" class="css-checkbox" checked="checked" type="checkbox">
+		                    		<label for="individual" class="css-label">Individual Data</label>
+	                    		</span>
+	                    		<span>
+		                    		<input name="google" id="google" class="css-checkbox" checked="checked" type="checkbox">
+	                    			<label for="google" class="css-label">Google Analytics</label>
+	                    		</span>
+	                    		<span>
+		                    		<input name="messaging" id="messaging" class="css-checkbox" checked="checked" type="checkbox">
+	                    			<label for="messaging" class="css-label">Messaging</label>
+	                    		</span>
+	                    		<span>
+		                    		<input name="download" id="download" class="css-checkbox" checked="checked" type="checkbox">
+	                    			<label for="download" class="css-label">Download Data</label>
+	                    		</span>
+	                    		<span>
+		                    		<input name="timeline" id="timeline" class="css-checkbox" checked="checked" type="checkbox">
+	                    			<label for="timeline" class="css-label">Timeline</label>
+	                    		</span>
+	                    		<span>
+		                    		<input name="assigment" id="assigment" class="css-checkbox" checked="checked" type="checkbox">
+	                    			<label for="assigment" class="css-label">User Assignments</label>
+	                    		</span>
+	                    		<span>
+		                    		<input name="comparative" id="comparative" class="css-checkbox" checked="checked" type="checkbox">
+	                    			<label for="comparative" class="css-label">Comparative Data</label>
+	                    		</span>
+	                    	</div>
+                    		<input name="submit" value="Create User" type="submit">
+						</form>
+					</div><!--end module-body-->
+				</div><!--end module-->
+			</section><!--End content registration-->
+			<section style="display: block;" class="content messaging current">
+				<div class="module">
+					<div class="module-header">
+						<h1>
+							Send a Message
+						</h1>
+					</div><!--end module-header-->
+					<div class="module-body">
+						<div class="wrapper">
+							<form id="messaging">
+								<p>
+								<label>Your Name</label>
+								<input placeholder="Blake Allison" type="text">
+								</p>
+								<p>
+								<label>Subject</label>
+								<input placeholder="Finish up your get rich now reward!" type="text">
+								</p>
+								<p>
+								<label>Message Body</label>
+								<textarea style="width: 478px; height: 148px;" cols="40" rows="10">Your credit health is currently at high risk. Complete the credit health task on Lifecents to improve!</textarea>
+								</p>
+								<input value="Send Message" type="submit">
+							</form>
+						</div>
+					</div><!--end module-body-->
+				</div><!--end module-->
+			</section><!--end content messaging-->
+		</div>
+		<span class="clear"></span>
+	</div>
+	<script type="text/javascript" src="Reporting_files/highcharts.js"></script>
+	<script type="text/javascript" src="Reporting_files/dark-unica.js"></script>
+	<script type="text/javascript" src="Reporting_files/charts1.js"></script>
+	<!--<script type="text/javascript" src="js/charts.js"></script>-->
+	<script src="Reporting_files/main.js"></script>
+
+</body></html>
