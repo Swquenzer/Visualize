@@ -327,10 +327,15 @@ function QueryEngine(options) {
                         //If messaging query engine, add selected user's email to the send list
                         var email = $(this).find('td')[3].innerHTML;
                         var emailSpan = "<span class='recipient'>" + email + "</span>";
-                        //Add email to recipient array
-                        recipients.push(email);
-                        //And add to the on-page list
-                        $('#recipient-list').append(emailSpan);
+                        //If it's already selected, don't add it again!
+                        if(!$(this).hasClass('selected')) {
+                            //Add email to recipient array
+                            recipients.push(email);
+                            //And add to the on-page list
+                            $('#recipient-list').append(emailSpan);
+                            //Mark as selected
+                            $(this).toggleClass('selected', true);
+                        }
                     } else if(that.options.target === "qe-dashboard") {
                         //If dashboard query engine, create user profile
                         //This is what decides the parameter for getting a user view
@@ -384,22 +389,30 @@ function QueryEngine(options) {
         var queryTable = "<div class='module qt'><div class='module-header'><h3>User Engagement: " + this.options.view.capitalize() + "<span class='subject-listing'> > " + this.affiliation[0].value.toUpperCase() + " > " + this.subject.join(" + ").toUpperCase() + "</span></h3></div><div class='module-body'><table class='tablesorter'><thead><tr></tr></thead><tbody></tbody></table>"+footer+"</div></div>";
         //Push to top of QE module stack
         this.target.prepend(queryTable);
-        console.log(this.target);
         if(that.options.viewMode === 'userList') {
             this.target.on("click", '.qt h4', function() {
                 //Add all subset of users to recipient list.
                 var email = "";
                 that.target.find('tbody tr').each(function(index) {
                     email = $(this).find('td')[3].innerHTML;
-                    recipients.push(email);
-                    $('#recipient-list').append("<span class='recipient'>" + email + "</span>");
+                    if(!$(this).hasClass('selected')) {
+                        //Add emails to recipient array
+                        recipients.push(email);
+                        //And add to the on-page list
+                        $('#recipient-list').append("<span class='recipient'>" + email + "</span>");
+                        //Mark as selected
+                        $(this).toggleClass('selected', true);
+                    }
                 });
             });
         }
     };
     this.createGraph = function() {
-        var queryGraph = "<div class='module qg'><div class='module-header'><h3>Graph</h3></div><div class='module-body'><div id='qe-graph' style='height: 400px'></div></div></div><!--end module qg-->";
+        var queryGraph = "<div class='module qg'><div class='module-header'><h3>Graph</h3></div><div class='module-body down'><div id='qe-graph' style='height: 400px'></div></div><div class='module-footer'><img src='images/up.png'></div></div><!--end module qg-->";
         this.target.prepend(queryGraph);
+        //Activate module footer accordian
+        //moduleAccordian();
+        //Create new highcharts chart
         var qeGraph = new Highcharts.Chart(Highcharts.merge(qeOptions, defaultTheme));
     };
 }

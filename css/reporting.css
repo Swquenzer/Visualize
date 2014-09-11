@@ -489,7 +489,7 @@ h2 {
 }
 .module-body h4:hover {
 	opacity: 1;
-	background: #dee0ee;
+	background: #f4aaa3;
 }
 .module-body h4 img {
 	position: relative;
@@ -504,6 +504,14 @@ h2 {
 	margin: 0;
 	padding: 10px 15px;
 	background: #ffffff;
+}
+.module-footer {
+	padding-top: 4px;
+	text-align: center;
+	background: #ccd1d6;
+}
+.module-footer:hover {
+	background: #b5b9c4;
 }
 .dark .module-header {
 	border-bottom: 1px solid #333B51;

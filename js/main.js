@@ -1,6 +1,6 @@
 //main.js
 //Prototypes
-var dev = true;
+var dev = false;
 //Captializes first letter of string
 String.prototype.capitalize = function() {
     return this.charAt(0).toUpperCase() + this.slice(1);
@@ -53,7 +53,6 @@ $(document).ready(function() {
 	qe[0] = new QueryEngine(options);
 	qe[0].initialize();
 	qe[1] = new QueryEngine(options2);
-	//qe[1].initialize();
 
 	//Make all non-current sections (non dashboard) display:none
 	$('.content').not('.current').hide();
@@ -62,7 +61,6 @@ $(document).ready(function() {
 	*/
 	function previousPage() {
 		if(pageHistory.length === 0) {
-			console.log(0)
 			$('#back-btn').toggleClass('disabled', true);
 		} else if(pageHistory.length === 1) {
 			var page = pageHistory.pop();
@@ -82,8 +80,6 @@ $(document).ready(function() {
 			//Add previously viewed page to pageHistory stack
 			pageHistory.push(current.attr('class').substr(0,current.attr('class').indexOf(' ')));
 		}
-
-		//console.log(pageHistory[1].attr('class').substr(0,pageHistory[1].attr('class').indexOf(' ')));
 		$('.option').toggleClass('current', false);
 		$(newPage).toggleClass('current', true);
 		if(!section.hasClass('current')) {
@@ -200,4 +196,24 @@ $(document).ready(function() {
 	
 	/* Messaging */
     recipients = [];
+
+    /* Modules */
+    moduleAccordian = function() {
+    	$('.module-footer').on('click', function() {
+	    	var that = this;
+	    	var body = $(this).siblings().last();
+	    	if(body.hasClass('down')) {
+	    		body.slideUp('slow', function() {
+	    			$(that).find('img').attr('src', 'images/down.png');
+	    		});
+	    	} else {
+	    		body.slideDown('slow', function() {
+	    			$(that).find('img').attr('src', 'images/up.png');
+	    		});
+	    	}
+	    	body.toggleClass("down","up");
+	    });
+    };
+    //Activate Initial Module Accordian//
+	moduleAccordian();
 });
