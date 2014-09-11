@@ -23,16 +23,16 @@
 			<section class="header red invisible">
 				Administration
 			</section>
-			<section class="option dashboard current invisible">
+			<section class="dashboard option current invisible">
 				<h4>Dashboard <img src="images/settings-icon.png"></h4>
 			</section>
-			<section class="option userView invisible">
+			<section class="userView option invisible">
 				<h4>User Profile <img src="images/user.png"></h4>
 			</section>
-			<section class="option registration invisible">
+			<section class="registration option invisible">
 				<h4>User Registration <img src="images/users.png"></h4>
 			</section>
-			<section class="option messaging invisible">
+			<section class="messaging option invisible">
 				<h4>Messaging <img src="images/dashboard-icon.png"></h4>
 			</section>
 			<section class="header light-green invisible">
@@ -64,7 +64,7 @@
 			<section class="option invisible" onclick="qe[0].changeView('tasks');">
 				<span>Task</span>
 			</section>
-			<section class="option invisible" onclick="qe[0].changeView('questionaires');">
+			<section class="option invisible" onclick="qe[0].changeView('questionnaires');">
 				<span>Questionaire</span>
 			</section>
 			<section class="option invisible" onclick="qe[0].changeView('metrics');">
@@ -78,8 +78,8 @@
 		</div><!--Left Sidebar-->
 		<div id="main">
 			<section id="edit_bar">
-				<h1><span class="green">LifeCents</span> Reporting</h1>
-			</section>
+				<h1><span class="green">LifeCents</span> Reporting</h1><span id="back-btn" class="disabled">Back</span>
+			</section><span class="clear"></span>
 			<section class="content dashboard current">
 				<div class="message green">
 					<h1>Dashboard</h1>
@@ -423,17 +423,21 @@
 						</h1>
 					</div><!--end module-header-->
 					<div class="module-body">
-						<div class="wrapper">
+						<div class="qe-wrapper">
+							<h1>Send a message to a custom group of users!</h1>
+							<h3>Filter by:</h3>
 							<div id="messaging-options">
-								<span class="option">Rewards</span>
-								<span class="option">Badge</span>
-								<span class="option">Goal</span>
-								<span class="option">Task</span>
-								<span class="option">Questionnaire</span>
-								<span class="option">Metric</span>
-								<section class="qt">
-								</section>
+								<span class="option" onclick="qe[1].initialize('reward');">Rewards</span>
+								<span class="option" onclick="qe[1].initialize('badges');">Badge</span>
+								<span class="option" onclick="qe[1].initialize('goals');">Goal</span>
+								<span class="option" onclick="qe[1].initialize('tasks');">Task</span>
+								<span class="option" onclick="qe[1].initialize('questionnaires');">Questionnaire</span>
+								<span class="option" onclick="qe[1].initialize('metrics');">Metric</span>
 							</div>
+							<div id="qe-messaging">
+							</div><!--end qe-messaging-->
+						</div><!--end qe-wrapper-->
+						<div class="wrapper">
 							<form id="messaging">
 								<p>
 								<label>From</label>

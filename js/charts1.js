@@ -210,7 +210,10 @@ function QueryEngine(options) {
     this.target = $("#" + options.target);
     this.affiliation = "";
     this.subject = [];
-    this.initialize = function() {
+    this.initialize = function(view) {
+        //If there's anything in target container, remove it and start fresh
+        this.target.children().remove();
+        if(view != null) this.options.view = view;
         var that = this;
         //Get subject from sidebar form
         this.subject = [];
@@ -232,7 +235,7 @@ function QueryEngine(options) {
 
         //Create Query Table Structure
         this.createTable();
-        this.createGraph();
+        if(this.options.graph === true) this.createGraph();
         /////Add loading icon
         this.renderView();
         /////Remove loading icon
@@ -243,6 +246,8 @@ function QueryEngine(options) {
         });
     };
     this.changeView = function(newView) {
+        //Make sure RE is visible
+        this.options.visible = true;
         //Change to new view type (reward, badge, metric, etc)
         if(newView === 'userList') {
             this.options.viewMode = 'userList';
@@ -256,7 +261,8 @@ function QueryEngine(options) {
         this.target.slideUp('fast', function() {
             //Remove current module for replacement
             //*CURRENTLY replaces FIRST module, need to modify to any user-chosen module
-            that.target.children().first().empty().next().empty();
+            //that.target.children().first().empty();
+            //that.target.children().first().next().empty();
             //Initialize new module with updated view
             that.initialize();
         });
@@ -266,11 +272,11 @@ function QueryEngine(options) {
         console.log("viewMode: " + this.options.viewMode);
         console.log("viewName: " + this.options.viewName);
         var section = $('.content.userView');
-        changePage(section, $('.options.userView'));
+        changePage(section, $('.option.userView'));
     }; 
     this.renderView = function() {
         var that = this;
-        var table = this.target.children().first().next().find('table');
+        var table = this.target.children().find('table');
         //*Needs to be in form rewards.aspx?option1=option1&option2=option2
         //OR use getJSON parameters
         var getURL = this.options.view + '.json';
@@ -293,7 +299,7 @@ function QueryEngine(options) {
                 case 'tasks':
 
                     break;
-                case 'questionaires':
+                case 'questionnaires':
 
                     break;
                 case 'metrics':
@@ -329,6 +335,7 @@ function QueryEngine(options) {
         } else {
             //Create thead Row
             $.getJSON(getURL, {},function(data) {
+                console.log(table);
                 for(var i=0; i<data.columns.length; i++) {
                     //Column Names (table headers) should originally be in lower *camelCase*
                     table.find('thead tr').append("<th>" + data.columns[i].separate().capitalize() + "</th>");
@@ -366,9 +373,12 @@ function QueryEngine(options) {
         var queryTable = "<div class='module qt'><div class='module-header'><h3>User Engagement: " + this.options.view.capitalize() + "<span class='subject-listing'> > " + this.affiliation[0].value.toUpperCase() + " > " + this.subject.join(" + ").toUpperCase() + "</span></h3></div><div class='module-body'><table class='tablesorter'><thead><tr></tr></thead><tbody></tbody></table>"+footer+"</div></div>";
         //Push to top of QE module stack
         this.target.prepend(queryTable);
+        this.target.on("click", '.qt h4', function() {
+            //console.log(this);
+        })
     };
     this.createGraph = function() {
-        var queryGraph = "<div class='module qg'><div class='module-header'><h3>Graph</h3></div><div class='module-body'><div id='qe-graph' style='height: 600px'></div></div></div><!--end module qg-->";
+        var queryGraph = "<div class='module qg'><div class='module-header'><h3>Graph</h3></div><div class='module-body'><div id='qe-graph' style='height: 400px'></div></div></div><!--end module qg-->";
         this.target.prepend(queryGraph);
         var qeGraph = new Highcharts.Chart(Highcharts.merge(qeOptions, defaultTheme));
     };

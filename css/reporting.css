@@ -157,12 +157,40 @@ h2 {
 
 #edit_bar {
 	display: block;
-	margin: 0;
-	padding: 20px;
+	margin: 0 !important;
+	padding: 0 !important;
 	background: #FFFFFF;
 }
+#back-btn {
+	display: inline-block;
+	padding: 27px;
+	font-size: 24px !important;
+	font-weight: 200;
+	cursor: pointer;
+	float: right;
+	transition: .2s;
+}
+#back-btn:before {
+	content: '< '
+}
+#back-btn:hover {
+	background: #d7e6f9
+}
+#back-btn.disabled {
+	padding: 32px;
+	font-size: 16px !important;;
+	color: gray;
+}
+#back-btn.disabled:before {
+	content: none;
+}
+#back-btn.disabled:hover {
+	background: none;
+}
 #edit_bar h1 {
+	display: inline-block;
 	position: relative;
+	padding: 20px 0;
 	left: 5%;
 	font-size: 24px;
 	font-weight: 300;
@@ -585,7 +613,7 @@ form label input {
 }
 form input[type="submit"] {
     height: inherit;
-		width: 95%;
+		width: 100%;
     color: #1f2641;
     background: white;
 }
@@ -637,24 +665,52 @@ form input[type="submit"]:hover {
 	margin-top: 20px;
 }
 /* Messaging */
+.messaging {
+	text-align: center;
+}
+.messaging .module-header {
+	text-align: left;
+}
 .messaging .module-body {
 	padding: inherit 50px;
 }
 .messaging .wrapper {
 	margin: auto;
-	width: 60%;
+	width: 70%;
 	margin-bottom: 10px;
 	padding: 20px;
 }
 .messaging form {
-	
+	text-align: left;
 }
 .messaging textarea {
 	display: block;
-	width: 90% !important;;
+	width: 90% !important;
 	height: 200px;
 	padding: 10px;
 	border: 1px solid #DEDEDE;
+}
+.qe-wrapper {
+	display: block;
+	padding: 30px;
+	border: 1px solid #DEDEDE;
+}
+.qe-wrapper .messaging-options {
+	
+}
+.qe-wrapper .option {
+	display: inline-block;
+	margin: 2px;
+	padding: 15px;
+	background: #e2e6f2;
+	cursor: pointer;
+	transition: background .2s;
+}
+.qe-wrapper .option:hover {
+	background: #DD6956;
+}
+#qe-messaging.invisible {
+	display: none !important;	
 }
 /* QE Graphs */
 .qg {

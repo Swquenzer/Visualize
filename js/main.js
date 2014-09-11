@@ -1,6 +1,6 @@
 //main.js
 //Prototypes
-var dev = false;
+var dev = true;
 //Captializes first letter of string
 String.prototype.capitalize = function() {
     return this.charAt(0).toUpperCase() + this.slice(1);
@@ -22,6 +22,12 @@ $(document).ready(function() {
 	});
 	$('#content.current').show();
 
+	//Page history stack
+	var pageHistory = [];
+	$('#back-btn').on("click", function() {
+		previousPage();
+	});
+
 	////////////////////////////
 	//Initialize Query Engine 1
 	//view: rewards, badges, metrics, etc
@@ -31,25 +37,62 @@ $(document).ready(function() {
 		view: "rewards",
 		target: "qe-dashboard",
 		type: "table",
-		viewMode: "type"
-	}
+		viewMode: "type",
+		graph: true,
+		visible: true
+	};
+	options2 = {
+		view: "",
+		target: "qe-messaging",
+		type: "table",
+		viewMode: "type",
+		graph: false,
+		visible: false
+	};
 	qe = [];
 	qe[0] = new QueryEngine(options);
 	qe[0].initialize();
+	qe[1] = new QueryEngine(options2);
+	//qe[1].initialize();
 
 	//Make all non-current sections (non dashboard) display:none
 	$('.content').not('.current').hide();
 	/*
 	** Main Page
 	*/
+	function previousPage() {
+		if(pageHistory.length === 0) {
+			console.log(0)
+			$('#back-btn').toggleClass('disabled', true);
+		} else if(pageHistory.length === 1) {
+			var page = pageHistory.pop();
+			changePage($('.content.' + page), $('.option.' + page), true);
+			$('#back-btn').toggleClass('disabled', true);
+		} else {
+			var page = pageHistory.pop();
+			changePage($('.content.' + page), $('.option.' + page), true);
+		}
+	}
+
 	//Main page transition
-	changePage = function(section, that) {
+	changePage = function(section, newPage, history) {
+		var current = $('.option.current');
+		if(!history) {
+			$('#back-btn').toggleClass('disabled', false);
+			//Add previously viewed page to pageHistory stack
+			pageHistory.push(current.attr('class').substr(0,current.attr('class').indexOf(' ')));
+		}
+
+		//console.log(pageHistory[1].attr('class').substr(0,pageHistory[1].attr('class').indexOf(' ')));
 		$('.option').toggleClass('current', false);
-		$(that).toggleClass('current', true);
-		if(!section.hasClass("current")) {
+		$(newPage).toggleClass('current', true);
+		if(!section.hasClass('current')) {
 			$('.content.current').toggleClass('current').slideUp('slow');
 			section.toggleClass('current');
-			section.delay('slow').slideDown('slow');
+			section.delay('slow').slideDown('slow', function() {
+				//Refresh screen width
+				$(window).resize();
+			});
 		}
 	}
 
