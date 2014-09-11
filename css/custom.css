@@ -1,30 +1,21 @@
-input[type=checkbox].css-checkbox {
-  display:none;
+.messaging td {
+  padding: 6px;
 }
-
-input[type=checkbox].css-checkbox + label.css-label {
-  padding-left:25px;
-  height:20px; 
-  display:inline-block;
-  line-height:20px;
-  background-repeat:no-repeat;
-  background-position: 0 1px;
-  font-size:20px;
-  vertical-align:middle;
-  cursor:pointer;
-
+#recipient-list {
+  display: block;
+  max-height: 250px;
+  overflow-y: scroll;
 }
-
-input[type=checkbox].css-checkbox:checked + label.css-label {
-  background-position: 0 -20px;
+#recipient-list h2 {
+  color: #26487F;
 }
-label.css-label {
-  margin-left: 20px;
-  background-image:url(../images/checkbox.png);
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
+.recipient {
+  display: inline-block;
+  margin: 2px;
+  padding: 5px;
+  background: #fff5ce;
+  cursor: pointer;
+}
+.recipient:hover {
+	background: #ffefac;
 }

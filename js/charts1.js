@@ -209,7 +209,7 @@ function QueryEngine(options) {
     //add to options?
     this.target = $("#" + options.target);
     this.affiliation = "";
-    this.subject = [];
+    this.subject = []; 
     this.initialize = function(view) {
         //If there's anything in target container, remove it and start fresh
         this.target.children().remove();
@@ -321,12 +321,23 @@ function QueryEngine(options) {
                     }
                 }
                 //*Add another click handler (as below) that creates a BACK button to show prev view
-                //onclick handler to go into USER mode
+                //onclick handler to go into Level 3: USER mode
                 table.find('tr').slice(1).on("click", function() {
-                    //This is what decides the paramter for getting a user view
-                    that.options.viewName = $(this).find('td')[0].innerHTML;
-                    that.options.viewMode = 'user';
-                    that.createUserView();
+                    if(that.options.target === "qe-messaging") {
+                        //If messaging query engine, add selected user's email to the send list
+                        var email = $(this).find('td')[3].innerHTML;
+                        var emailSpan = "<span class='recipient'>" + email + "</span>";
+                        //Add email to recipient array
+                        recipients.push(email);
+                        //And add to the on-page list
+                        $('#recipient-list').append(emailSpan);
+                    } else if(that.options.target === "qe-dashboard") {
+                        //If dashboard query engine, create user profile
+                        //This is what decides the parameter for getting a user view
+                        that.options.viewName = $(this).find('td')[0].innerHTML;
+                        that.options.viewMode = 'user';
+                        that.createUserView();
+                    }
                 });
 
                 //Apply to all tables
@@ -335,7 +346,6 @@ function QueryEngine(options) {
         } else {
             //Create thead Row
             $.getJSON(getURL, {},function(data) {
-                console.log(table);
                 for(var i=0; i<data.columns.length; i++) {
                     //Column Names (table headers) should originally be in lower *camelCase*
                     table.find('thead tr').append("<th>" + data.columns[i].separate().capitalize() + "</th>");
@@ -367,15 +377,25 @@ function QueryEngine(options) {
         }
     };
     this.createTable = function() {
+        var that = this;
         var footer = "";
         //If it's a userlist, allow group emailing from footer
         if(this.options.viewMode === 'userList') footer = "<h4><img src='images/envelope-black.png'>Send these users an email</h4><span class='clear'></span>";
         var queryTable = "<div class='module qt'><div class='module-header'><h3>User Engagement: " + this.options.view.capitalize() + "<span class='subject-listing'> > " + this.affiliation[0].value.toUpperCase() + " > " + this.subject.join(" + ").toUpperCase() + "</span></h3></div><div class='module-body'><table class='tablesorter'><thead><tr></tr></thead><tbody></tbody></table>"+footer+"</div></div>";
         //Push to top of QE module stack
         this.target.prepend(queryTable);
-        this.target.on("click", '.qt h4', function() {
-            //console.log(this);
-        })
+        console.log(this.target);
+        if(that.options.viewMode === 'userList') {
+            this.target.on("click", '.qt h4', function() {
+                //Add all subset of users to recipient list.
+                var email = "";
+                that.target.find('tbody tr').each(function(index) {
+                    email = $(this).find('td')[3].innerHTML;
+                    recipients.push(email);
+                    $('#recipient-list').append("<span class='recipient'>" + email + "</span>");
+                });
+            });
+        }
     };
     this.createGraph = function() {
         var queryGraph = "<div class='module qg'><div class='module-header'><h3>Graph</h3></div><div class='module-body'><div id='qe-graph' style='height: 400px'></div></div></div><!--end module qg-->";

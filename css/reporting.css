@@ -20,7 +20,6 @@ h2 {
 	font-family: 'Ubuntu', sans-serif;
 	color: #EEEEEE;
 }
-
 #wrapper {
 	height: 100%;
 }
@@ -664,31 +663,41 @@ form input[type="submit"]:hover {
 .reg-form input[type="submit"] {
 	margin-top: 20px;
 }
+
+
+input[type=checkbox].css-checkbox {
+  display:none;
+}
+
+input[type=checkbox].css-checkbox + label.css-label {
+  padding-left:25px;
+  height:20px; 
+  display:inline-block;
+  line-height:20px;
+  background-repeat:no-repeat;
+  background-position: 0 1px;
+  font-size:20px;
+  vertical-align:middle;
+  cursor:pointer;
+
+}
+
+input[type=checkbox].css-checkbox:checked + label.css-label {
+  background-position: 0 -20px;
+}
+label.css-label {
+  margin-left: 20px;
+  background-image:url(../images/checkbox.png);
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
 /* Messaging */
 .messaging {
 	text-align: center;
-}
-.messaging .module-header {
-	text-align: left;
-}
-.messaging .module-body {
-	padding: inherit 50px;
-}
-.messaging .wrapper {
-	margin: auto;
-	width: 70%;
-	margin-bottom: 10px;
-	padding: 20px;
-}
-.messaging form {
-	text-align: left;
-}
-.messaging textarea {
-	display: block;
-	width: 90% !important;
-	height: 200px;
-	padding: 10px;
-	border: 1px solid #DEDEDE;
 }
 .qe-wrapper {
 	display: block;
@@ -711,6 +720,28 @@ form input[type="submit"]:hover {
 }
 #qe-messaging.invisible {
 	display: none !important;	
+}
+.messaging .module-header {
+	text-align: left;
+}
+.messaging .module-body {
+	padding: inherit 50px;
+}
+.messaging .wrapper {
+	margin: auto;
+	width: 70%;
+	margin-bottom: 10px;
+	padding: 20px;
+}
+.messaging form {
+	text-align: left;
+}
+.messaging textarea {
+	display: block;
+	width: 90% !important;
+	height: 200px;
+	padding: 10px;
+	border: 1px solid #DEDEDE;
 }
 /* QE Graphs */
 .qg {

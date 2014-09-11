@@ -197,7 +197,7 @@ $(document).ready(function() {
 		}
 		twag.toggleClass("down","up");
 	});
-	window.thing = function() {
-		$('.stats-mod:last').clone(true, true).appendTo('#stats');
-	}
+	
+	/* Messaging */
+    recipients = [];
 });
