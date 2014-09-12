@@ -259,10 +259,6 @@ function QueryEngine(options) {
         }
         var that = this;
         this.target.slideUp('fast', function() {
-            //Remove current module for replacement
-            //*CURRENTLY replaces FIRST module, need to modify to any user-chosen module
-            //that.target.children().first().empty();
-            //that.target.children().first().next().empty();
             //Initialize new module with updated view
             that.initialize();
         });
@@ -323,19 +319,9 @@ function QueryEngine(options) {
                 //*Add another click handler (as below) that creates a BACK button to show prev view
                 //onclick handler to go into Level 3: USER mode
                 table.find('tr').slice(1).on("click", function() {
+                    //If messaging query engine, add selected user's email to the send list
                     if(that.options.target === "qe-messaging") {
-                        //If messaging query engine, add selected user's email to the send list
-                        var email = $(this).find('td')[3].innerHTML;
-                        var emailSpan = "<span class='recipient'>" + email + "</span>";
-                        //If it's already selected, don't add it again!
-                        if(!$(this).hasClass('selected')) {
-                            //Add email to recipient array
-                            recipients.push(email);
-                            //And add to the on-page list
-                            $('#recipient-list').append(emailSpan);
-                            //Mark as selected
-                            $(this).toggleClass('selected', true);
-                        }
+                        selectRecipient(this, true);
                     } else if(that.options.target === "qe-dashboard") {
                         //If dashboard query engine, create user profile
                         //This is what decides the parameter for getting a user view
@@ -383,38 +369,74 @@ function QueryEngine(options) {
     };
     this.createTable = function() {
         var that = this;
-        var footer = "";
         //If it's a userlist, allow group emailing from footer
-        if(this.options.viewMode === 'userList') footer = "<h4><img src='images/envelope-black.png'>Send these users an email</h4><span class='clear'></span>";
-        var queryTable = "<div class='module qt'><div class='module-header'><h3>User Engagement: " + this.options.view.capitalize() + "<span class='subject-listing'> > " + this.affiliation[0].value.toUpperCase() + " > " + this.subject.join(" + ").toUpperCase() + "</span></h3></div><div class='module-body'><table class='tablesorter'><thead><tr></tr></thead><tbody></tbody></table>"+footer+"</div></div>";
+        
+        var queryTable = "<div class='module qt'><div class='module-header'></div><div class='module-body'><table class='tablesorter'><thead><tr></tr></thead><tbody></tbody></table></div></div>";
         //Push to top of QE module stack
         this.target.prepend(queryTable);
-        if(that.options.viewMode === 'userList') {
-            this.target.on("click", '.qt h4', function() {
-                //Add all subset of users to recipient list.
-                var email = "";
-                that.target.find('tbody tr').each(function(index) {
-                    email = $(this).find('td')[3].innerHTML;
-                    if(!$(this).hasClass('selected')) {
-                        //Add emails to recipient array
-                        recipients.push(email);
-                        //And add to the on-page list
-                        $('#recipient-list').append("<span class='recipient'>" + email + "</span>");
-                        //Mark as selected
-                        $(this).toggleClass('selected', true);
-                    }
-                });
-            });
-        }
+        this.createHeader(this.target.find('.qt .module-header'), 'table');
+        this.createFooter(this.target.find('.qt .module-body'), 'table');
+        //Activate module footer accordian
+        //moduleAccordian(); Hard wire it in
     };
     this.createGraph = function() {
-        var queryGraph = "<div class='module qg'><div class='module-header'><h3>Graph</h3></div><div class='module-body down'><div id='qe-graph' style='height: 400px'></div></div><div class='module-footer'><img src='images/up.png'></div></div><!--end module qg-->";
+        var queryGraph = "<div class='module qg'><div class='module-header'></div><div class='module-body down'><div id='qe-graph' style='height: 400px'></div></div><div class='module-footer'><img src='images/up.png'></div></div><!--end module qg-->";
         this.target.prepend(queryGraph);
+        this.createHeader(this.target.find('.qg .module-header'), 'graph');
+        this.createFooter(this.target.find('.qg .module-body'), 'graph');
         //Activate module footer accordian
-        //moduleAccordian();
+        moduleAccordian();
         //Create new highcharts chart
         var qeGraph = new Highcharts.Chart(Highcharts.merge(qeOptions, defaultTheme));
     };
-}
+    this.createHeader = function(target, type) {
+        var content = "";
+        switch (type) {
+            case 'graph':
+                content = "<h3>Graph</h3>";
+            break;
+            case 'table':
+                if(this.options.target === 'qe-dashboard') {
+                    content = "<h3>Filter By: " + this.options.view.capitalize() + "<span class='subject-listing'> > " + this.affiliation[0].value.toUpperCase() + " > " + this.subject.join(" + ").toUpperCase() + "</span></h3>";
+                } else {
+                    content = "";
+                }
+            break;
+            case 'other':
+                content = "";
+            break;
+        }
+        target.prepend(content);
+    };
+    this.createFooter = function(target, type) {
+        var that = this;
+        var content = "";
+        var messaging = this.options.target === 'qe-messaging';
 
+        //If in user-list (level 2) mode, make footer button available
+        if(this.options.viewMode === 'userList' && type === 'table') {
+            if(messaging) content = "<h4>Select/Deselect All</h4>";
+            content += "<h4>Add to recipient list</h4><span class='clear'></span>";
+            target.append(content);
+
+            this.target.on("click", '.qt h4', function() {
+                var selectButton = $(this).parent().find('h4');
+                //Select All/Deselect All button
+                if($(this).is(selectButton.first())) {
+                    //Select all
+                    that.target.find('tbody tr').each(function() {
+                        selectRecipient(this, false);
+                    });
+                    //If was select all, now deselect all & vice versa
+                    selectAll = !selectAll;
+                } else if($(this).is(selectButton.last())) {
+                    //Add all subset of users to recipient list
+                    that.target.find('tbody .selected').each(function() {
+                        addRecipient(this);
+                    });
+                }
+            });
+        }
+    };
+}
 

@@ -28,6 +28,9 @@ $(document).ready(function() {
 		previousPage();
 	});
 
+	//Activate Initial Module Accordian//
+	moduleAccordian();
+
 	////////////////////////////
 	//Initialize Query Engine 1
 	//view: rewards, badges, metrics, etc
@@ -36,7 +39,7 @@ $(document).ready(function() {
 	var options = {
 		view: "rewards",
 		target: "qe-dashboard",
-		type: "table",
+		//type: "table",
 		viewMode: "type",
 		graph: true,
 		visible: true
@@ -44,7 +47,7 @@ $(document).ready(function() {
 	options2 = {
 		view: "",
 		target: "qe-messaging",
-		type: "table",
+		//type: "table",
 		viewMode: "type",
 		graph: false,
 		visible: false
@@ -193,27 +196,46 @@ $(document).ready(function() {
 		}
 		twag.toggleClass("down","up");
 	});
-	
-	/* Messaging */
-    recipients = [];
-
-    /* Modules */
-    moduleAccordian = function() {
-    	$('.module-footer').on('click', function() {
-	    	var that = this;
-	    	var body = $(this).siblings().last();
-	    	if(body.hasClass('down')) {
-	    		body.slideUp('slow', function() {
-	    			$(that).find('img').attr('src', 'images/down.png');
-	    		});
-	    	} else {
-	    		body.slideDown('slow', function() {
-	    			$(that).find('img').attr('src', 'images/up.png');
-	    		});
-	    	}
-	    	body.toggleClass("down","up");
-	    });
-    };
-    //Activate Initial Module Accordian//
-	moduleAccordian();
 });
+/* Messaging */
+recipients = [];
+selectAll = true;
+function selectRecipient(row, single) {
+	if(single) {
+	    //If it's already selected, don't add it again!
+	    if(!$(row).hasClass('selected')) {
+	        //Select
+	        $(row).toggleClass('selected', true);
+	    } else {
+	    	//Deselect
+	    	$(row).toggleClass('selected', false);
+	    }
+	} else {
+		if(selectAll) $(row).toggleClass('selected', true);
+			else   $(row).toggleClass('selected', false);
+	}
+}
+function addRecipient(row) {
+	var email = $(row).find('td')[3].innerHTML;
+    var emailSpan = "<span class='recipient'>" + email + "</span>";
+    //Add email to recipient array
+    recipients.push(email);
+    //And add to the on-page list
+    $('#recipient-list').append(emailSpan);
+}
+function moduleAccordian() {
+	$('.module-footer').on('click', function() {
+    	var that = this;
+    	var body = $(this).siblings().last();
+    	if(body.hasClass('down')) {
+    		body.slideUp('slow', function() {
+    			$(that).find('img').attr('src', 'images/down.png');
+    		});
+    	} else {
+    		body.slideDown('slow', function() {
+    			$(that).find('img').attr('src', 'images/up.png');
+    		});
+    	}
+    	body.toggleClass("down","up");
+    });
+};

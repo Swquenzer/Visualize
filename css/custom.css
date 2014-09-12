@@ -1,24 +1,9 @@
-.messaging tr.selected {
-	background: #ddffe2;
-}
-.messaging td {
-  padding: 6px;
-}
-#recipient-list {
-  display: block;
-  max-height: 250px;
-  overflow-y: scroll;
-}
-#recipient-list h2 {
-  color: #26487F;
-}
-.recipient {
+#qe-messaging h4 {
   display: inline-block;
-  margin: 2px;
-  padding: 5px;
-  background: #fff5ce;
-  cursor: pointer;
+  margin-left: 10px;
+  margin-right: 10px;
+  padding: 20px;
 }
-.recipient:hover {
-	background: #ffefac;
+#qe-messaging h4:hover {
+  background: #e2eafa;
 }
