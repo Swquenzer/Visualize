@@ -200,6 +200,9 @@ $(document).ready(function() {
 /* Messaging */
 recipients = [];
 selectAll = true;
+$('#recipient-list').on("click", '.recipient', function() {
+	removeRecipient(this);
+});
 function selectRecipient(row, single) {
 	if(single) {
 	    //If it's already selected, don't add it again!
@@ -216,13 +219,30 @@ function selectRecipient(row, single) {
 	}
 }
 function addRecipient(row) {
+	var duplicate = false;
 	var email = $(row).find('td')[3].innerHTML;
-    var emailSpan = "<span class='recipient'>" + email + "</span>";
-    //Add email to recipient array
-    recipients.push(email);
-    //And add to the on-page list
-    $('#recipient-list').append(emailSpan);
+	//Check each current recipient for duplicate email
+	$('#recipient-list .recipient').each(function() {
+		if(this.innerHTML === email) {
+			duplicate = true;
+		}
+	});
+	if(!duplicate) {
+	    //Add email to recipient array
+	    recipients.push(email);
+	    //And add to the on-page list
+	    $('#recipient-list').append("<span class='recipient'>" + email + "</span>");
+	}
 }
+function removeRecipient(email) {
+	var index = recipients.indexOf(email.innerHTML);
+	recipients.splice(index, 1);
+	$(email).remove();
+	console.log(recipients);
+}
+
+
+/* Modules */
 function moduleAccordian() {
 	$('.module-footer').on('click', function() {
     	var that = this;

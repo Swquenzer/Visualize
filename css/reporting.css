@@ -752,10 +752,12 @@ label.css-label {
   padding: 5px;
   background: #fff5ce;
   cursor: pointer;
+	transition: padding-left .2s;
 }
 .recipient:hover {
-	background: #ffefac;
-  background: url('../images/cross.png') no-repeat;
+	padding-left: 28px;
+  background: #ffefac url('../images/cross-small.png') left no-repeat;
+	background-position: 10px 0px left;
 }
 
 .messaging .wrapper {
