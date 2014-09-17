@@ -1,6 +1,6 @@
 //main.js
 //Prototypes
-var dev = false;
+var dev = true;
 //Captializes first letter of string
 String.prototype.capitalize = function() {
     return this.charAt(0).toUpperCase() + this.slice(1);
@@ -27,9 +27,6 @@ $(document).ready(function() {
 	$('#back-btn').on("click", function() {
 		previousPage();
 	});
-
-	//Activate Initial Module Accordian//
-	moduleAccordian();
 
 	////////////////////////////
 	//Initialize Query Engine 1
@@ -169,6 +166,10 @@ $(document).ready(function() {
 		var section = $('.content.registration');
 		changePage(section, this);
 	});
+	$('.option.clientSettings').on("click", function() {
+		var section = $('.content.clientSettings');
+		changePage(section, this);
+	});
 
 	if(dev) {
 		var twag = $('.twag-body');
@@ -178,8 +179,6 @@ $(document).ready(function() {
 		});
 	}
 	
-
-	//twag.toggleClass("down","up");
 	/* TWAG Slider */
 	$('.twag-footer').on("click", function() {
 		var twag = $('.twag-body');
@@ -197,6 +196,7 @@ $(document).ready(function() {
 		twag.toggleClass("down","up");
 	});
 });
+
 /* Messaging */
 recipients = [];
 selectAll = true;
@@ -243,19 +243,28 @@ function removeRecipient(email) {
 
 
 /* Modules */
-function moduleAccordian() {
-	$('.module-footer').on('click', function() {
-    	var that = this;
-    	var body = $(this).siblings().last();
-    	if(body.hasClass('down')) {
-    		body.slideUp('slow', function() {
-    			$(that).find('img').attr('src', 'images/down.png');
-    		});
-    	} else {
-    		body.slideDown('slow', function() {
-    			$(that).find('img').attr('src', 'images/up.png');
-    		});
-    	}
-    	body.toggleClass("down","up");
-    });
-};
+//Create 
+$('body').on('click', '.module-footer', function() {
+	var that = this;
+	var body = $(this).siblings().last();
+	if(body.hasClass('down')) {
+		body.slideUp('slow', function() {
+			$(that).find('img').attr('src', 'images/down.png');
+		});
+	} else {
+		body.slideDown('slow', function() {
+			$(that).find('img').attr('src', 'images/up.png');
+			$(window).resize();
+		});
+	}
+	body.toggleClass("down","up");
+});
+/* Registration */
+$('.reg-form .affiliation-list').on("click", "input:checked", function() {
+	var subjectList = $(this).siblings().next();
+	subjectList.show();
+});
+$('.reg-form .affiliation-list').on("click", "input:not(:checked)", function() {
+	var subjectList = $(this).siblings().next();
+	subjectList.hide();
+});

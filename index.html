@@ -29,8 +29,11 @@
 			<section class="userView option invisible">
 				<h4>User Profile <img src="images/user.png"></h4>
 			</section>
+			<section class="clientSettings option invisible">
+				<h4>Your Profile <img src="images/user1.png"></h4>
+			</section>
 			<section class="registration option invisible">
-				<h4>User Registration <img src="images/users.png"></h4>
+				<h4>Client Registration <img src="images/users.png"></h4>
 			</section>
 			<section class="messaging option invisible">
 				<h4>Messaging <img src="images/dashboard-icon.png"></h4>
@@ -102,31 +105,31 @@
 								<td>New Users</td>
 								<td>1,409</td>
 								<td>1,493</td>
-								<td class="light-green">+18%</td>
+								<td>+18%</td>
 							</tr>
 							<tr onclick="twagUpdate('tasks')">
 								<td>Tasks Completed</td>
 								<td>1,409</td>
 								<td>1,493</td>
-								<td class="red">-3%</td>
+								<td>-3%</td>
 							</tr>
 							<tr onclick="twagUpdate('goals')">
 								<td>Goals Completed</td>
 								<td>3,409</td>
 								<td>4,493</td>
-								<td class="red">-3%</td>
+								<td>-3%</td>
 							</tr>
 							<tr onclick="twagUpdate('badges')">
 								<td>Badges Earned</td>
 								<td>1,409</td>
 								<td>1,493</td>
-								<td class="light-green">+32%</td>
+								<td>+32%</td>
 							</tr>
 							<tr onclick="twagUpdate('rewards')">
 								<td>Rewards Earned</td>
 								<td>1,409</td>
 								<td>1,493</td>
-								<td class="light-green">+4%</td>
+								<td>+4%</td>
 							</tr>
 						</table>
 						<div id="twag-chart" style="width: 45%; float: left;"></div>
@@ -136,6 +139,16 @@
 					<img src="images/up.png">
 				</footer>
 				<span class="clear"></span>
+				<div class="module">
+					<div class="module-header">
+						<h3>Main Header</h3>
+						<div class="module-header-right">
+						<h4>Stuff in here</h4>
+						</div>
+					</div>
+					<div class="module-body">
+					</div>
+				</div>
 				<div id="qe-dashboard">
 				</div><!--End qe-dashboard-->
 			</section><!--content-->
@@ -360,22 +373,49 @@
 							<input name="password" placeholder="********">
 							</p>
 								<span class="clear"></span>
+								<hr>
 								<h2>Affiliations</h2>
-								<span>
-									<input type="checkbox" name="pra" id="pra" class="css-checkbox" checked/>
-	                    			<label for="pra" class="css-label">PRA</label>
-	                    		</span>
-	                    		<span>
-									<input type="checkbox" name="cashamerica" id="cashamerica" class="css-checkbox" checked/>
-	                    			<label for="cashamerica" class="css-label">Cash America</label>
-	                    		</span>
-	                    		<span>
-									<input type="checkbox" name="mercy" id="mercy" class="css-checkbox" checked/>
-	                				<label for="mercy" class="css-label">Mercy</label>
-	                			</span>
-	                    		<span></span>
-	                    		<span></span>
-	                    		<span></span>
+								<div class="affiliation-list">
+									<span>
+										<input type="checkbox" name="pra" id="pra" class="css-checkbox"/>
+		                    			<label for="pra" class="css-label">PRA</label>
+		                    			<div class="subject-list" style="display:none;">
+		                    				<h5>Subjects:</h5>
+		                    				<span>
+		                    					<input type="checkbox" name="fha" id="fha" class="css-checkbox"/>
+		                    					<label for="fha" class="css-label">FHA</label>
+		                    				</span>
+		                    				<span>
+		                    					<input type="checkbox" name="subject0" id="subject0" class="css-checkbox"/>
+		                    					<label for="subject0" class="css-label">Subject 0</label>
+		                    				</span>
+		                    			</div>
+			                    		</span>
+		                    		<span>
+										<input type="checkbox" name="cashamerica" id="cashamerica" class="css-checkbox"/>
+		                    			<label for="cashamerica" class="css-label">Cash America</label>
+			                    		<div class="subject-list" style="display:none;">
+		                    				<span>
+		                    					<input type="checkbox" name="subjec1" id="subjec1" class="css-checkbox"/>
+		                    					<label for="subjec1" class="css-label">Subject 1</label>
+		                    				</span>
+		                    			</div>
+		                    		</span>
+		                    		<span>
+										<input type="checkbox" name="mercy" id="mercy" class="css-checkbox"/>
+		                				<label for="mercy" class="css-label">Mercy</label>
+			                			<div class="subject-list" style="display:none;">
+		                    				<span>
+		                    					<input type="checkbox" name="Subject 2" id="Subject 2" class="css-checkbox"/>
+		                    					<label for="Subject 2" class="css-label">Subject 2</label>
+		                    				</span>
+		                    			</div>
+		                			</span>
+		                    		<span></span>
+		                    		<span></span>
+		                    		<span></span>
+								</div><!--end affiliation-list-->
+	                    		<hr>
 	                			<h2>Special Permissions</h2>
 		                    	<span>
 		                    		<input type="checkbox" name="individual" id="individual" class="css-checkbox" checked/>
@@ -418,6 +458,52 @@
 					</div><!--end module-body-->
 				</div><!--end module-->
 			</section><!--End content registration-->
+			<section class="content clientSettings">
+				<div class="module">
+					<div class="module-header">
+						<h1>Your Permissions and Settings</h1>
+					</div>
+					<div class="module-body">
+						<div class="wrapper">
+							<h3>General Information</h3>
+							<ul>
+								<li>Name: Stephen Quenzer</li>
+								<li>Email: stephen.quenzer@myfela.com</li>
+								<li>Affiliations:
+									<ol>
+										<li>PRA -- Subjects:
+											<ul>FHA</ul>
+											<ul>Subject 2</ul>
+											<ul>Subject 3</ul>
+										</li>
+										<li>Mercy -- Subjects:
+											<ul>FHA</ul>
+											<ul>Subject 6</ul>
+											<ul>Subject 7</ul>
+										</li>
+										<li>PRA -- Subjects:
+											<ul>Subject 3</ul>
+											<ul>Subject 4</ul>
+											<ul>Subject 5</ul>
+										</li>
+									</ol>
+								</li>
+							</ul>
+							<h3>Special Permissions</h3>
+							<ul>
+								<li>Individual View: Yes</li>
+								<li>Messaging: Yes</li>
+								<li>Timeline: No</li>
+								<li>Comparative Data: No</li>
+								<li>Google Analytics: Yes</li>
+								<li>Downloadable Data: Yes</li>
+								<li>Assigments: No</li>
+								<li>Social Media: Yes</li>
+							</ul>
+						</div>
+					</div><!-- end module-body -->
+				</div><!--end module-->
+			</section><!-- end content clientProfile -->
 			<section class="content messaging">
 				<div class="module">
 					<div class="module-header">
@@ -430,7 +516,7 @@
 							<h1>Send a message to a custom group of users!</h1>
 							<h3>Filter by:</h3>
 							<div id="messaging-options">
-								<span class="option" onclick="qe[1].initialize('reward');">Rewards</span>
+								<span class="option" onclick="qe[1].initialize('rewards');">Rewards</span>
 								<span class="option" onclick="qe[1].initialize('badges');">Badge</span>
 								<span class="option" onclick="qe[1].initialize('goals');">Goal</span>
 								<span class="option" onclick="qe[1].initialize('tasks');">Task</span>
@@ -475,7 +561,7 @@
 	</div>
 	<script type="text/javascript" src="dist/highcharts.js"></script>
 	<script type="text/javascript" src="js/themes/dark-unica.js"></script>
-	<script type="text/javascript" src="js/charts1.js"></script>
+	<script type="text/javascript" src="js/charts.js"></script>
 	<!--<script type="text/javascript" src="js/charts.js"></script>-->
 	<script src="js/main.js"></script>
 </body>

@@ -445,7 +445,7 @@ h5 {
 	background: #edf8f9;
 }
 .qt th {
-	padding: 10px 20px;
+	padding: 10px 5px;
 	background: white !important;
 }
 .qt td {
@@ -462,6 +462,7 @@ h5 {
 /* Modules */
 .module {
 	display: block;
+	/max-width: 660px;
 	margin: 15px 0px;
 	background: #C6DEE8;
 	/border-right: 30px solid #697490;
@@ -473,32 +474,14 @@ h5 {
 	padding: 10px;
 	background: #F6F6F6;
 }
-.module-header h1, .module-header h2, .module-header h3 {
-	display: inline-block;
+.module-header h1 {
 	margin-left: 20px;
 }
-.module-header h1 {
-	
-}
-.module-header h2 {
-	
-}
 .module-header h3 {
-	display: inline-block;
+	display: inline-block;dd
 	margin: 0;
 	color: #767676;
 	font-weight: 300;
-}
-.module-header-right {
-	float: right;
-}
-.module-body {
-	display: block;
-	position: relative;
-	/height: 400px;
-	margin: 0;
-	padding: 10px 15px;
-	background: #ffffff;
 }
 .module-body h4 {
 	display: block;
@@ -518,6 +501,14 @@ h5 {
 	bottom: 2px;
 	margin-right: 5px;
 	vertical-align: middle;
+}
+.module-body {
+	display: block;
+	position: relative;
+	/height: 400px;
+	margin: 0;
+	padding: 10px 15px;
+	background: #ffffff;
 }
 .module-footer {
 	padding-top: 4px;
@@ -759,4 +750,3 @@ label.css-label {
 #qe-graph {
 	width: 100%;
 }
-/* ClientSettings */
