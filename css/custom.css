@@ -133,6 +133,7 @@ input.cmn-toggle-yes-no + label:before {
   -ms-backface-visibility: hidden;
   -o-backface-visibility: hidden;
   backface-visibility: hidden;
+  border-radius: 5px;
 }
 input.cmn-toggle-yes-no + label:after {
   background-color: #fb9198;
@@ -151,6 +152,8 @@ input.cmn-toggle-yes-no + label:after {
   -ms-backface-visibility: hidden;
   -o-backface-visibility: hidden;
   backface-visibility: hidden;
+  
+  border-radius: 5px;
 }
 input.cmn-toggle-yes-no:checked + label:before {
   -webkit-transform: rotateY(180deg);

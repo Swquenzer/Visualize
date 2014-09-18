@@ -239,7 +239,7 @@ function QueryEngine(options) {
     //Messaging type options
     var that = this;
     $('#messaging-options').on("click", '.option', function() {
-        that.initialize(this[0].innerHTML);
+        //that.initialize(this[0].innerHTML);
     });
     this.initialize = function(view) {
         //If there's anything in target container, remove it and start fresh
