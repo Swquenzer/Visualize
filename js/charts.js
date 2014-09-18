@@ -234,6 +234,13 @@ function QueryEngine(options) {
     this.target = $("#" + options.target);
     this.affiliation = "";
     this.subject = []; 
+
+    //Event Triggers
+    //Messaging type options
+    var that = this;
+    $('#messaging-options').on("click", '.option', function() {
+        that.initialize(this[0].innerHTML);
+    });
     this.initialize = function(view) {
         //If there's anything in target container, remove it and start fresh
         this.target.children().remove();
@@ -277,7 +284,7 @@ function QueryEngine(options) {
             this.options.viewMode = 'userList';
         } else {
             var section = $('.content.dashboard');
-            changePage(section, $('.option.dashboard'));
+            if(this.options.target !== 'qe-messaging') changePage(section, $('.option.dashboard'));
             this.options.viewMode = 'type';
             this.options.view = newView;
         }
@@ -366,7 +373,7 @@ function QueryEngine(options) {
                     table.find('thead tr').append("<th>" + data.columns[i].separate().capitalize() + "</th>");
                 }
                 //*Need switch statment for related badges and goals
-                table.find('thead tr').append("<th>Subject</th><th>Related Badges</th><th>Related Goals</th>");
+                table.find('thead tr').append("<th>Related Badges</th><th>Related Goals</th>");
                 //Create tbody Rows
                 for(var i=0; i<data.results.length; i++) {
                     table.find('tbody').append('<tr></tr>');
@@ -376,7 +383,7 @@ function QueryEngine(options) {
                     //Subject name extracted from previous sibling label
                     //var subject = that.subject.prev().html();
                     //*Need another switch statment here
-                    table.find('tbody tr:last').append("<td>" + "subject" + "</td><td>Clickable Icon</td><td>Clickable Icon</td>");
+                    table.find('tbody tr:last').append("<td>Clickable Icon</td><td>Clickable Icon</td>");
                 }
                 //Select all tr's except for first (header)
                 table.find('tr').slice(1).on("click", function() {
@@ -394,39 +401,49 @@ function QueryEngine(options) {
     this.createTable = function() {
         var that = this;
         //If it's a userlist, allow group emailing from footer
-        
-        var queryTable = "<div class='module qt'><div class='module-header'></div><div class='module-body'><table class='tablesorter'><thead><tr></tr></thead><tbody></tbody></table></div></div>";
+        var queryTable = "<div class='module qt'><div class='module-body'><table class='tablesorter'><thead><tr></tr></thead><tbody></tbody></table></div></div>";
         //Push to top of QE module stack
         this.target.prepend(queryTable);
-        this.createHeader(this.target.find('.qt .module-header'), 'table');
+        this.createHeader(this.target.find('.qt.module'), 'table');
         this.createFooter(this.target.find('.qt .module-body'), 'table');
     };
     this.createGraph = function() {
-        var queryGraph = "<div class='module qg'><div class='module-header'></div><div class='module-body down'><div id='qe-graph' style='height: 400px'></div></div><div class='module-footer'><img src='images/up.png'></div></div><!--end module qg-->";
+        var queryGraph = "<div class='module qg'><div class='module-body down'><div id='qe-graph' style='height: 400px'></div></div><div class='module-footer'><img src='images/up.png'></div></div><!--end module qg-->";
         this.target.prepend(queryGraph);
-        this.createHeader(this.target.find('.qg .module-header'), 'graph');
+        this.createHeader(this.target.find('.qg.module'), 'graph');
         this.createFooter(this.target.find('.qg .module-body'), 'graph');
         //Create new highcharts chart
         var qeGraph = new Highcharts.Chart(Highcharts.merge(qeOptions, defaultTheme));
     };
     this.createHeader = function(target, type) {
-        var content = "";
-        switch (type) {
-            case 'graph':
-                content = "<h3>Graph</h3>";
-            break;
-            case 'table':
-                if(this.options.target === 'qe-dashboard') {
-                    content = "<h3>Filter By: " + this.options.view.capitalize() + "<span class='subject-listing'> > " + this.affiliation[0].value.toUpperCase() + " > " + this.subject.join(" + ").toUpperCase() + "</span></h3>";
-                } else {
-                    content = "";
-                }
-            break;
-            case 'other':
-                content = "";
-            break;
+        var header = $("<div class='module-header'></div>");
+        if(this.options.target === 'qe-dashboard') {
+            if(type === 'graph') {
+                header.append("Graph");
+                target.prepend(header);
+                return;
+            }
+            if(type === 'table') {
+                //complex header
+                header.addClass("right").append("<div class='left'></div><div class='right'></div>");
+                //left
+                header.find('.left').append("<h3>Filter By: " + this.options.view.capitalize() + "<span class='subject-listing'> > " + this.affiliation[0].value.toUpperCase() + " > " + this.subject.join(" + ").toUpperCase() + "</span></h3>");
+                //right
+                header.find('.right').append("<div class='switch'><input type='checkbox' id='completion-toggle-dashboard' class='cmn-toggle cmn-toggle-yes-no'/><label for='completion-toggle-dashboard' data-on='Filter by completion' data-off='Filter by incompletion'></label></div>");
+                //add
+                target.prepend(header);
+                return;
+            }
+        } 
+        if(this.options.target === 'qe-messaging') {
+            //complex header
+            header.css("text-align", "center").addClass("right");
+            if(this.options.viewMode === 'type')
+            header.append("<div class='switch'><input type='checkbox' id='completion-toggle-messaging' class='cmn-toggle cmn-toggle-yes-no'/><label for='completion-toggle-messaging' data-on='Filter by completion' data-off='Filter by incompletion'></label></div>");
+            //add
+            target.prepend(header);
+            return;
         }
-        target.prepend(content);
     };
     this.createFooter = function(target, type) {
         var that = this;
@@ -439,6 +456,7 @@ function QueryEngine(options) {
             content += "<h4>Add to recipient list</h4><span class='clear'></span>";
             target.append(content);
 
+            //Messaging
             this.target.on("click", '.qt h4', function() {
                 var selectButton = $(this).parent().find('h4');
                 //Select All/Deselect All button

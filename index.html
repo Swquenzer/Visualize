@@ -139,16 +139,7 @@
 					<img src="images/up.png">
 				</footer>
 				<span class="clear"></span>
-				<div class="module">
-					<div class="module-header">
-						<h3>Main Header</h3>
-						<div class="module-header-right">
-						<h4>Stuff in here</h4>
-						</div>
-					</div>
-					<div class="module-body">
-					</div>
-				</div>
+				
 				<div id="qe-dashboard">
 				</div><!--End qe-dashboard-->
 			</section><!--content-->
@@ -516,12 +507,12 @@
 							<h1>Send a message to a custom group of users!</h1>
 							<h3>Filter by:</h3>
 							<div id="messaging-options">
-								<span class="option" onclick="qe[1].initialize('rewards');">Rewards</span>
-								<span class="option" onclick="qe[1].initialize('badges');">Badge</span>
-								<span class="option" onclick="qe[1].initialize('goals');">Goal</span>
-								<span class="option" onclick="qe[1].initialize('tasks');">Task</span>
-								<span class="option" onclick="qe[1].initialize('questionnaires');">Questionnaire</span>
-								<span class="option" onclick="qe[1].initialize('metrics');">Metric</span>
+								<span class="option" onclick="qe[1].changeView('rewards');">Rewards</span>
+								<span class="option" onclick="qe[1].changeView('badges');">Badges</span>
+								<span class="option" onclick="qe[1].changeView('goals');">Goals</span>
+								<span class="option" onclick="qe[1].changeView('tasks');">Tasks</span>
+								<span class="option" onclick="qe[1].changeView('questionnaires');">Questionnaires</span>
+								<span class="option" onclick="qe[1].changeView('metrics');">Metrics</span>
 							</div>
 							<div id="qe-messaging">
 							</div><!--end qe-messaging-->

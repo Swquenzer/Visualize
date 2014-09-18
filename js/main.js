@@ -102,13 +102,13 @@ $(document).ready(function() {
 		isIn = false;
 		$('.left_sidebar').toggleClass('open', true);
 		$('#main').toggleClass('shrink', true);
-		$('.left_sidebar h2').delay(100).fadeIn("200");
+		//$('.left_sidebar h2').delay(100).fadeIn(200);
 		var len = $('.left_sidebar section').length;
 		$('.left_sidebar section').each(function(i) {
 			$(this).delay(100*i+300).slideDown(100, function() {
+				$(window).resize();
 				if(i === len-1) {
-					//Forces resize of charts to match container width
-					$(window).resize();
+					//is now fully out
 					isOut = true;
 				}
 			});
@@ -122,6 +122,7 @@ $(document).ready(function() {
 			var count = 0;
 			$('.left_sidebar section').slideUp(300, function() {
 				//is now fully in
+				$(window).resize();
 				isIn = true;
 			});
 			isOut = false;

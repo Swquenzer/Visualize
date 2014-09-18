@@ -79,6 +79,7 @@ h5 {
 	transition: background .1s, ease;
 }
 .left_sidebar .header {
+	padding-bottom: 15px;
 	text-align: center;
 	cursor: default;
 	font-weight: 700;
@@ -470,32 +471,35 @@ h5 {
 }
 .module-header {
 	display:block;
-	padding: 10px;
+	padding: 20px;
 	background: #F6F6F6;
 }
 .module-header h1, .module-header h2, .module-header h3 {
 	display: inline-block;
-	margin-left: 20px;
-}
-.module-header h1 {
-	
-}
-.module-header h2 {
-	
+	margin: 0 20px;
 }
 .module-header h3 {
 	display: inline-block;
-	margin: 0;
 	color: #767676;
 	font-weight: 300;
 }
-.module-header-right {
-	float: right;
+.module-header.right {
+	padding: 0;
+}
+.module-header.right .left {
+	display: inline-block;
+	padding: 0px 0;
+	width: 60%;
+}
+.module-header.right .right {
+	display: inline-block;
+	width: 40%;
+	text-align: right;
+	vertical-align: middle;
 }
 .module-body {
 	display: block;
 	position: relative;
-	/height: 400px;
 	margin: 0;
 	padding: 10px 15px;
 	background: #ffffff;
@@ -555,19 +559,17 @@ h5 {
 	background: #434E66;
 }
 .userView .profile .module-header h3 {
-	padding: 15px 15px 6px;
+	padding: 15px 15px 10px;
 	color: #EEEEEE;
 	vertical-align: middle;
 }
 .userView .profile h3 img {
 	width: 50px;
-	position: relative;
-	margin-top: -17px;
 	vertical-align: middle
 }
 .userView .profile .module-header h4 {
 	display: inline-block;
-	padding: 15px 20px;
+	margin-top: 30px;
 	margin-right: 20px;
 	text-align: right;
 	color: white;
