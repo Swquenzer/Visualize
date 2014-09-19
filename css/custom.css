@@ -169,3 +169,51 @@ input.cmn-toggle-yes-no:checked + label:after {
   -o-transform: rotateY(0);
   transform: rotateY(0);
 }
+/* ============================================================
+  Toggle Button
+============================================================ */
+/* Set-up 
+<div class='toggle-button-wrapper'><div class='toggle-button'><div class='front'>Completed</div><div class='side'>Not Completed</div></div></div>
+*/
+toggle-button-wrapper {
+	display: inline-block;
+	background: #F4F6F8;
+	line-height: 62px;
+  -webkit-perspective: 1000px; /* <-NB */
+}
+
+/* Container box to set the sides relative to */
+.toggle-button {
+	width: 150px;
+	text-align: center;
+	margin: 0 auto;
+	height: 30px;
+	-webkit-transition: -webkit-transform .33s;
+	transition: transform .33s; /* Animate the transform properties */
+	-webkit-transform-style: preserve-3d;
+	transform-style: preserve-3d; /* <-NB */
+}
+
+/* The two faces of the cube */
+.front,.side {
+	background: rgb(247, 247, 247);
+	border: 1px solid rgba(147, 184, 189, .8);
+	height: 30px;
+}
+
+/* Position the faces */
+.front {
+	-webkit-transform: translateZ(15px);
+	transform: translateZ(15px);
+}
+
+.side {
+	-webkit-transform: rotateX(-90deg) translateZ(-15px);
+	transform: rotateX(-90deg) translateZ(-15px);
+}
+
+/* Rotate the cube */
+.toggle-button:hover {
+	-webkit-transform: rotateX(89deg);
+	transform: rotateX(89deg); /* Text bleed at 90Âº */
+}

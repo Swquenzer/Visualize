@@ -39,7 +39,8 @@ $(document).ready(function() {
 		//type: "table",
 		viewMode: "type",
 		graph: true,
-		visible: true
+		visible: true,
+		completed: true
 	};
 	options2 = {
 		view: "",
@@ -47,7 +48,8 @@ $(document).ready(function() {
 		//type: "table",
 		viewMode: "type",
 		graph: false,
-		visible: false
+		visible: false,
+		completed: true
 	};
 	qe = [];
 	qe[0] = new QueryEngine(options);
@@ -234,6 +236,11 @@ function addRecipient(row) {
 	    //And add to the on-page list
 	    $('#recipient-list').append("<span class='recipient'>" + email + "</span>");
 	}
+}
+function addAllRecipients(rows) {
+	rows.each(function(i, el) {
+		addRecipient(el);
+	});
 }
 function removeRecipient(email) {
 	var index = recipients.indexOf(email.innerHTML);

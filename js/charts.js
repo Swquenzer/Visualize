@@ -312,6 +312,7 @@ function QueryEngine(options) {
             paramList.view = this.options.view;
             paramList.affiliation = this.affiliation[0].value;
             paramList.subject = this.subject;
+            paramList.completed = this.options.completed;
             //Gather data for query
             switch(this.options.view) {
                 case 'rewards':
@@ -335,6 +336,8 @@ function QueryEngine(options) {
             }
 
             //If array doesn't get through in paramList, look up "traditional flag" with Google
+            var URL = 'getUsers.json';
+            if(!paramList.completed) URL = 'getUsers1.json';
             $.getJSON('getUsers.json', paramList, function(data) {
                 //On Success
                 for(var i=0; i<data.columns.length; i++) {
@@ -419,31 +422,33 @@ function QueryEngine(options) {
         var header = $("<div class='module-header'></div>");
         if(this.options.target === 'qe-dashboard') {
             if(type === 'graph') {
-                header.append("Graph");
-                target.prepend(header);
-                return;
+                header.append("<h3>Graph</h3>");
             }
-            if(type === 'table') {
-                //complex header
-                header.addClass("right").append("<div class='left'></div><div class='right'></div>");
-                //left
-                header.find('.left').append("<h3>Filter By: " + this.options.view.capitalize() + "<span class='subject-listing'> > " + this.affiliation[0].value.toUpperCase() + " > " + this.subject.join(" + ").toUpperCase() + "</span></h3>");
-                //right
-                header.find('.right').append("<div class='switch'><input type='checkbox' id='completion-toggle-dashboard' class='cmn-toggle cmn-toggle-yes-no'/><label for='completion-toggle-dashboard' data-on='Filter by completion' data-off='Filter by incompletion'></label></div>");
-                //add
-                target.prepend(header);
-                return;
+            if(type === 'table' && this.options.viewMode === 'type') {
+                header.append("<h3>Filter By: " + this.options.view.capitalize() + "<span class='subject-listing'> > " + this.affiliation[0].value.toUpperCase() + " > " + this.subject.join(" + ").toUpperCase() + "</span></h3>");
             }
-        } 
-        if(this.options.target === 'qe-messaging') {
+        } else if(this.options.target === 'qe-messaging') {
             //complex header
-            header.css("text-align", "center").addClass("right");
-            if(this.options.viewMode === 'type')
-            header.append("<div class='switch'><input type='checkbox' id='completion-toggle-messaging' class='cmn-toggle cmn-toggle-yes-no'/><label for='completion-toggle-messaging' data-on='Filter by completion' data-off='Filter by incompletion'></label></div>");
-            //add
-            target.prepend(header);
-            return;
+            //header.css("text-align", "center").addClass("right");
         }
+        if(this.options.viewMode === 'userList' && type==='table') {
+            //Filter by users who have completed the <goal>
+            header.addClass('right').append("<div class='left'></div><div class='right'><div>");
+            var current = "<strong class='green'>have</strong>";
+            var otherwise = "<strong class='red'>have not</strong>";
+            if(!this.options.completed) {
+                //Switch
+                var temp = otherwise;
+                current = otherwise;
+                otherwise = temp;
+            }
+            var heading = "<h3>Filtering by users who " + current + " completed the " + this.options.view.slice(0,-1);
+            var button = "OR <h3 class='completion-button hover'>List users who " + otherwise + "</h3>";
+            header.find('.left').append(heading);
+            header.find('.right').append(button);
+        }
+        target.prepend(header);
+        return;
     };
     this.createFooter = function(target, type) {
         var that = this;
@@ -452,26 +457,33 @@ function QueryEngine(options) {
 
         //If in user-list (level 2) mode, make footer button available
         if(this.options.viewMode === 'userList' && type === 'table') {
-            if(messaging) content = "<h4>Select/Deselect All</h4>";
-            content += "<h4>Add to recipient list</h4><span class='clear'></span>";
+            if(messaging) content = "<h4 class='hover'>Select/Deselect All</h4>";
+            content += "<h4 class='hover'>Add to recipient list</h4><span class='clear'></span>";
             target.append(content);
 
             //Messaging
-            this.target.on("click", '.qt h4', function() {
+            this.target.on("click", '.qt .module-body h4', function() {
                 var selectButton = $(this).parent().find('h4');
                 //Select All/Deselect All button
-                if($(this).is(selectButton.first())) {
-                    //Select all
-                    that.target.find('tbody tr').each(function() {
-                        selectRecipient(this, false);
-                    });
-                    //If was select all, now deselect all & vice versa
-                    selectAll = !selectAll;
-                } else if($(this).is(selectButton.last())) {
-                    //Add all subset of users to recipient list
-                    that.target.find('tbody .selected').each(function() {
-                        addRecipient(this);
-                    });
+                if(that.options.target === 'qe-messaging') {
+                    if($(this).is(selectButton.first())) {
+                        //Select all
+                        that.target.find('tbody tr').each(function() {
+                            selectRecipient(this, false);
+                        });
+                        //If was select all, now deselect all & vice versa
+                        selectAll = !selectAll;
+                    } else if($(this).is(selectButton.last())) {
+                        console.log(4)
+                        //Add selected users button
+                        that.target.find('tbody .selected').each(function() {
+                            addRecipient(this);
+                        });
+                    }
+                } else {
+                    //Add all users button
+                    addAllRecipients(that.target.find('tbody tr'));
+                    changePage($('.content.messaging'),$('.option.messaging'));
                 }
             });
         }

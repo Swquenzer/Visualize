@@ -431,7 +431,6 @@ h5 {
 /* Query Table */
 .qt .module-body {
 	overflow-x: scroll;
-	text-align: center;
 }
 .qt table {
 	width: 100%;
@@ -470,34 +469,19 @@ h5 {
 	border-radius: 2px 2px 2px 2px;
 	box-shadow: 0px 0px 1px 0px rgba(1, 1, 1, .6);
 }
-.module .hover {
-  margin-left: 10px;
-  margin-right: 10px;
-  padding: 20px;
-  cursor: pointer;
-}
-.module .hover:hover {
-  background: #e2eafa;
-}
 .module-header {
 	display:block;
-	padding: 0px;
+	padding: 20px;
 	background: #F6F6F6;
 }
 .module-header h1, .module-header h2, .module-header h3 {
 	display: inline-block;
-	padding: 20px;
 	margin: 0 20px;
 }
 .module-header h3 {
 	display: inline-block;
-	padding: 20px;
 	color: #767676;
 	font-weight: 300;
-}
-.module-header h4 {
-	display: inline-block !important;
-	padding: 20px;
 }
 .module-header.right {
 	padding: 0;
@@ -511,7 +495,7 @@ h5 {
 	display: inline-block;
 	width: 40%;
 	text-align: right;
-	/* vertical-align: middle; */
+	vertical-align: middle;
 }
 .module-body {
 	display: block;
@@ -521,7 +505,7 @@ h5 {
 	background: #ffffff;
 }
 .module-body h4 {
-	display: inline-block;
+	display: block;
 	margin: 15px 0 0 0;
 	padding: 10px;
 	text-align: center;
@@ -712,6 +696,15 @@ label.css-label {
 }
 #qe-messaging.invisible {
 	display: none !important;	
+}
+#qe-messaging h4 {
+  display: inline-block;
+  margin-left: 10px;
+  margin-right: 10px;
+  padding: 20px; 
+}
+#qe-messaging h4:hover {
+  background: #e2eafa;
 }
 .messaging .module-header {
 	text-align: left;
