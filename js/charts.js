@@ -422,7 +422,7 @@ function QueryEngine(options) {
         var header = $("<div class='module-header'></div>");
         if(this.options.target === 'qe-dashboard') {
             if(type === 'graph') {
-                header.append("<h3>Graph</h3>");
+                //header.append("<h3>Graph</h3>");
             }
             if(type === 'table' && this.options.viewMode === 'type') {
                 header.append("<h3>Filter By: " + this.options.view.capitalize() + "<span class='subject-listing'> > " + this.affiliation[0].value.toUpperCase() + " > " + this.subject.join(" + ").toUpperCase() + "</span></h3>");
@@ -438,14 +438,17 @@ function QueryEngine(options) {
             var otherwise = "<strong class='red'>have not</strong>";
             if(!this.options.completed) {
                 //Switch
-                var temp = otherwise;
+                var temp = current;
                 current = otherwise;
                 otherwise = temp;
             }
             var heading = "<h3>Filtering by users who " + current + " completed the " + this.options.view.slice(0,-1);
             var button = "OR <h3 class='completion-button hover'>List users who " + otherwise + "</h3>";
             header.find('.left').append(heading);
-            header.find('.right').append(button);
+            header.find('.right').append(button).on("click", '.hover', function() {
+                that.options.completed = !that.options.completed;
+                that.initialize();
+            });
         }
         target.prepend(header);
         return;

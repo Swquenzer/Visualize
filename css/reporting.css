@@ -1,4 +1,14 @@
 /* reporting.css */
+.layout-half {
+	width: 100%;
+}
+.layout-half .col-left,
+.layout-half .col-right {
+	display: inline-block;
+	width: 47%;
+	margin: 1%;
+	vertical-align: top;
+}
 body, html {
 	height: 100%;
 	margin: 0;
@@ -38,6 +48,7 @@ h5 {
 	overflow: hidden;
 	background: #2E323A;
 	transition: width .2s, ease;
+	overflow-y: auto;
 }
 .left_sidebar:hover {
 	background: #262930;
@@ -56,6 +67,7 @@ h5 {
 	text-align: right;
 	float: right;
 	z-index: 100000;
+	cursor: pointer;
 }
 .left_sidebar .icon-menu img {
 	opacity: .8;
@@ -74,17 +86,24 @@ h5 {
 	padding: 10px 0;
 	color: #6b8baf;
 	font-weight: 300;
-	cursor: pointer;
+	cursor: default;
 	background: #262A33;
 	transition: background .1s, ease;
 }
 .left_sidebar .header {
-	padding-bottom: 15px;
+	padding: 15px 0;
 	text-align: center;
-	cursor: default;
 	font-weight: 700;
 	border-top: 10px solid #2E323A;
 	border-bottom: 1px solid #6b8baf;
+	background: #262A33 url('../images/marquee-minus') no-repeat 10px center;
+	cursor: pointer;
+}
+.left_sidebar .header:hover {
+	background-color: #1f222c;
+}
+.left_sidebar .header.up {
+	background: #262A33 url('../images/marquee-plus') no-repeat 10px center;
 }
 .left_sidebar .option {
 	padding: 1px 0;
@@ -105,9 +124,13 @@ h5 {
 	display: block !important;
 	text-align: left;
 }
-.left_sidebar section img {
+.left_sidebar .header img {
+	margin-left: 10px;
+	float: left;
+}
+.left_sidebar .option img {
 	display: inline-block;
-	width: 24px;
+	width: 24px; height: 24px;
 	float: right;
 }
 .left_sidebar .bottom {
@@ -212,7 +235,7 @@ h5 {
 	height: 100%;
 	margin: 2px 0 15px 0;
 	padding: 0px 15px;
-	overflow-y: scroll;
+	overflow-y: auto;
 	overflow-x: hidden;
 	background: #F3F3F3;
 }
@@ -430,7 +453,7 @@ h5 {
 }
 /* Query Table */
 .qt .module-body {
-	overflow-x: scroll;
+	overflow-x: auto;
 	text-align: center;
 }
 .qt table {
@@ -466,7 +489,6 @@ h5 {
 	display: block;
 	margin: 15px 0px;
 	background: #C6DEE8;
-	/border-right: 30px solid #697490;
 	border-radius: 2px 2px 2px 2px;
 	box-shadow: 0px 0px 1px 0px rgba(1, 1, 1, .6);
 }
@@ -489,15 +511,15 @@ h5 {
 	padding: 20px;
 	margin: 0 20px;
 }
+.module-header h1 {
+	color: #262A33;
+}
+.module-header h2 {
+	color: #767676;
+}
 .module-header h3 {
-	display: inline-block;
-	padding: 20px;
 	color: #767676;
 	font-weight: 300;
-}
-.module-header h4 {
-	display: inline-block !important;
-	padding: 20px;
 }
 .module-header.right {
 	padding: 0;
@@ -551,26 +573,30 @@ h5 {
 	border-bottom: 1px solid #333B51;
 	background: #434E66;
 }
+.dark .module-header h1 {
+	color: #F6F6F6;
+}
+.dark .module-header h2 {
+	color: #CFCFCF;
+}
+.dark .module-header h3 {
+	color: #CFCFCF;
+}
 .dark .module-body {
 	color: #8DABE2;
 	background: #454C5A;
 }
-
 /* User View */
 .userView {
 	border-bottom: 1px solid #333B51;
 	text-align: center;
 }
-.userView .module {
+.userView .profile {
 	display: inline-block;
+	width: 96%;
 	margin-right: 1%;
 	margin-left: 1%;
-	width: 47%;
 	vertical-align: top;
-	border-right: none;
-}
-.userView .profile {
-	width: 96%;
 	text-align: left;
 	background: #434E66;
 }
@@ -586,6 +612,7 @@ h5 {
 .userView .profile .module-header h4 {
 	display: inline-block;
 	margin-top: 30px;
+	padding: 0;
 	margin-right: 20px;
 	text-align: right;
 	color: white;
@@ -605,9 +632,34 @@ h5 {
 	opacity: 1 !important;
 }
 .userView .profile .module-body {
-	height: 150px;
-	padding: 30px;
+	text-align: left;
+	padding: 0;
+	color: #d9e1f4;
+}
+.userView .profile .left {
+	display: inline-block;
+	font-weight: 100;
+	text-align: left;
+	width: 35%;
+	border-right: 1px solid #d9e1f4;
+	vertical-align: top;
+}
+.userView .profile ul {
+	color: white;
+	line-height: 30px;
+}
+.userView .profile strong {
+	color: #d9e1f4;
+}
+.userView .profile .right {
+	display: inline-block;
+	padding-left: 20px;
+	width: 60%;
+}
+.userView .profile .right h2 {
+	padding: 20px 0;
 	text-align: center;
+	background: #2f374c;
 }
 .userView .module-header {
 	
@@ -728,7 +780,7 @@ label.css-label {
 #recipient-list {
   display: block;
   max-height: 250px;
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 #recipient-list h2 {
   color: #26487F;

@@ -11,7 +11,7 @@
     <link rel="stylesheet" type="text/css" href="css/reporting.css">
     <link rel="stylesheet" type="text/css" href="css/custom.css">
     <link href='http://fonts.googleapis.com/css?family=Ubuntu:700,400,300' rel='stylesheet' type='text/css'>
-</head>
+</head>-
 <body>
 	<div id="wrapper">
 		<div class="left_sidebar">
@@ -29,22 +29,24 @@
 			<section class="userView option invisible">
 				<h4>User's Profile <img src="images/user.png"></h4>
 			</section>
-			<section class="clientSettings option invisible">
-				<h4>Your Profile <img src="images/user1.png"></h4>
+			<section class="messaging option invisible">
+				<h4>Messaging <img src="images/dashboard-icon.png"></h4>
 			</section>
 			<section class="registration option invisible">
 				<h4>Register a Client <img src="images/users.png"></h4>
 			</section>
-			<section class="messaging option invisible">
-				<h4>Messaging <img src="images/dashboard-icon.png"></h4>
+			<section class="clientSettings option invisible">
+				<h4>Settings and Permissions<img src="images/user1.png"></h4>
 			</section>
 			<section class="header light-green invisible">
 				Custom Query
 			</section>
 			<section class="qe" >
 				<h3>Affiliation:</h3>
+				<label>AZEL</label>
+				<input type="radio" name="affiliation" value="azel" checked>
 				<label>PRA</label>
-				<input type="radio" name="affiliation" value="pra" checked>
+				<input type="radio" name="affiliation" value="pra">
 				<label>Mercy</label>
 				<input type="radio" name="affiliation" value="mercy">
 				<label>FTC</label>
@@ -73,11 +75,11 @@
 			<section class="option invisible" onclick="qe[0].changeView('metrics');">
 				<span>Metric</span>
 			</section>
-			<section class="option invisible">
-				<h4>Questions and Responses <img src="images/settings-icon.png"></h4>
+			<section class="questions option invisible">
+				<h4>Individual Questions and Responses <img src="images/settings-icon.png"></h4>
 			</section>
-			<section class="header bottom invisible">
-			</section>
+			<!-- <section class="header bottom invisible">
+			</section> -->
 		</div><!--Left Sidebar-->
 		<div id="main">
 			<section id="edit_bar">
@@ -139,200 +141,241 @@
 					<img src="images/up.png">
 				</footer>
 				<span class="clear"></span>
-				
 				<div id="qe-dashboard">
 				</div><!--End qe-dashboard-->
 			</section><!--content-->
 			<section class="content userView">
 				<div class="module dark profile">
 					<div class="module-header">
-						<h3><img src="images/user1.png">User Profile: Stephen Quenzer</h3>
+						<h3><img src="images/user1.png">User Profile: Kate Hoffman</h3>
 						<h4><img src="images/envelope-white.png">Send Stephen an email</h4>
 					</div><!-- End module-header-->
 					<div class="module-body">
-						<div>A bunch of content goes here</div>
+						<div class='left'>
+							<ul>
+								<li><strong>Username:</strong> KHoffman</li>
+								<li><strong>Email:</strong> khoffman@gmail.com</li>
+								<li><strong>Age:</strong> 18-25</li>	
+								<li><strong>Affiliation:</strong> AZEL</li>	
+								<li><strong>Tasks Completed:</strong> 34</li>	
+								<li><strong>Goals Completed:</strong> 8</li>	
+								<li><strong>Badges Earned:</strong> 2</li>
+								<li><strong>Rewards Earned:</strong> 2</li>	
+							</ul>
+						</div><!--end left-->
+						<div class='right'>
+							<h2> Profile Questionnaire </h2>
+							<ul>
+								<li><strong>Fact:</strong> She loves her dogs.</li>
+							</ul>
+						</div><!-- end right-->
 					</div><!-- End module-body-->
 				</div> <!--End module Profile-->
 				<span class="qt">
-					<div class="module">
-						<div class="module-header">
-							<h3>Rewards</h3>
-						</div><!-- End module-header-->
-						<div class="module-body">
-							A bunch of statistics go here
-							<table class="tablesorter">
-								<thead>
-									<tr>
-										<th>Name</th>
-										<th>Col 2</th>
-										<th>Col 3</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td>The Name</td>
-										<td>Stat 2</td>
-										<td>Stat 3</td>
-									</tr>
-								</tbody>
-							</table>
-						</div><!-- End module-body-->
-					</div> <!--End module-->
-					<div class="module">
-						<div class="module-header">
-							<h3>Goals</h3>
-						</div><!-- End module-header-->
-						<div class="module-body">
-							A bunch of statistics go here
-							<table class="tablesorter">
-								<thead>
-									<tr>
-										<th>Name</th>
-										<th>Col 2</th>
-										<th>Col 3</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td>The Name</td>
-										<td>Stat 2</td>
-										<td>Stat 3</td>
-									</tr>
-									<tr>
-										<td>The Name</td>
-										<td>Stat 2</td>
-										<td>Stat 3</td>
-									</tr>
-									<tr>
-										<td>The Name</td>
-										<td>Stat 2</td>
-										<td>Stat 3</td>
-									</tr>
-								</tbody>
-							</table>
-						</div><!-- End module-body-->
-					</div> <!--End module-->
-					<div class="module">
-						<div class="module-header">
-							<h3>Badges</h3>
-						</div><!-- End module-header-->
-						<div class="module-body">
-							A bunch of statistics go here
-							<table class="tablesorter">
-								<thead>
-									<tr>
-										<th>Name</th>
-										<th>Col 2</th>
-										<th>Col 3</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td>The Name</td>
-										<td>Stat 2</td>
-										<td>Stat 3</td>
-									</tr>
-									<tr>
-										<td>The Name</td>
-										<td>Stat 2</td>
-										<td>Stat 3</td>
-									</tr>
-									<tr>
-										<td>The Name</td>
-										<td>Stat 2</td>
-										<td>Stat 3</td>
-									</tr>
-								</tbody>
-							</table>
-						</div><!-- End module-body-->
-					</div> <!--End module-->
-					<div class="module">
-						<div class="module-header">
-							<h3>Tasks</h3>
-						</div><!-- End module-header-->
-						<div class="module-body">
-							A bunch of statistics go here
-							<table class="tablesorter">
-								<thead>
-									<tr>
-										<th>Name</th>
-										<th>Col 2</th>
-										<th>Col 3</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td>The Name</td>
-										<td>Stat 2</td>
-										<td>Stat 3</td>
-									</tr>
-								</tbody>
-							</table>
-						</div><!-- End module-body-->
-					</div> <!--End module-->
-					<div class="module">
-						<div class="module-header">
-							<h3>Questionaires</h3>
-						</div><!-- End module-header-->
-						<div class="module-body">
-							A bunch of statistics go here
-							<table class="tablesorter">
-								<thead>
-									<tr>
-										<th>Name</th>
-										<th>Col 2</th>
-										<th>Col 3</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td>The Name</td>
-										<td>Stat 2</td>
-										<td>Stat 3</td>
-									</tr>
-									<tr>
-										<td>The Name</td>
-										<td>Stat 2</td>
-										<td>Stat 3</td>
-									</tr>
-									<tr>
-										<td>The Name</td>
-										<td>Stat 2</td>
-										<td>Stat 3</td>
-									</tr>
-								</tbody>
-							</table>
-						</div><!-- End module-body-->
-					</div> <!--End module-->
-					<div class="module">
-						<div class="module-header">
-							<h3>Metrics</h3>
-						</div><!-- End module-header-->
-						<div class="module-body">
-							A bunch of statistics go here
-							<table class="tablesorter">
-								<thead>
-									<tr>
-										<th>Name</th>
-										<th>Col 2</th>
-										<th>Col 3</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td>The Name</td>
-										<td>Stat 2</td>
-										<td>Stat 3</td>
-									</tr>
-									<tr>
-										<td>The Name</td>
-										<td>Stat 2</td>
-										<td>Stat 3</td>
-									</tr>
-								</tbody>
-							</table>
-						</div><!-- End module-body-->
-					</div> <!--End module-->
+					<div class="layout-half">
+						<div class="col-left">
+							<div class="module">
+								<div class="module-header">
+									<h3>Rewards</h3>
+								</div><!-- End module-header-->
+								<div class="module-body">
+									<table class="tablesorter">
+										<thead>
+											<tr>
+												<th>Name</th>
+												<th>Subject</th>
+												<th>Date Completed</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>First Steps</td>
+												<td>FHA</td>
+												<td>3.24.14</td>
+											</tr>
+											<tr>
+												<td>Halfway There!</td>
+												<td>Valor</td>
+												<td>6.21.14</td>
+											</tr>
+											<tr>
+												<td>Final Steps</td>
+												<td>FHA</td>
+												<td>8.14.13</td>
+											</tr>
+										</tbody>
+									</table>
+								</div><!-- End module-body-->
+							</div> <!--End module-->
+							<div class="module">
+								<div class="module-header">
+									<h3>Goals</h3>
+								</div><!-- End module-header-->
+								<div class="module-body">
+									<table class="tablesorter">
+										<thead>
+											<tr>
+												<th>Name</th>
+												<th>Subject</th>
+												<th>Date Completed</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>Finish the 'Savings Health' Questionnaire</td>
+												<td>FHA</td>
+												<td>3.24.14</td>
+											</tr>
+											<tr>
+												<td>Finish the 'Spending Health' Questionnaire</td>
+												<td>Valor</td>
+												<td>6.21.14</td>
+											</tr>
+											<tr>
+												<td>Finish the 'Spending Health' Questionnaire</td>
+												<td>Valor</td>
+												<td>6.21.14</td>
+											</tr>
+											<tr>
+												<td>Finish the 'Spending Health' Questionnaire</td>
+												<td>Valor</td>
+												<td>6.21.14</td>
+											</tr>
+											<tr>
+												<td>Finish the 'Credit Health' Questionnaire</td>
+												<td>FHA</td>
+												<td>8.14.13</td>
+											</tr>
+										</tbody>
+									</table>
+								</div><!-- End module-body-->
+							</div> <!--End module-->
+							<div class="module">
+								<div class="module-header">
+									<h3>Badges</h3>
+								</div><!-- End module-header-->
+								<div class="module-body">
+									<table class="tablesorter">
+										<thead>
+											<tr>
+												<th>Name</th>
+												<th>Subject</th>
+												<th>Date Completed</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>Financial Health Assessment</td>
+												<td>FHA</td>
+												<td>1.24.14</td>
+											</tr>
+											<tr>
+												<td>Valor</td>
+												<td>Valor</td>
+												<td>6.21.14</td>
+											</tr>
+										</tbody>
+									</table>
+								</div><!-- End module-body-->
+							</div> <!--End module-->
+						</div><!--end col-left-->
+						<div class="col-right">
+							<div class="module">
+								<div class="module-header">
+									<h3>Tasks</h3>
+								</div><!-- End module-header-->
+								<div class="module-body">
+									<table class="tablesorter">
+										<thead>
+											<tr>
+												<th>Name</th>
+												<th>Subject</th>
+												<th>Date Completed</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>Check your 'Banking Basics' score!</td>
+												<td>FHA</td>
+												<td>3.24.14</td>
+											</tr>
+											<tr>
+												<td>Complete the 'Savings Health' questionnaire</td>
+												<td>FHA</td>
+												<td>6.21.14</td>
+											</tr>
+											<tr>
+												<td>Complete the 'Banking Choices' questionnaire</td>
+												<td>FHA</td>
+												<td>8.14.13</td>
+											</tr>
+										</tbody>
+									</table>
+								</div><!-- End module-body-->
+							</div> <!--End module-->
+							<div class="module">
+								<div class="module-header">
+									<h3>Questionaires</h3>
+								</div><!-- End module-header-->
+								<div class="module-body">
+									<table class="tablesorter">
+										<thead>
+											<tr>
+												<th>Name</th>
+												<th>Col 2</th>
+												<th>Col 3</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>The Name</td>
+												<td>Stat 2</td>
+												<td>Stat 3</td>
+											</tr>
+											<tr>
+												<td>The Name</td>
+												<td>Stat 2</td>
+												<td>Stat 3</td>
+											</tr>
+											<tr>
+												<td>The Name</td>
+												<td>Stat 2</td>
+												<td>Stat 3</td>
+											</tr>
+										</tbody>
+									</table>
+								</div><!-- End module-body-->
+							</div> <!--End module-->
+							<div class="module">
+								<div class="module-header">
+									<h3>Metrics</h3>
+								</div><!-- End module-header-->
+								<div class="module-body">
+									<table class="tablesorter">
+										<thead>
+											<tr>
+												<th>Name</th>
+												<th>Col 2</th>
+												<th>Col 3</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>The Name</td>
+												<td>Stat 2</td>
+												<td>Stat 3</td>
+											</tr>
+											<tr>
+												<td>The Name</td>
+												<td>Stat 2</td>
+												<td>Stat 3</td>
+											</tr>
+										</tbody>
+									</table>
+								</div><!-- End module-body-->
+							</div> <!--End module-->
+						</div><!--end col-right-->
+					</div><!--end layout-half-->
 				</span>
 			</section><!--End userList-->
 			<section class="content registration">
@@ -547,7 +590,57 @@
 					</div>
 				</div>
 			</section><!--end content messaging-->
-		</div>
+			<section class="content questions">
+				<div class="layout-half">
+					<div class="col-left">
+						<div class="module dark">
+							<div class="module-header">
+								<h1>Questions</h1>
+							</div><!--end module-header-->
+							<div class="module-body">
+							</div><!--end module-body-->
+						</div><!--end module-->
+						<div class="module dark">
+							<div class="module-header">
+								<h2>Questions</h2>
+							</div><!--end module-header-->
+							<div class="module-body">
+							</div><!--end module-body-->
+						</div><!--end module-->
+						<div class="module dark">
+							<div class="module-header">
+								<h3>Questions</h3>
+							</div><!--end module-header-->
+							<div class="module-body">
+							</div><!--end module-body-->
+						</div><!--end module-->
+					</div><!--end col-left-->
+					<div class="col-right">
+						<div class="module">
+							<div class="module-header">
+								<h1>Responses</h1>
+							</div><!--end module-header-->
+							<div class="module-body">
+							</div><!--end module-body-->
+						</div><!--end module-->
+						<div class="module">
+							<div class="module-header">
+								<h2>Responses</h2>
+							</div><!--end module-header-->
+							<div class="module-body">
+							</div><!--end module-body-->
+						</div><!--end module-->
+						<div class="module">
+							<div class="module-header">
+								<h3>Responses</h3>
+							</div><!--end module-header-->
+							<div class="module-body">
+							</div><!--end module-body-->
+						</div><!--end module-->
+					</div><!--end col-right-->
+				</div><!--end half-layout-->
+			</section><!--end content questions-->
+		</div><!--end #main-->
 		<span class="clear"></span>
 	</div>
 	<script type="text/javascript" src="dist/highcharts.js"></script>

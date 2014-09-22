@@ -1,6 +1,6 @@
 //main.js
 //Prototypes
-var dev = true;
+var dev = false;
 //Captializes first letter of string
 String.prototype.capitalize = function() {
     return this.charAt(0).toUpperCase() + this.slice(1);
@@ -14,12 +14,7 @@ $(document).ready(function() {
 	/*
 	** Initialize
 	*/
-	//Make first stat animate out
-	//$('.stats-mod:nth-child(1)').toggleClass('stats-mod-open').children(2).toggleClass('light-green');
-	//Slide the remaining stats down one at a time
-	$('.stats-mod').not(':nth-child(1)').toggleClass('invisible').each(function(i) {
-		$(this).delay(200*i).slideDown(200);
-	});
+
 	$('#content.current').show();
 
 	//Page history stack
@@ -53,7 +48,7 @@ $(document).ready(function() {
 	};
 	qe = [];
 	qe[0] = new QueryEngine(options);
-	qe[0].initialize();
+	//qe[0].initialize();
 	qe[1] = new QueryEngine(options2);
 
 	//Make all non-current sections (non dashboard) display:none
@@ -121,15 +116,17 @@ $(document).ready(function() {
 		$('.left_sidebar h2').fadeOut(200, function() {
 			$('#main').toggleClass('shrink', false);
 			$('.left_sidebar').toggleClass('open', false);
-			var count = 0;
-			$('.left_sidebar section').slideUp(300, function() {
-				//is now fully in
-				$(window).resize();
+			$('.left_sidebar section').show().hide(100, function() {
 				isIn = true;
+				$(window).resize();
+
+		console.log('in');
 			});
 			isOut = false;
 		});
 	}
+
+	//Slide in/out events
 	$('.left_sidebar').on("click", function() {
 		if(isIn) {
 			slideOut();
@@ -142,14 +139,23 @@ $(document).ready(function() {
 			$('.icon-menu img').toggleClass('invisible');
 		}
 	});
+
+	//Button hover effects
 	$('.left_sidebar').hover(function() {
 		if(isIn) $('.icon-menu img').css("opacity", 1);
 	}, function() {
 		if(isIn) $('.icon-menu img').css("opacity", .8);
 	});
 
+	//Section accordian events
+	$('.left_sidebar').on("click", ".header", function() {
+		$(this).nextUntil($('.header')).slideToggle('fast');
+		$(this).toggleClass('up');
+	});
+
 	//On page load
 	slideOut();
+
 	$('.icon-menu img').toggleClass('invisible');
 
 	/*** --- Left Sidebar Controls --- ***/
@@ -171,6 +177,10 @@ $(document).ready(function() {
 	});
 	$('.option.clientSettings').on("click", function() {
 		var section = $('.content.clientSettings');
+		changePage(section, this);
+	});
+	$('.option.questions').on("click", function() {
+		var section = $('.content.questions');
 		changePage(section, this);
 	});
 
