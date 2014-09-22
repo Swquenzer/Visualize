@@ -465,13 +465,16 @@ h5 {
 	text-align: left;
 	border-bottom: 1px solid #C3E3EE;
 	cursor: pointer;
+	background: white;
 }
 .qt tr:hover {
 	background: #edf8f9;
 }
+.qt tr.selected {
+	background: #d8feda;
+}
 .qt th {
 	padding: 10px 20px;
-	background: white !important;
 }
 .qt td {
 	padding: 10px 5px;
@@ -482,6 +485,9 @@ h5 {
 	font-size: 12px;
 	font-weight: 300;
 	color: #28345e;
+}
+.qt .dark tr {
+	background: ;
 }
 
 /* Modules */
@@ -770,9 +776,6 @@ label.css-label {
 }
 .messaging .module-body {
 	padding: inherit 50px;
-}
-.messaging tr.selected {
-	background: #e6f9e8;
 }
 .messaging td {
   padding: 6px;
