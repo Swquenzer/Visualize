@@ -13,11 +13,8 @@ String.prototype.separate = function() {
 var spinner = $('.spinner');
 
 $(document).ready(function() {
-	/*
-	** Initialize
-	*/
-
-	$('#content.current').show();
+	/////////////////////////////////////////////////////////////////////////////////////
+	// Initialize
 
 	//Page history stack
 	var pageHistory = [];
@@ -25,11 +22,12 @@ $(document).ready(function() {
 		previousPage();
 	});
 
-	////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////
 	//Initialize Query Engine 1
 	//view: rewards, badges, metrics, etc
 	//viewMode: type, userList, user
 	//viewName: string value of first td in selected row ('swquenzer' or 'saving habits')
+
 	var options = {
 		view: "rewards",
 		target: "qe-dashboard",
@@ -50,13 +48,13 @@ $(document).ready(function() {
 	};
 	qe = [];
 	qe[0] = new QueryEngine(options);
-	//qe[0].initialize();
 
 	//Make all non-current sections (non dashboard) display:none
 	$('.content').not('.current').hide();
-	/*
-	** Main Page
-	*/
+
+	/////////////////////////////////////////////////////////////////////////////////////
+	// Page Functionality
+
 	function previousPage() {
 		if(pageHistory.length === 0) {
 			$('#back-btn').toggleClass('disabled', true);
@@ -72,9 +70,9 @@ $(document).ready(function() {
 
 	//Initialize event handlers for specific pages here
 	function getPage(section, pageName) {
-		spinner.slideDown(300);
+		spinner.fadeIn(300);
 		$.get(pageName + ".html", function(data) {
-			spinner.delay(3000).slideUp(300);
+			spinner.fadeOut(300);
 			//Add page to html
 			section[0].innerHTML = data;
 			//Custom page events & functionality
@@ -120,9 +118,9 @@ $(document).ready(function() {
 		}
 	}
 
-	/*
-	** Sidebar Module 
-	*/
+	/////////////////////////////////////////////////////////////////////////////////////
+	// Sidebar Functionality
+
 	var isIn = true;
 	var isOut = false; 
 
@@ -189,7 +187,9 @@ $(document).ready(function() {
 
 	$('.icon-menu img').toggleClass('invisible');
 
-	/*** --- Left Sidebar Controls --- ***/
+	/////////////////////////////////////////////////////////////////////////////////////
+	// Page links
+
 	$('.option.dashboard').on("click", function() {
 		var section = $('.content.dashboard');
 		changePage(section, $(this));
@@ -215,6 +215,9 @@ $(document).ready(function() {
 		changePage(section, $(this));
 	});
 
+	/////////////////////////////////////////////////////////////////////////////////////
+	// This Week at a Glance
+
 	if(dev) {
 		var twag = $('.twag-body');
 		$('.twag-header h2').css("font-size", "24px")
@@ -223,7 +226,6 @@ $(document).ready(function() {
 		});
 	}
 	
-	/* TWAG Slider */
 	$('.twag-footer').on("click", function() {
 		var twag = $('.twag-body');
 		if(twag.hasClass('down')) {
@@ -241,7 +243,9 @@ $(document).ready(function() {
 	});
 });
 
-/* Messaging */
+/////////////////////////////////////////////////////////////////////////////////////
+// Messaging
+
 recipients = [];
 selectAll = true;
 $('.content.messaging').on("click", '.recipient', function() {
@@ -291,8 +295,10 @@ function removeRecipient(email) {
 }
 
 
-/* Modules */
-//Create 
+/////////////////////////////////////////////////////////////////////////////////////
+// Modules
+
+//Module footer accordian
 $('body').on('click', '.module-footer', function() {
 	var that = this;
 	var body = $(this).siblings().last();
@@ -308,7 +314,10 @@ $('body').on('click', '.module-footer', function() {
 	}
 	body.toggleClass("down","up");
 });
-/* Registration */
+
+/////////////////////////////////////////////////////////////////////////////////////
+// Registration
+
 $('.reg-form .affiliation-list').on("click", "input:checked", function() {
 	var subjectList = $(this).siblings().next();
 	subjectList.show();
