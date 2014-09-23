@@ -10,6 +10,8 @@ String.prototype.separate = function() {
 	return this.replace(/([A-Z]+)/g, " $1");
 };
 
+var spinner = $('.spinner');
+
 $(document).ready(function() {
 	/*
 	** Initialize
@@ -49,7 +51,6 @@ $(document).ready(function() {
 	qe = [];
 	qe[0] = new QueryEngine(options);
 	//qe[0].initialize();
-	qe[1] = new QueryEngine(options2);
 
 	//Make all non-current sections (non dashboard) display:none
 	$('.content').not('.current').hide();
@@ -69,23 +70,53 @@ $(document).ready(function() {
 		}
 	}
 
+	//Initialize event handlers for specific pages here
+	function getPage(section, pageName) {
+		spinner.slideDown(300);
+		$.get(pageName + ".html", function(data) {
+			spinner.delay(3000).slideUp(300);
+			//Add page to html
+			section[0].innerHTML = data;
+			//Custom page events & functionality
+			if(pageName === 'messaging') {
+				//Initialize messaging query engine
+				qe[1] = new QueryEngine(options2);
+			}
+			//Display new page
+			section.delay('slow').slideDown('slow', function() {
+				$(window).resize();
+			});
+		});
+	}
 	//Main page transition
 	changePage = function(section, newPage, history) {
 		var current = $('.option.current');
+		//Get plaintext name of new page (string)
+		var newPageName = newPage.attr('class').substr(0, newPage.attr('class').indexOf(' '));
 		if(!history) {
 			$('#back-btn').toggleClass('disabled', false);
 			//Add previously viewed page to pageHistory stack
 			pageHistory.push(current.attr('class').substr(0,current.attr('class').indexOf(' ')));
 		}
+		//Remove left border marking current page (sidebar)
 		$('.option').toggleClass('current', false);
+		//Then mark the new page as current (sidebar)
 		$(newPage).toggleClass('current', true);
+		//But only change page if it's a new page
 		if(!section.hasClass('current')) {
+			//Hide the current page
 			$('.content.current').toggleClass('current').slideUp('slow');
+			//Mark the new section as current page (content)
 			section.toggleClass('current');
-			section.delay('slow').slideDown('slow', function() {
-				//Refresh screen width
-				$(window).resize();
-			});
+			//If section is being loaded for the first time, $.GET it (and show it)!
+			if(section[0].innerHTML === "") {
+				getPage(section, newPageName);
+			} else {
+				//Otherwise simply display new current page
+				section.delay('slow').slideDown('slow', function() {
+					$(window).resize();
+				});
+			}
 		}
 	}
 
@@ -161,27 +192,27 @@ $(document).ready(function() {
 	/*** --- Left Sidebar Controls --- ***/
 	$('.option.dashboard').on("click", function() {
 		var section = $('.content.dashboard');
-		changePage(section, this);
+		changePage(section, $(this));
 	});
 	$('.option.messaging').on("click", function() {
 		var section = $('.content.messaging');
-		changePage(section, this);
+		changePage(section, $(this));
 	});
 	$('.option.userView').on("click", function() {
 		var section = $('.content.userView');
-		changePage(section, this);
+		changePage(section, $(this));
 	});
 	$('.option.registration').on("click", function() {
 		var section = $('.content.registration');
-		changePage(section, this);
+		changePage(section, $(this));
 	});
 	$('.option.clientSettings').on("click", function() {
 		var section = $('.content.clientSettings');
-		changePage(section, this);
+		changePage(section, $(this));
 	});
 	$('.option.questions').on("click", function() {
 		var section = $('.content.questions');
-		changePage(section, this);
+		changePage(section, $(this));
 	});
 
 	if(dev) {
@@ -213,7 +244,7 @@ $(document).ready(function() {
 /* Messaging */
 recipients = [];
 selectAll = true;
-$('#recipient-list').on("click", '.recipient', function() {
+$('.content.messaging').on("click", '.recipient', function() {
 	removeRecipient(this);
 });
 function selectRecipient(row, single) {
