@@ -28,7 +28,7 @@ h2 {
 	font-size: 22px;
 	font-weight: 400;
 	font-family: 'Ubuntu', sans-serif;
-	color: #EEEEEE;
+	color: #262A33;
 }
 h5 {
 	margin: 0;
@@ -396,6 +396,7 @@ h5 {
 	text-align: center;
 	font-size: 36px;
 	transition: ease .6s;
+	color: #EEEEEE;
 }
 .twag-body {
 	min-width: 700px;
@@ -467,7 +468,7 @@ h5 {
 	cursor: pointer;
 	background: white;
 }
-.qt tr:hover {
+.qt tbody tr:hover {
 	background: #edf8f9;
 }
 .qt tr.selected {
@@ -487,7 +488,6 @@ h5 {
 	color: #28345e;
 }
 .qt .dark tr {
-	background: ;
 }
 
 /* Modules */
@@ -589,7 +589,7 @@ h5 {
 	color: #CFCFCF;
 }
 .dark .module-body {
-	color: #8DABE2;
+	color: #a3baea;
 	background: #454C5A;
 }
 /* User View */
@@ -665,6 +665,7 @@ h5 {
 .userView .profile .right h2 {
 	padding: 20px 0;
 	text-align: center;
+	color: #dbe1e9;
 	background: #2f374c;
 }
 .userView .module-header {
@@ -754,7 +755,7 @@ label.css-label {
 .qe-wrapper {
 	display: block;
 	padding: 30px;
-	background: #f0f2f8;
+	background: #f2f7ff;
 	border: 1px solid #DEDEDE;
 }
 .qe-wrapper .option {
@@ -783,7 +784,10 @@ label.css-label {
 #recipient-list {
   display: block;
   max-height: 250px;
+	padding: 5px;
   overflow-y: auto;
+	background: #f9fbff;
+	border: 1px dashed #DEDEDE;
 }
 #recipient-list h2 {
   color: #26487F;

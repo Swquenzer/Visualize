@@ -11,7 +11,7 @@
     <link rel="stylesheet" type="text/css" href="css/reporting.css">
     <link rel="stylesheet" type="text/css" href="css/custom.css">
     <link href='http://fonts.googleapis.com/css?family=Ubuntu:700,400,300' rel='stylesheet' type='text/css'>
-</head>-
+</head>
 <body>
 	<div id="wrapper">
 		<div class="left_sidebar">
@@ -33,10 +33,10 @@
 				<h4>Messaging <img src="images/dashboard-icon.png"></h4>
 			</section>
 			<section class="registration option invisible">
-				<h4>Register a Client <img src="images/users.png"></h4>
+				<h4>Registration <img src="images/users.png"></h4>
 			</section>
 			<section class="clientSettings option invisible">
-				<h4>Settings and Permissions<img src="images/user1.png"></h4>
+				<h4>Settings and Permissions <img src="images/user1.png"></h4>
 			</section>
 			<section class="header light-green invisible">
 				Custom Query
@@ -141,6 +141,26 @@
 					<img src="images/up.png">
 				</footer>
 				<span class="clear"></span>
+				<div class="layout-half">
+					<div class="col-left">
+						<div class="module">
+							<div class="module-header">
+								<h2>Default Chart 1</h1>
+							</div>
+							<div class="module-body" id="dash-chart-1">
+							</div>
+						</div>
+					</div><!--end col-left-->
+					<div class="col-right">
+						<div class="module">
+							<div class="module-header">
+								<h2>Default Chart 2</h1>
+							</div>
+							<div class="module-body" id="dash-chart-2">
+							</div>
+						</div>
+					</div><!--end col-right-->
+				</div><!--end layout-half-->
 				<div id="qe-dashboard">
 				</div><!--End qe-dashboard-->
 			</section><!--content-->
@@ -491,52 +511,92 @@
 						</form>
 					</div><!--end module-body-->
 				</div><!--end module-->
+				<div class="module dark">
+					<div class="module-header">
+						<h2>Complete your registration</h2>
+					</div><!--end module-header-->
+					<div class="module-body">
+						<form class="reg-form">
+							<div class="inner-wrapper">
+								<p>
+									<label>Company Size</label>
+									<input name="username" placeholder="Stephen">
+								</p>
+								<p>
+									<label>Last Name</label>
+									<input name="username" placeholder="Quenzer">
+								</p>
+								<span class="clear"></span>
+							</div><!--end inner-wrapper-->
+						</form><!--end reg-form-->
+					</div><!--end module-body-->
+				</div><!--end module-->
 			</section><!--End content registration-->
 			<section class="content clientSettings">
-				<div class="module">
-					<div class="module-header">
-						<h1>Your Permissions and Settings</h1>
-					</div>
-					<div class="module-body">
-						<div class="wrapper">
-							<h3>General Information</h3>
-							<ul>
-								<li>Name: Stephen Quenzer</li>
-								<li>Email: stephen.quenzer@myfela.com</li>
-								<li>Affiliations:
-									<ol>
-										<li>PRA -- Subjects:
-											<ul>FHA</ul>
-											<ul>Subject 2</ul>
-											<ul>Subject 3</ul>
+				<div class="layout-half">
+					<div class="col-left">
+						<div class="module">
+							<div class="module-header">
+								<h1>General Information</h1>
+							</div><!--end module-header-->
+							<div class="module-body">
+								<div class="wrapper">
+									<h3>General Information</h3>
+									<ul>
+										<li>Name: Stephen Quenzer</li>
+										<li>Email: stephen.quenzer@myfela.com</li>
+										<li>Affiliations:
+											<ol>
+												<li>PRA -- Subjects:
+													<ul>FHA</ul>
+													<ul>Subject 2</ul>
+													<ul>Subject 3</ul>
+												</li>
+												<li>Mercy -- Subjects:
+													<ul>FHA</ul>
+													<ul>Subject 6</ul>
+													<ul>Subject 7</ul>
+												</li>
+												<li>PRA -- Subjects:
+													<ul>Subject 3</ul>
+													<ul>Subject 4</ul>
+													<ul>Subject 5</ul>
+												</li>
+											</ol>
 										</li>
-										<li>Mercy -- Subjects:
-											<ul>FHA</ul>
-											<ul>Subject 6</ul>
-											<ul>Subject 7</ul>
-										</li>
-										<li>PRA -- Subjects:
-											<ul>Subject 3</ul>
-											<ul>Subject 4</ul>
-											<ul>Subject 5</ul>
-										</li>
-									</ol>
-								</li>
-							</ul>
-							<h3>Special Permissions</h3>
-							<ul>
-								<li>Individual View: Yes</li>
-								<li>Messaging: Yes</li>
-								<li>Timeline: No</li>
-								<li>Comparative Data: No</li>
-								<li>Google Analytics: Yes</li>
-								<li>Downloadable Data: Yes</li>
-								<li>Assigments: No</li>
-								<li>Social Media: Yes</li>
-							</ul>
-						</div>
-					</div><!-- end module-body -->
-				</div><!--end module-->
+									</ul>
+								</div><!--end wrapper-->
+							</div><!-- end module-body -->
+						</div><!--end module-->
+						<div class="module">
+							<div class="module-header">
+								<h3>Special Permissions</h3>
+							</div><!--end module-header-->
+							<div class="module-body">
+								<ul>
+									<li>Individual View: Yes</li>
+									<li>Messaging: Yes</li>
+									<li>Timeline: No</li>
+									<li>Comparative Data: No</li>
+									<li>Google Analytics: Yes</li>
+									<li>Downloadable Data: Yes</li>
+									<li>Assigments: No</li>
+									<li>Social Media: Yes</li>
+								</ul>
+							</div><!--module-body-->
+						</div><!--end module-->
+					</div><!--end col-left-->
+					<div class="col-right">
+						<div class="module dark">
+							<div class="module-header">
+								<h3>Assign Goals</h3>
+							</div><!--end module-header-->
+							<div class="module-body">
+								<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+							</div><!--module-body-->
+						</div><!--end module-->
+					</div><!--dend col-right-->
+				</div><!--end layout-half-->
 			</section><!-- end content clientProfile -->
 			<section class="content messaging">
 				<div class="module">
@@ -558,8 +618,9 @@
 							</div><!--end qe-messaging-->
 						</div><!--end qe-wrapper-->
 						<div class="wrapper">
+							<h2>Recipient List:</h2>
 							<div id="recipient-list">
-								<h2>Recipient List:</h2>
+								
 							</div>
 							<form id="messaging">
 								<p>
