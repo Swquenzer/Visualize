@@ -1,4 +1,8 @@
-/* reporting.css */
+/* ============================================================
+  *	Reporting.css
+  * Author: Stephen Quenzer
+  * Date Created: Aug 1, 2014
+============================================================ */
 .layout-half {
 	width: 100%;
 }
@@ -38,7 +42,9 @@ h5 {
 	height: 100%;
 }
 
-/* LEFT SIDEBAR */
+/* ============================================================
+  Left Sidebar
+============================================================ */
 .left_sidebar {
 	position: relative;
 	height: 100%;
@@ -143,26 +149,10 @@ h5 {
 	font-weight: 300;
 	color: #b1cae9;
 }
-.invisible {
-	display: none;
-}
-.clear {
-	clear: both !important;
-}
-.green {
-	color: #438a46 !important;
-}
-.light-green {
-	color: #b4eab4 !important;
-}
-.red {
-	color: #dd6956 !important;
-}
-.center {
-	text-align: center;
-}
 
-/* Main Content Area*/
+/* ============================================================
+  Main Content
+============================================================ */
 #main {
 	height: 100%;
 	float: left;
@@ -180,8 +170,9 @@ h5 {
 	transition: width 1s, ease;
 }
 
-/* Edit Bar */
-
+/* ============================================================
+  Header bar
+============================================================ */
 #edit_bar {
 	display: block;
 	margin: 0 !important;
@@ -229,7 +220,9 @@ h5 {
 	color: #4C902A;
 }
 
-/* Content */
+/* ============================================================
+  Content
+============================================================ */
 .content {
 	display:block;
 	height: 100%;
@@ -239,72 +232,10 @@ h5 {
 	overflow-x: hidden;
 	background: #F3F3F3;
 }
-#stats h2 {
-	margin: 0;
-	padding: 0;
-	color: #273441;
-}
-#stats h2 .order {
-	color: #445b73;
-	font-weight: 300;
-	font-size: 14px;
-	cursor: pointer;
-}
-#stats h2 .order:hover {
-	font-weight: 400;
-}
 
-#stats {
-	display: inline-block;
-	margin: 0;
-	padding: 0;
-	position: relative;
-}
-#stats>span {
-	display: block;
-	width: 100%;
-	max-width: 1400px;
-}
-#stats .stats-mod {
-	height: 75px;
-	width: 325px;
-	margin-right: 10px; margin-top: 5px; margin-bottom: 5px;
-	float: left;
-	background: #617887;
-	cursor: pointer;
-	transition: width .9s, ease;
-}
-#stats .stats-mod:hover {
-	background: #596e7c;
-}
-#stats .stats-mod-open {
-	display: block;
-	width: 770px;
-	margin-right: 350px;
-	transition: width .9s, ease;
-}
-#stats .value {
-	display: block;
-	padding: 10px 20px 5px 20px;
-	text-align: center;
-	color: white;
-	font-size: 28px;
-}
-#stats .stats-mod-open .value {
-	text-align: left;
-}
-#stats .description {
-	display: block;
-	text-align: center;
-	color: #ACC1CA;
-}
-#stats .stats-mod-open .description {
-	position: relative;
-	left: 20px;
-	text-align: left;
-}
-
-/* Message */
+/* ============================================================
+  Messages 
+============================================================ */
 .message {
 	display: block;
 	margin: 15px 0;
@@ -328,57 +259,9 @@ h5 {
 	border-color: #aacf9b;
 }
 
-/* Spinner */
-.spinner {
-  margin: 100px auto;
-  width: 140px;
-  height: 140px;
-  position: relative;
-  text-align: center;
-  
-  -webkit-animation: rotate 2.0s infinite linear;
-  animation: rotate 2.0s infinite linear;
-}
-
-.dot1, .dot2 {
-  width: 60%;
-  height: 60%;
-  display: inline-block;
-  position: absolute;
-  top: 0;
-  background-color: yellow;
-  border-radius: 100%;
-  
-  -webkit-animation: bounce 2.0s infinite ease-in-out;
-  animation: bounce 2.0s infinite ease-in-out;
-}
-
-.dot2 {
-  top: auto;
-  bottom: 0px;
-  -webkit-animation-delay: -1.0s;
-  animation-delay: -1.0s;
-}
-
-@-webkit-keyframes rotate { 100% { -webkit-transform: rotate(360deg) }}
-@keyframes rotate { 100% { transform: rotate(360deg); -webkit-transform: rotate(360deg) }}
-
-@-webkit-keyframes bounce {
-  0%, 100% { -webkit-transform: scale(0.0) }
-  50% { -webkit-transform: scale(1.0) }
-}
-
-@keyframes bounce {
-  0%, 100% { 
-    transform: scale(0.0);
-    -webkit-transform: scale(0.0);
-  } 50% { 
-    transform: scale(1.0);
-    -webkit-transform: scale(1.0);
-  }
-}
-
-/* This week at a glace (TWAG) */
+/* ============================================================
+	This Week at a Glance (TWAG)
+============================================================ */
 .twag {
 	display: block;
 	background: #454c5a;
@@ -386,17 +269,48 @@ h5 {
 	overflow-x: auto;
 }
 .twag-header {
-	margin: 0; padding: 0;
+	position: relative;
+	text-align: center;
 	background: #434e66;
 	border-bottom: 1px solid #2a3045;
+	overflow: hidden;
 }
 .twag-header h2 {
+	display: inline-block;
 	margin: 0; 
 	padding: 10px;
 	text-align: center;
 	font-size: 36px;
-	transition: ease .6s;
 	color: #EEEEEE;
+	vertical-align: middle;
+	transition: ease .6s;
+}
+.twag-header .twag-toggle {
+	position: absolute;
+	right: 2%;
+	top: 10px;
+}
+.twag-header img {
+	display: inline-block;
+	height: 32px;
+	width: 32px;
+	padding: 2px;
+	vertical-align: middle;
+	opacity: .7;
+	transition: .1s;
+}
+.twag-header img:hover {
+	height: 35px;
+	width: 35px;
+	margin-right: -3px;
+	opacity: 1;
+}
+.twag-header .current,
+.twag-header .current:hover {
+	height: 40px;
+	width: 40px;
+	margin: 0;
+	opacity: 1;
 }
 .twag-body {
 	min-width: 700px;
@@ -452,7 +366,10 @@ h5 {
 	margin: auto;
 	padding: 5px 0;
 }
-/* Query Table */
+
+/* ============================================================
+	Query Table
+============================================================ */
 .qt .module-body {
 	overflow-x: auto;
 	text-align: center;
@@ -490,7 +407,10 @@ h5 {
 .qt .dark tr {
 }
 
-/* Modules */
+/* ============================================================
+  Generic Modules
+============================================================ */
+/* Light Theme */
 .module {
 	display: block;
 	margin: 15px 0px;
@@ -575,6 +495,8 @@ h5 {
 .module-footer:hover {
 	background: #b5b9c4;
 }
+
+/* Dark Theme */
 .dark .module-header {
 	border-bottom: 1px solid #333B51;
 	background: #434E66;
@@ -592,7 +514,34 @@ h5 {
 	color: #a3baea;
 	background: #454C5A;
 }
-/* User View */
+
+/* ============================================================
+  Generic Styles
+============================================================ */
+.invisible {
+	display: none;
+}
+.clear {
+	clear: both !important;
+}
+.green {
+	color: #438a46 !important;
+}
+.light-green {
+	color: #b4eab4 !important;
+}
+.red {
+	color: #dd6956 !important;
+}
+/* Future developers: I don't care :) */
+.center {
+	text-align: center;
+	margin: auto;
+}
+
+/* ============================================================
+  User View (User Profile)
+============================================================ */
 .userView {
 	border-bottom: 1px solid #333B51;
 	text-align: center;
@@ -676,7 +625,10 @@ h5 {
 	text-align: left;
 	color: #414141;
 }
-/* Forms */
+
+/* ============================================================
+  Generic Forms
+============================================================ */
 form h2 {
 	color: black;
 	clear: both;
@@ -719,36 +671,10 @@ form input[type="submit"]:hover {
     color: white;
     background: #F07D50;
 }
-/* Registration */
 
-input[type=checkbox].css-checkbox {
-  display:none;
-}
-input[type=checkbox].css-checkbox + label.css-label {
-  padding-left:25px;
-  height:20px; 
-  display:inline-block;
-  line-height:20px;
-  background-repeat:no-repeat;
-  background-position: 0 1px;
-  font-size:20px;
-  vertical-align:middle;
-  cursor:pointer;
-}
-input[type=checkbox].css-checkbox:checked + label.css-label {
-  background-position: 0 -20px;
-}
-label.css-label {
-  margin-left: 20px;
-  background-image:url(../images/checkbox.png);
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-/* Messaging */
+/* ============================================================
+  Messaging
+============================================================ */
 .messaging {
 	text-align: center;
 }
@@ -805,7 +731,6 @@ label.css-label {
   background: #ffefac url('../images/cross-small.png') left no-repeat;
 	background-position: 10px 0px left;
 }
-
 .messaging .wrapper {
 	margin: auto;
 	width: 70%;
@@ -822,10 +747,118 @@ label.css-label {
 	padding: 10px;
 	border: 1px solid #DEDEDE;
 }
-/* QE Graphs */
+/* ============================================================
+  Query-engine Graphs
+============================================================ */
 .qg {
 }
 #qe-graph {
 	width: 100%;
 }
-/* ClientSettings */
+
+/* ============================================================
+  Registration
+============================================================ */
+.registration h1 {
+  display: block;
+	text-align: center;
+}
+.reg-form {
+    display: block;
+    width: 700px;
+		margin: 20px auto;
+    padding: 30px;
+    padding-bottom: 30px;
+		text-align: center;
+    background: #F3F3F3;
+    border: 10px solid white; 
+    
+  -webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	-webkit-box-shadow: inset 0 0 8px 1px #B0B0B0;
+	box-shadow: inset 0 0 8px 1px #B0B0B0;
+}
+.reg-form p {
+	width: 50%;
+	margin: 0;
+	margin-bottom: 10px;
+	float: left;
+}
+.reg-form .inner-wrapper {
+	display: block;
+	width: 600px;
+	margin: auto;
+	font-size: 18px;
+	clear: both;
+}
+.reg-form .inner-wrapper span {
+	display: inline-block;
+	width: 200px;
+	margin: auto;
+	text-align: left;
+}
+.reg-form input[type="submit"] {
+	margin-top: 20px;
+}
+.reg-form hr {
+	position: relative;
+	top: 10px;
+	border: none;
+	border-top: 1px solid #bcbcbc;
+	clear: both;
+}
+.reg-form .affiliation-list {
+}
+.reg-form .affiliation-list span {
+  display: block;
+	width: auto;
+}
+.reg-form .subject-list {
+	margin: 10px 30px;
+	padding: 10px 30px;
+	background: #f5f5f5;
+	border: 1px solid #D2D2D2;
+}
+.reg-form .subject-list h5 {
+	margin: auto;
+	margin-bottom: 10px;
+	padding: 10px;
+	text-align: center;
+	color: black;
+	border-bottom: 1px solid #D2D2D2;
+}
+.subject-list span {
+	width: 200px;
+}
+.subject-list label {
+	margin: 0;
+}
+/* Custom Checkboxes */
+input[type=checkbox].css-checkbox {
+  display:none;
+}
+input[type=checkbox].css-checkbox + label.css-label {
+  padding-left:25px;
+  height:20px; 
+  display:inline-block;
+  line-height:20px;
+  background-repeat:no-repeat;
+  background-position: 0 1px;
+  font-size:20px;
+  vertical-align:middle;
+  cursor:pointer;
+}
+input[type=checkbox].css-checkbox:checked + label.css-label {
+  background-position: 0 -20px;
+}
+label.css-label {
+  margin-left: 20px;
+  background-image:url(../images/checkbox.png);
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}

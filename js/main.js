@@ -226,15 +226,22 @@ $(document).ready(function() {
 		});
 	}
 	
+	//Chart-type toggle
+	$('.twag-header .twag-toggle').on("click", "img", function() {
+		$('.twag-toggle img').toggleClass("current");
+	});
+
 	$('.twag-footer').on("click", function() {
 		var twag = $('.twag-body');
 		if(twag.hasClass('down')) {
 			$('.twag-header h2').css("font-size", "24px")
+			$('.twag-toggle').fadeOut(100);
 			twag.slideUp("slow", function() {
 				$('.twag-footer img').attr("src", "images/down.png");
 			});
 		} else {
-			$('.twag-header h2').css("font-size", "36px")
+			$('.twag-header h2').css("font-size", "36px");
+			$('.twag-toggle').fadeIn(100);
 			twag.slideDown("slow", function() {
 				$('.twag-footer img').attr("src", "images/up.png");
 			});
