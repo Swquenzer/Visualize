@@ -16,6 +16,8 @@ $(document).ready(function() {
 	/////////////////////////////////////////////////////////////////////////////////////
 	// Initialize
 
+	//Random
+
 	//Page history stack
 	var pageHistory = [];
 	$('#back-btn').on("click", function() {
@@ -97,6 +99,8 @@ $(document).ready(function() {
 			if(pageName === 'messaging') {
 				//Initialize messaging query engine
 				qe[1] = new QueryEngine(options2);
+				//Add recipients if necessary
+				addSelectedRecipients();
 			} else if(pageName === 'questions') {
 				//Initialize question and response query engines
 				qe[2] = new QueryEngine(options3);
@@ -118,7 +122,7 @@ $(document).ready(function() {
 		//Collapse TWAG module
 		var twag = $('.twag-body');
 		if(twag.hasClass('down')) {
-			$('.twag-header h2').css("font-size", "24px")
+			$('.twag-header h2').css("font-size", "24px");
 			$('.twag-toggle').fadeOut(100);
 			twag.slideUp("slow", function() {
 				$('.twag-footer img').attr("src", "images/down.png");
@@ -317,6 +321,13 @@ function addRecipient(row) {
 	    $('#recipient-list').append("<span class='recipient'>" + email + "</span>");
 	}
 }
+function addSelectedRecipients() {
+	if(recipients.length > 0) {
+		for(var i=0; i<recipients.length; i++) {
+			$('#recipient-list').append("<span class='recipient'>" + recipients[i] + "</span>");
+		}
+	}
+}
 function addAllRecipients(rows) {
 	rows.each(function(i, el) {
 		addRecipient(el);
@@ -326,7 +337,6 @@ function removeRecipient(email) {
 	var index = recipients.indexOf(email.innerHTML);
 	recipients.splice(index, 1);
 	$(email).remove();
-	console.log(recipients);
 }
 
 

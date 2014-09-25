@@ -404,7 +404,7 @@ function QueryEngine(options) {
                 }
                 //*Add another click handler (as below) that creates a BACK button to show prev view
                 //onclick handler to go into Level 3: USER mode
-                table.find('tr').slice(1).on("click", function() {
+                table.find('tbody tr').on("click", function() {
                     //If messaging query engine, add selected user's email to the send list
                     if(that.options.target === "qe-messaging") {
                         selectRecipient(this, true);
@@ -418,7 +418,7 @@ function QueryEngine(options) {
                 });
 
                 //Apply to all tables
-                $(".qt table").tablesorter();
+                $(".footable").footable();
             });
         } else {
             //Create thead Row
@@ -446,7 +446,7 @@ function QueryEngine(options) {
                     }
                 }
                 //Select all tr's except for first (header)
-                table.find('tr').slice(1).on("click", function() {
+                table.find('tbody tr').on("click", function() {
                     that.options.viewName = $(this).find('td')[0].innerHTML;
                     //* For Christ's sake, make this a switch statement (use default case for below)
                     //If not in questions view, change this table...
@@ -464,7 +464,7 @@ function QueryEngine(options) {
                 });
                 
                 //Apply to all tables
-                $(".qt table").tablesorter();
+                $(".footable").footable();
             }).error(function() {
                 console.log("Error retrieving data");
             });
@@ -473,7 +473,7 @@ function QueryEngine(options) {
     this.createTable = function() {
         var that = this;
         //If it's a userlist, allow group emailing from footer
-        var queryTable = "<div class='module qt'><div class='module-body'><table class='tablesorter'><thead><tr></tr></thead><tbody></tbody></table></div></div>";
+        var queryTable = "<div class='module qt'><div class='module-body'><table class='footable' data-page-size='6'><thead><tr></tr></thead><tfoot><tr><td colspan='7'><div class='pagination pagination-centered hide-if-no-paging'></div></td></tr></tfoot><tbody></tbody></table><div id='pager' class='pager'></div></div></div>";
         //Push to top of QE module stack
         this.target.prepend(queryTable);
         this.createHeader(this.target.find('.qt.module'), 'table');
@@ -550,7 +550,6 @@ function QueryEngine(options) {
                         //If was select all, now deselect all & vice versa
                         selectAll = !selectAll;
                     } else if($(this).is(selectButton.last())) {
-                        console.log(4)
                         //Add selected users button
                         that.target.find('tbody .selected').each(function() {
                             addRecipient(this);
@@ -559,7 +558,7 @@ function QueryEngine(options) {
                 } else {
                     //Add all users button
                     addAllRecipients(that.target.find('tbody tr'));
-                    changePage($('.content.messaging'),$('.option.messaging'));
+                    changePage($('.content.messaging'), $('.option.messaging'));
                 }
             });
         }
