@@ -196,7 +196,7 @@ h5 {
 }
 #back-btn.disabled {
 	padding: 32px;
-	font-size: 16px !important;;
+	font-size: 16px !important;
 	color: gray;
 }
 #back-btn.disabled:before {
@@ -861,4 +861,44 @@ label.css-label {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+}
+
+/* ============================================================
+  ClientSettings
+============================================================ */
+.clientSettings .module-body {
+	text-align: center;
+}
+.clientSettings ul {
+	margin: 0;
+	padding: 0;
+	text-align: left;
+}
+.clientSettings li {
+	display: block;
+	margin: 0px;
+	padding: 8px;
+	list-style: none;
+	cursor: pointer;
+}
+.clientSettings #special-permissions li:hover {
+	background: #dae6ff;
+}
+.clientSettings li:not(:last-child) {
+	border-bottom: 1px solid #eeeeee;
+}
+.clientSettings li span {
+	display: none;
+	cursor: auto;
+}
+.clientSettings li .selected {
+	display: block;
+	margin: 10px;
+	padding: 10px;
+	color: #bed7ef;
+	background: #434E66;
+	border-left: 5px solid #bed7ef;
+}
+.clientSettings li .selected:hover {
+	
 }

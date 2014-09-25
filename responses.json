@@ -1,0 +1,24 @@
+{
+  "columns": [
+    "Name",
+    "numCorrect"
+  ],
+  "results": [
+    [
+      "Loan Stuff",
+      "30%"
+    ],
+    [
+      "Equity Stuff",
+      "15%"
+    ],
+    [
+      "Investment Stuff",
+      "28.5%"
+    ],
+    [
+      "A line of something",
+      "16.5%"
+    ]
+  ]
+}

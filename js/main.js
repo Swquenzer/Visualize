@@ -46,9 +46,27 @@ $(document).ready(function() {
 		visible: false,
 		completed: true
 	};
+	options3 = {
+		view: "questions",
+		target: "qe-questions",
+		viewMode: "type",
+		graph: false,
+		visible: true,
+		completed: true
+
+	};
+	options4 = {
+		view: "responses",
+		target: "qe-responses",
+		viewMode: "type",
+		graph: false,
+		visible: true,
+		completed: true
+
+	};
 	qe = [];
 	qe[0] = new QueryEngine(options);
-
+	qe[3] = new QueryEngine(options3);
 	//Make all non-current sections (non dashboard) display:none
 	$('.content').not('.current').hide();
 
@@ -79,6 +97,12 @@ $(document).ready(function() {
 			if(pageName === 'messaging') {
 				//Initialize messaging query engine
 				qe[1] = new QueryEngine(options2);
+			} else if(pageName === 'questions') {
+				//Initialize question and response query engines
+				qe[2] = new QueryEngine(options3);
+				qe[3] = new QueryEngine(options4);
+				qe[2].initialize('questions');
+				//qe[3] = new QueryEngine(options4);
 			}
 			//Display new page
 			section.delay('slow').slideDown('slow', function() {
@@ -91,6 +115,15 @@ $(document).ready(function() {
 		var current = $('.option.current');
 		//Get plaintext name of new page (string)
 		var newPageName = newPage.attr('class').substr(0, newPage.attr('class').indexOf(' '));
+		//Collapse TWAG module
+		var twag = $('.twag-body');
+		if(twag.hasClass('down')) {
+			$('.twag-header h2').css("font-size", "24px")
+			$('.twag-toggle').fadeOut(100);
+			twag.slideUp("slow", function() {
+				$('.twag-footer img').attr("src", "images/down.png");
+			});
+		}
 		if(!history) {
 			$('#back-btn').toggleClass('disabled', false);
 			//Add previously viewed page to pageHistory stack
@@ -225,11 +258,6 @@ $(document).ready(function() {
 			$('.twag-footer img').attr("src", "images/down.png");
 		});
 	}
-	
-	//Chart-type toggle
-	$('.twag-header .twag-toggle').on("click", "img", function() {
-		$('.twag-toggle img').toggleClass("current");
-	});
 
 	$('.twag-footer').on("click", function() {
 		var twag = $('.twag-body');
@@ -332,4 +360,12 @@ $('.reg-form .affiliation-list').on("click", "input:checked", function() {
 $('.reg-form .affiliation-list').on("click", "input:not(:checked)", function() {
 	var subjectList = $(this).siblings().next();
 	subjectList.hide();
+});
+
+/////////////////////////////////////////////////////////////////////////////////////
+// Client Settings
+
+$('#main').on("click", "#special-permissions li", function() {
+	console.log($(this).find('span').toggleClass('selected'));
+	$(this).find('span').toggleClass('.selected');
 });

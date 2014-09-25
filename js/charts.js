@@ -3,6 +3,16 @@
 ** Creation Date: 
 */
 /* This Week At a Glance (TWAG) Module */
+
+/* ============================================================
+===============================================================
+== Chart settings, options, and themes ========================
+===============================================================
+============================================================ */
+
+/* ============================================================
+    Default Theme
+============================================================ */
 var defaultTheme = {
   colors: ['#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', '#492970',
         '#f28f43', '#77a1e5', '#c42525', '#a6c96a'],
@@ -90,6 +100,10 @@ var defaultTheme = {
       }
    }
 };
+
+/* ============================================================
+    Query Engine Graph Options
+============================================================ */
 var qeOptions = {
     chart: {
         renderTo: 'qe-graph'
@@ -108,7 +122,65 @@ var qeOptions = {
     }]
 };
 
-//TWAG
+/* ============================================================
+    This week at a glance
+============================================================ */
+var isBar = true;
+var twagBarOptions = {
+    chart: {
+        renderTo: 'twag-chart',
+        type: 'bar',
+    },
+    title: {
+        text: 'User Engagement'
+    },
+    xAxis: {
+        categories: ['Last Week', 'This Week', 'Next Week (trend)']
+    },
+    legend: {
+        reversed: true
+    },
+    plotOptions: {
+        series: {
+            stacking: 'normal'
+        }
+    }
+}
+var twagLineOptions = {
+    chart: {
+        type: 'line',
+        renderTo: 'twag-chart'
+    },
+    title: {
+        text: 'User Engagement'
+    },
+    xAxis: {
+        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+    },
+    yAxis: {
+        title: {
+            text: 'Number of Users'
+        }
+    },
+    plotOptions: {
+        line: {
+            dataLabels: {
+                enabled: true
+            },
+            enableMouseTracking: false
+        }
+    },
+    series: [{
+        name: 'Tokyo',
+        data: [7.0, 6.9, 9.5, 14.5, 18.4, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6]
+    }, {
+        name: 'London',
+        data: [3.9, 4.2, 5.7, 8.5, 11.9, 15.2, 17.0, 16.6, 14.2, 10.3, 6.6, 4.8]
+    }]
+};
+// name: User-facing value
+// dataTotal: Array containing 2 values: Total data from last week & Total data from this week
+// dataNew: Array containing 2 values: New data from last week & New data from this week
 var users = {
     name: 'Users'
 };
@@ -124,109 +196,89 @@ var badges = {
 var rewards = {
     name: 'Rewards Completed'
 };
-//utility function
+//Calculate change in values from 3 weeks to 2 weeks ago ([0]) and 2 weeks to 1 week ago ([1])
 function calculateNewData(option, total) {
     //Calculate total values
     option.dataTotal = [total[1],total[2]];
     option.dataNew = [total[1]-total[0], total[2]-total[1]];
 }
-function getTwagData(type, callback) {
+function createTwagGraph(type, callback) {
     $.getJSON('twag.json', {}, function(json) {
         calculateNewData(users, json.results[0]);
         calculateNewData(tasks, json.results[1]);
         calculateNewData(goals, json.results[2]);
         calculateNewData(badges, json.results[3]);
         calculateNewData(rewards, json.results[4]);
-        switch(type) {
-        case "users":
-          return callback(users);
-          break;
-        case "tasks":
-          return callback(tasks);
-          break;
-        case "goals":
-          return callback(goals);
-          break;
-        case "badges":
-          return callback(badges);
-          break;
-        case "rewards":
-          return callback(rewards);
-          break;
-      }
+        return callback(eval(type));
     }).error(function(error) {
         console.log("Error in getTwagData");
     });
 }
-//Default type for initial view
-getTwagData('users', function(type) {
-    var twagOptions = {
-        chart: {
-            renderTo: 'twag-chart',
-            type: 'bar',
-        },
-        title: {
-            text: 'User Engagement'
-        },
-        xAxis: {
-            categories: ['Last Week', 'This Week', 'Next Week (trend)']
-        },
-        yAxis: {
+function initializeTwag() {
+    createTwagGraph('users', function(type) {
+            //Options for bar graph
+        twagBarOptions.yAxis = {
             min: 0,
             title: {
                 text: 'Total ' + type.name
             }
-        },
-        legend: {
-            reversed: true
-        },
-        plotOptions: {
-            series: {
-                stacking: 'normal'
-            }
-        },
-            series: [{
+        };
+        twagBarOptions.series = [{
             name: 'New ' + type.name,
             data: type.dataNew
         }, {
             name: 'Total ' + type.name,
             data: type.dataTotal
-        }]
-    }
-    function insertTableData(row, type) {
-        tr.eq(row).find('td')[1].innerHTML = type.dataNew[0];
-        tr.eq(row).find('td')[2].innerHTML = type.dataNew[1];
-        tr.eq(row).find('td')[3].innerHTML = (((type.dataNew[1]-type.dataNew[0])/type.dataNew[0])*100).toFixed(1) + "%";
-        if (type.dataNew[1] > type.dataNew[0])
-            tr.eq(row).find('td').eq(3).addClass('light-green');
-        else
-            tr.eq(row).find('td').eq(3).addClass('red');
-    }
-    //Get twag table rows
-    var tr = $('.twag-body tr').filter(':not(:first)');
-    //Users
-    insertTableData(0, users);
-    insertTableData(1, tasks);
-    insertTableData(2, goals);
-    insertTableData(3, badges);
-    insertTableData(4, rewards);
-    //Create new bar chart
-    twagChart = new Highcharts.Chart(twagOptions);
-});
+        }];
+        //Options for line graph
 
+        function insertTableData(row, type) {
+            tr.eq(row).find('td')[1].innerHTML = type.dataNew[0];
+            tr.eq(row).find('td')[2].innerHTML = type.dataNew[1];
+            tr.eq(row).find('td')[3].innerHTML = (((type.dataNew[1]-type.dataNew[0])/type.dataNew[0])*100).toFixed(1) + "%";
+            if (type.dataNew[1] > type.dataNew[0])
+                tr.eq(row).find('td').eq(3).addClass('light-green');
+            else
+                tr.eq(row).find('td').eq(3).addClass('red');
+        }
+        //Get twag table rows
+        var tr = $('.twag-body tr').filter(':not(:first)');
+        //Users
+        insertTableData(0, users);
+        insertTableData(1, tasks);
+        insertTableData(2, goals);
+        insertTableData(3, badges);
+        insertTableData(4, rewards);
+        //Create new bar chart
+
+        twagGraph = (isBar === true) ? new Highcharts.Chart(twagBarOptions) : new Highcharts.Chart(twagLineOptions);
+    });
+}
+//Chart-type toggle
+$('.twag-header .twag-toggle').on("click", "img", function() {
+    $('.twag-toggle img').toggleClass("current");
+    $('#twag-chart')[0].innerHTML = "";
+    isBar = !isBar;
+    initializeTwag();
+});
+initializeTwag();
 
 //On click event for controlling different engagement views
 //New Users, Tasks Completed, Goals Completed, Badges Earned, Rewards Earned
 function twagUpdate(type) {
-    getTwagData(type, function(data) {
-        twagChart.series[0].setData(data.dataNew, false);
-        twagChart.series[1].setData(data.dataTotal, false);
-        twagChart.redraw();
+    createTwagGraph(type, function(data) {
+        if(isBar === true) {
+            twagGraph.series[0].setData(data.dataNew, false);
+            twagGraph.series[1].setData(data.dataTotal, false);
+            twagGraph.redraw();
+        } else {
+            //update line graph
+        }
     });
 }
 
-/* Render Engine */
-var numRecords = 1;
+
+//var numRecords = 1;
 //Query Engine Class
 function QueryEngine(options) {
     this.options = options;
@@ -264,7 +316,7 @@ function QueryEngine(options) {
         //Get affiliation from sidebar form
         this.affiliation = $('.qe input[name="affiliation"]:checked');
 
-        //Create Query Table Structure
+        //Create Query Table Structures
         this.createTable();
         if(this.options.graph === true) this.createGraph();
         /////Add loading icon
@@ -284,7 +336,7 @@ function QueryEngine(options) {
             this.options.viewMode = 'userList';
         } else {
             var section = $('.content.dashboard');
-            if(this.options.target !== 'qe-messaging') changePage(section, $('.option.dashboard'));
+            if(this.options.target === 'qe-dashboard') changePage(section, $('.option.dashboard'));
             this.options.viewMode = 'type';
             this.options.view = newView;
         }
@@ -376,7 +428,10 @@ function QueryEngine(options) {
                     table.find('thead tr').append("<th>" + data.columns[i].separate().capitalize() + "</th>");
                 }
                 //*Need switch statment for related badges and goals
-                table.find('thead tr').append("<th>Related Badges</th><th>Related Goals</th>");
+                //*Don't forget
+                if(that.options.target !== 'qe-questions' && that.options.target !== 'qe-responses') {
+                    table.find('thead tr').append("<th>Related Badges</th><th>Related Goals</th>");
+                }
                 //Create tbody Rows
                 for(var i=0; i<data.results.length; i++) {
                     table.find('tbody').append('<tr></tr>');
@@ -386,14 +441,28 @@ function QueryEngine(options) {
                     //Subject name extracted from previous sibling label
                     //var subject = that.subject.prev().html();
                     //*Need another switch statment here
-                    table.find('tbody tr:last').append("<td>Clickable Icon</td><td>Clickable Icon</td>");
+                    if(that.options.target !== 'qe-questions' && that.options.target !== 'qe-responses') {
+                        table.find('tbody tr:last').append("<td>Clickable Icon</td><td>Clickable Icon</td>");
+                    }
                 }
                 //Select all tr's except for first (header)
                 table.find('tr').slice(1).on("click", function() {
-                    //This is what decides the paramter for getting a userList view
                     that.options.viewName = $(this).find('td')[0].innerHTML;
-                    that.changeView('userList');
+                    //* For Christ's sake, make this a switch statement (use default case for below)
+                    //If not in questions view, change this table...
+                    if(that.options.target !== 'qe-questions' && that.options.target !== 'qe-responses') {
+                        //This is what decides the paramter for getting a userList view
+                        that.changeView('userList');
+                    } else if(that.options.target === 'qe-questions') {
+                        //...otherwise don't change this table, change the responses table
+
+                        qe[3].options.viewName = $(this).find('td')[0].innerHTML;
+                        qe[3].initialize('responses');
+                    } else {
+                        //or still change the responses table
+                    }
                 });
+                
                 //Apply to all tables
                 $(".qt table").tablesorter();
             }).error(function() {
@@ -411,7 +480,7 @@ function QueryEngine(options) {
         this.createFooter(this.target.find('.qt .module-body'), 'table');
     };
     this.createGraph = function() {
-        var queryGraph = "<div class='module qg'><div class='module-body down'><div id='qe-graph' style='height: 400px'></div></div><div class='module-footer'><img src='images/up.png'></div></div><!--end module qg-->";
+        var queryGraph = "<div class='module qg'><div class='module-body down'><div id='qe-graph' style='height: 300px'></div></div><div class='module-footer'><img src='images/up.png'></div></div><!--end module qg-->";
         this.target.prepend(queryGraph);
         this.createHeader(this.target.find('.qg.module'), 'graph');
         this.createFooter(this.target.find('.qg .module-body'), 'graph');
@@ -430,6 +499,10 @@ function QueryEngine(options) {
         } else if(this.options.target === 'qe-messaging') {
             //complex header
             //header.css("text-align", "center").addClass("right");
+        } else if(this.options.target === 'qe-questions') {
+            header.append("<h2>Questions</h2>")
+        } else if(this.options.target === 'qe-responses') {
+            header.append("<h2>Responses to question: " + that.options.viewName + "</h2>")
         }
         if(this.options.viewMode === 'userList' && type==='table') {
             //Filter by users who have completed the <goal>
