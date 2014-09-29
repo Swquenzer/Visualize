@@ -68,7 +68,6 @@ $(document).ready(function() {
 	};
 	qe = [];
 	qe[0] = new QueryEngine(options);
-	qe[0].initialize();
 	qe[3] = new QueryEngine(options3);
 	//Make all non-current sections (non dashboard) display:none
 	$('.content').not('.current').hide();
@@ -120,8 +119,6 @@ $(document).ready(function() {
 		var current = $('.option.current');
 		//Get plaintext name of new page (string)
 		var newPageName = newPage.attr('class').substr(0, newPage.attr('class').indexOf(' '));
-		//Remove Message on dashboard
-		$('.message').hide();
 		//Collapse TWAG module
 		var twag = $('.twag-body');
 		if(twag.hasClass('down')) {

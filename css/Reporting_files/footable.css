@@ -1,4 +1,5 @@
 .footable>thead>tr>th{
+	padding:10px;
 }
 .footable .pagination{
 	margin:0px 0
