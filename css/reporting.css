@@ -41,6 +41,106 @@ h5 {
 #wrapper {
 	height: 100%;
 }
+/* ============================================================
+  Generic Modules
+============================================================ */
+/* Light Theme */
+.module {
+	display: block;
+	margin: 15px 0px;
+	background: #C6DEE8;
+	border-radius: 2px 2px 2px 2px;
+	box-shadow: 0px 0px 1px 0px rgba(1, 1, 1, .6);
+}
+.module .hover {
+  margin-left: 10px;
+  margin-right: 10px;
+  padding: 20px;
+  cursor: pointer;
+}
+.module .hover:hover {
+  background: #e2eafa;
+}
+.module-header {
+	display:block;
+	padding: 0px;
+	background: #F6F6F6;
+}
+.module-header h1, .module-header h2, .module-header h3 {
+	display: inline-block;
+	padding: 20px;
+	margin: 0 20px;
+}
+.module-header h1 {
+	color: #262A33;
+}
+.module-header h2 {
+	color: #767676;
+}
+.module-header h3 {
+	color: #767676;
+	font-weight: 300;
+}
+.module-header.right {
+	padding: 0;
+}
+.module-header.right .left {
+	display: inline-block;
+	padding: 0px 0;
+	width: 60%;
+}
+.module-header.right .right {
+	display: inline-block;
+	width: 40%;
+	text-align: right;
+	/* vertical-align: middle; */
+}
+.module-body {
+	display: block;
+	position: relative;
+	margin: 0;
+	padding: 10px 15px;
+	background: #ffffff;
+}
+.module-body h4 {
+	display: inline-block;
+	margin: 10px 0 0 0;
+	padding: 10px;
+	text-align: center;
+	color: black;
+	cursor: pointer;
+	opacity: .6;
+}
+.module-body h4:hover {
+	opacity: 1;
+	background: #f4aaa3;
+}
+.module-body h4 img {
+	position: relative;
+	bottom: 2px;
+	margin-right: 5px;
+	vertical-align: middle;
+}
+.module-footer {
+	padding-top: 4px;
+	text-align: center;
+	background: #ccd1d6;
+}
+.module-footer:hover {
+	background: #b5b9c4;
+}
+.module.half {
+	display: inline-block;
+	width: 48%;
+	margin: 1%;
+	vertical-align: top;
+}
+.module.half .module-body {
+	overflow: hidden;
+}
+.module.half tbody td {
+	
+}
 
 /* ============================================================
   Left Sidebar
@@ -371,6 +471,7 @@ h5 {
 	Query Table
 ============================================================ */
 .qt .module-body {
+	padding: 0;	
 	overflow-x: auto;
 	text-align: center;
 }
@@ -395,7 +496,7 @@ h5 {
 	padding: 15px 5px 15px 10px;
 	text-align: left;
 	background: #e3e8f2;
-	border: 3px solid white;
+	border: 0px solid white;
 }
 .qt td {
 	padding: 10px 5px;
@@ -410,94 +511,6 @@ h5 {
 .qt .dark tr {
 }
 
-/* ============================================================
-  Generic Modules
-============================================================ */
-/* Light Theme */
-.module {
-	display: block;
-	margin: 15px 0px;
-	background: #C6DEE8;
-	border-radius: 2px 2px 2px 2px;
-	box-shadow: 0px 0px 1px 0px rgba(1, 1, 1, .6);
-}
-.module .hover {
-  margin-left: 10px;
-  margin-right: 10px;
-  padding: 20px;
-  cursor: pointer;
-}
-.module .hover:hover {
-  background: #e2eafa;
-}
-.module-header {
-	display:block;
-	padding: 0px;
-	background: #F6F6F6;
-}
-.module-header h1, .module-header h2, .module-header h3 {
-	display: inline-block;
-	padding: 20px;
-	margin: 0 20px;
-}
-.module-header h1 {
-	color: #262A33;
-}
-.module-header h2 {
-	color: #767676;
-}
-.module-header h3 {
-	color: #767676;
-	font-weight: 300;
-}
-.module-header.right {
-	padding: 0;
-}
-.module-header.right .left {
-	display: inline-block;
-	padding: 0px 0;
-	width: 60%;
-}
-.module-header.right .right {
-	display: inline-block;
-	width: 40%;
-	text-align: right;
-	/* vertical-align: middle; */
-}
-.module-body {
-	display: block;
-	position: relative;
-	margin: 0;
-	padding: 10px 15px;
-	background: #ffffff;
-}
-.module-body h4 {
-	display: inline-block;
-	margin: 10px 0 0 0;
-	padding: 10px;
-	text-align: center;
-	color: black;
-	cursor: pointer;
-	opacity: .6;
-}
-.module-body h4:hover {
-	opacity: 1;
-	background: #f4aaa3;
-}
-.module-body h4 img {
-	position: relative;
-	bottom: 2px;
-	margin-right: 5px;
-	vertical-align: middle;
-}
-.module-footer {
-	padding-top: 4px;
-	text-align: center;
-	background: #ccd1d6;
-}
-.module-footer:hover {
-	background: #b5b9c4;
-}
 
 /* Dark Theme */
 .dark .module-header {

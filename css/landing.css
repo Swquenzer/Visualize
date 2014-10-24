@@ -1,0 +1,456 @@
+html, body {
+  position: relative;
+  margin: 0;
+  padding: 0;
+	font-family: 'Ubuntu', sans-serif;
+  background: #F0F4F9l
+}
+h1, h2, h3, h4, h5, h6 {
+  margin: 0; padding: 0;
+  color: #5B6675;
+  font-weight: 400;
+}
+h1 {
+  font-size: 36px;
+}
+h2 {
+  font-size: 28px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 14px;
+}
+p {
+  margin:0; padding:0;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+/* ============================================================
+  Generic Styles
+============================================================ */
+.content {
+  position: relative;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  background: #f4fff2;
+}
+.wrapper {
+  display: block;
+  position: relative;
+  width: 90%;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.module {
+  display: inline-block;
+  position: relative;
+  width: 400px;
+  background: #F3F3F3;
+  background-color: #4c71d2;
+  vertical-align: top;
+  z-index: 10;
+  transition: .3s;
+}
+.module::after {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  opacity: .4;
+  z-index: -1;
+}
+.module:hover {
+  background-color: #2bb4ab;
+  opacity: 1;
+}
+.module:nth-child(2n) {
+}
+.module .module-head {
+  position: relative;
+  text-align: left;
+}
+.module .module-head h4 {
+  display: block;
+  padding: 25px;
+  text-align: center;
+  color: white;
+  font-size: 32px;
+  letter-spacing: 15px;
+  font-weight: 700;
+  background: rgba(32,44,78,.4);
+}
+.module .module-body {
+  min-height: 30%;
+  padding: 20px;
+  color: white;
+  text-align: center;
+  font-size: 24px;
+  font-weight: 300;
+  /background: rgba(32,44,78,.2);
+}
+.module .module-body p {
+ margin-top: 30px;
+ text-align: left; 
+}
+form ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+form li {
+  margin: 10px 0;
+  text-align: left;
+}
+@keyframes wobble {
+    0% {transform: rotate(-1deg);}
+    50% {transform: rotate(1deg);}
+    100% {transform: rotate(-1deg);}
+}
+
+.light-red {
+  background: #ffe7e9 !important;
+  transition: .5s;
+}
+.red {
+  color: #fd8792 !important;
+}
+.light-green {
+  background: #edffd9 !important;
+  transition: .5s;
+}
+.green {
+  color: #69db63 !important;
+}
+/* ============================================================
+  Header
+============================================================ */
+header.content {
+  background: white;
+}
+header .wrapper {
+  width: 60%;
+  min-width: 600px;
+  padding: 0px;
+  /text-align: right;
+}
+header img {
+  margin: 12px;
+  height: 40px;
+  vertical-align: middle;
+  /float: left;
+}
+header ul {
+  margin: 0;
+  padding: 0;
+}
+header li {
+  display: inline-block;
+  margin: 0;
+  padding: 20px 3%;
+  list-style: none;
+  border-bottom: 3px solid white;
+  transition: .2s;
+}
+header li:hover {
+  color: white;
+  background: #647097;
+  border-bottom: 3px solid #647097;
+}
+header li.current {
+  border-bottom: 3px solid #DD6956;
+}
+
+/* ============================================================
+  Main Section
+============================================================ */
+#main.content {
+  background: #7eb93a url('../images/LPBanner4.jpg') center 60px no-repeat;  
+}
+#main .wrapper {
+  height: 300px;
+  width: 900px;
+  padding: 40px 0 80px;
+  text-align: center;
+}
+#main .left {
+  display: inline-block;
+  position: relative;
+  width: 47%;
+  margin-right: 3%;
+  text-align: left;
+  color: #f1fde3;
+  font-size: 20px;
+  font-weight: 300;
+  vertical-align: top;
+}
+#main h2 {
+  display: block;
+  padding: 10px;
+  color: #657492;
+  text-align: center;
+  font-size: 32px;
+  font-weight: 700;
+  background: rgba(242, 255, 227, 0.6);
+  box-shadow: 0px 0px 15px #1d3d1a;
+}
+#main .left span {
+  display: inline-block;
+  position: absolute;
+  top: 180%;
+  left: 0;
+  padding: 10px;
+  color: white;
+  font-size: 100px;
+  font-weight: 800;
+}
+#login {
+  display: inline-block;
+  position: relative;
+  padding: 5px 20px 5px;
+  background-color: #e5f7d1;
+  background-color: rgba(242, 255, 227, 0.9);
+  opacity: .95;
+  box-shadow: 0px 0px 15px #1d3d1a;
+}
+#login input {
+  width: 250px;
+  padding: 10px;
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 18px;
+  font-weight: 300;
+  color: #818181;
+}
+#login label {
+  color: #477045;
+  font-weight: 400;
+}
+#login input[type="checkbox"] {
+  width: auto;
+}
+#login input[type="submit"] {
+  display: block;
+  width: 100%;
+  padding: 15px;
+  color: white;
+  background: #647097;
+  border: none;
+  cursor: pointer;
+  transition: .2s;
+}
+#login input[type="submit"]:hover {
+  background: #DD6956;
+}
+#login a {
+  display: block;
+  margin: 5px;
+  padding: 5px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 300;
+}
+#login a:hover {
+  text-decoration: underline;
+}
+/* ============================================================
+  About Header
+============================================================ */
+#about-header.content {
+  background: #eaffd6;
+}
+#about-header .wrapper {
+  text-align: center;
+  padding: 60px 0;
+}
+#about-header h1 {
+  padding: 10px;
+  color: #647097;
+  font-size: 52px; 
+}
+
+/* ============================================================
+  About
+============================================================ */
+#about.content {
+  background: white;
+}
+#about .wrapper {
+  width: 100%;
+  min-width: 900px;
+  padding: 0;
+  margin: 0;
+  text-align: center !important;;
+}
+#about .module {
+  height: 500px;
+  width: 33.3%;
+  margin: 0;
+}
+.module#left::after {
+  background: url('../images/discover2.jpg');
+  background-size: 180%;
+}
+.module#middle::after {
+  background: url('../images/openbook.jpg');
+  background-size: 150%;
+}
+.module#right::after {
+  background: url('../images/discover.jpg');
+  background-size: 125%;
+}
+
+/* ============================================================
+  What to Expect
+============================================================ */
+#expect.content {
+  text-align: center;
+  background: white;
+}
+#expect .wrapper {
+  width: 50%;
+  margin: 50px auto;
+  padding: 30px 90px;
+  /border-top: 1px solid gray;
+  /border-bottom: 1px solid gray;
+}
+#expect h1 {
+  color: #5B6675;
+  font-weight: 400;
+}
+#expect p {
+  padding: 10px;
+  color: #5B6675;
+  font-size: 20px;
+  font-weight: 300;
+  opacity: .7;
+}
+/* ============================================================
+  Testimonial
+============================================================ */
+#testimonial.content {
+  /background: #F3F3F3;
+}
+#testimonial .wrapper {
+  width: 55%;  
+  text-align: center;
+}
+#testimonial h3 {
+	color: #53875a;
+}
+#testimonial h4 {
+  margin-right: 100px;
+  color: #53875a;  
+  text-align: right;
+}
+/* ============================================================
+  FAQ
+============================================================ */
+#faq-head.content {
+  background: #7EB93A;
+}
+#faq-head h1 { 
+  text-align: center;
+  color: white;
+}
+#faq-body.content {
+  background: #E5F7D1;
+}
+#faq-body .wrapper {
+  width: 60%;
+  text-align: center;
+  /padding-top: 0;
+}
+#faq-body .qa {
+  display: inline-block;
+  padding: 15px;
+  text-align: left;
+  border-bottom: 10px solid white;
+}
+#faq-body .qa:nth-child(2n+1) {
+  background: #f5fdec;
+}
+#faq-body h3 {
+  padding: 5px;
+  color: #355f37;
+  font-size: 20px;
+  font-weight: 300;
+}
+#faq-body h4 {
+  margin-left: 15px;
+  padding: 10px;
+  color: #355f37;
+}
+#faq-body h3 strong {
+  font-size: 28px;
+  font-weight: 700;
+}
+
+/* ============================================================
+  Contact
+============================================================ */
+#contact .wrapper {
+  text-align: center;
+}
+#contact input, #contact textarea {
+  display: block;
+  width: 500px;
+  margin: auto;
+  padding: 10px;
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 18px;
+  font-weight: 300;
+  color: #818181;
+}
+#contact textarea {
+  border: 1px solid #c2c2c2;
+}
+#contact input[type="submit"] {
+  display: block;
+  padding: 15px;
+  color: white;
+  background: #647097;
+  border: none;
+  cursor: pointer;
+  transition: .2s;
+}
+#contact input[type="submit"]:hover {
+  background: #DD6956;
+}
+
+/* ============================================================
+  Footer
+============================================================ */
+footer.content {
+  background: #647097;
+}
+footer .wrapper {
+  height: 100px;
+  color: #dae0f9;
+}
+footer h4 {
+  padding: 20px;
+  text-align: center;
+  color: white;
+}
+footer ul {
+  list-style: circle;
+}
+footer li {
+  width: 40%;
+  padding: 10px;
+  cursor: pointer;
+}
+footer li:hover {
+  color: white;
+}
