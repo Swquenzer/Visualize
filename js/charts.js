@@ -362,7 +362,6 @@ function QueryEngine(options) {
     this.renderView = function() {
         var that = this;
         var table = this.target.children().find('table');
-        //*Needs to be in form rewards.aspx?option1=option1&option2=option2
         //OR use getJSON parameters
         var getURL = this.options.view + '.json';
         if(this.options.viewMode === 'userList') {
@@ -456,21 +455,21 @@ function QueryEngine(options) {
                         table.find('tbody tr:last').append("<td>Clickable Icon</td><td>Clickable Icon</td>");
                     }
                 }
-                //Select all tr's except for first (header)
+                //Make all table rows clickable
                 table.find('tbody tr').on("click", function() {
                     that.options.viewName = $(this).find('td')[0].innerHTML;
                     //* For Christ's sake, make this a switch statement (use default case for below)
                     //If not in questions view, change this table...
                     if(that.options.target !== 'qe-questions' && that.options.target !== 'qe-responses') {
-                        //This is what decides the paramter for getting a userList view
                         that.changeView('userList');
                     } else if(that.options.target === 'qe-questions') {
                         //...otherwise don't change this table, change the responses table
-
                         qe[3].options.viewName = $(this).find('td')[0].innerHTML;
                         qe[3].initialize('responses');
-                    } else {
-                        //or still change the responses table
+                    } else if(that.options.target === 'qe-responses') {
+                        qe[4].options.viewName = $(this).find('td')[0].innerHTML;
+                        qe[4].options.viewMode = 'userList';
+                        qe[4].initialize('getUsers');
                     }
                 });
                 

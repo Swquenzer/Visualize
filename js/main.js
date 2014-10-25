@@ -64,8 +64,15 @@ $(document).ready(function() {
 		graph: false,
 		visible: true,
 		completed: true
-
 	};
+	options5 = {
+		view: "response",
+		target: "qe-responses-userList",
+		viewMode: "type",
+		graph: false,
+		visible: true,
+		completed: true
+	}
 	qe = [];
 	qe[0] = new QueryEngine(options);
 	qe[0].initialize();
@@ -106,8 +113,8 @@ $(document).ready(function() {
 				//Initialize question and response query engines
 				qe[2] = new QueryEngine(options3);
 				qe[3] = new QueryEngine(options4);
+				qe[4] = new QueryEngine(options5);
 				qe[2].initialize('questions');
-				//qe[3] = new QueryEngine(options4);
 			}
 			//Display new page
 			section.delay('slow').slideDown('slow', function() {
